@@ -1,6 +1,6 @@
 # Master-of-Algorithm
 알고리즘PS의 시작
-
+test
 <목록>
 1. VS Code 단축키, 사용법
 2. C++ defualt main code
