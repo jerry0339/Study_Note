@@ -59,9 +59,12 @@ int main() {
   9. 문자열검색 : str1.find("World"); // 탐색문자열이 있으면 그 시작 인덱스를 반환. 없으면 -1반환
   10. 문자열비교 : str1.compare(str2); // 같으면 0 str1이 더 작으면(우선순위높으면) -1, 크면 1반환
 
-  ****iterator**** 사용법 숙지, capacity개념 숙지필요함...!!!
-  <vector 사용법>
+
+
+
+  ***********<vector 사용법>**************
   https://blockdmask.tistory.com/70
+  **iterator** 사용법 숙지, capacity개념 숙지필요함...!!!
     
   1. vector<타입> v(n, initnum); 또는 ()안에 벡터를 넣어서 복사가능
   2. v.at(idx) 와 v[idx] 의 차이점 -> []가 더 빠르지만, at()은 인덱스 범위(range) 점검하여 벗어나면 예외를 날림(안전).
