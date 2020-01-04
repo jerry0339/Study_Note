@@ -40,7 +40,7 @@ int main() {
   0. string str1 = "Hello "; // 초기화방법
      string copys(str1); // 이렇게 복사가능 (깊은복사)
   1. cin만사용시(cin<<str1<<str2; 이런식) 공백 구분하여 입력받음
-  2. str1 = str2 + str3; //+사용가능
+  2. str1 = str2 + str3; // +사용가능
   3. getline(cin, str1); // 공백문자 포함 한번에받기. c언어의 gets(str1)와 같은함수
                             정확히는 -> getline(입력방식, 입력버퍼시작주소, 딜리미터)   //딜리미터 : 구분문자, 
                             버퍼는 여기공부 : https://kks227.blog.me/60204963264
