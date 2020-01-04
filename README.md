@@ -15,8 +15,9 @@
 실행 : ctrl + alt + r
 o -> x로 바뀌면 저장 된거.
 검색 : F1 , ctrl + shift + p
-ctrl + , : 설정
-ctrl + shift + g : git 소스제어
+설정 : ctrl + ,
+git소스제어 : ctrl + shift + g
+코드정렬 : shift + alt + f
 
 
 2. <C++ defualt main code>
