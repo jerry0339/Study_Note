@@ -73,18 +73,18 @@ int main() {
   5. v.clear(); -> 모든원소 제거
   6. v.push_back(7); -> 마지막 원소뒤에 7삽입
   7. v.pop_back(); -> 마지막 원소 제거
-  **8. v.begin(); -> 첫번째 원소 가리킴(참조아님) : iterator와 사용
-  **9. v.end(); -> 마지막 원소 가리킴(참조아님) : iterator와 사용
-  ***10. v.rend();
-  ***11. v.reserve(n);
-  ***12. v.resize(n);
-  ***13. v.resize(n,3);
+  8. v.begin(); -> 첫번째 원소 가리킴(참조아님) : iterator와 사용
+  9. v.end(); -> 마지막 원소 가리킴(참조아님) : iterator와 사용
+  **10. v.rend();
+  **11. v.reserve(n);
+  **12. v.resize(n);
+  **13. v.resize(n,3);
   14. v.size(); -> 원소의 개수 리턴
   15. v.capacity(); -> 할당된 공간 리턴
-  ***16. v2.swap(v1);
+  **16. v2.swap(v1);
   17. v.insert(2, 3, 4); -> 2번째 위치에 3개의 4값을 삽입 (뒤의 값들은 뒤로밀림)
   **18. v.insert(2, 3); -> 2번째 위치에 3삽입, 삽입한 곳의 iterator를 반환
-  ***19. v.erase(iter);
+  **19. v.erase(iter);
   20. v.empty(); -> vector가 비었으면 리턴 true (size가 0. capacity와는 상관없는것)
 
 
