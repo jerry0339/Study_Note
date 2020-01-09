@@ -39,3 +39,26 @@ int main() {
     }
     cout << cnt;
 }
+
+/*
+<비슷한 단어> - 2607
+
+input(1) : 
+4
+DOG
+GOD
+GOOD
+DOLL
+
+ouput(1) : 
+2
+--------------
+
+input(2) : 
+ABB
+AAA
+
+output(2) : 
+0
+
+*/
