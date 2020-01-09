@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-
 using namespace std;
 
 class Node {
@@ -76,8 +75,6 @@ int Node::sumFunc(int n) {
     }
     return result;
 }
-
-
 int Node::getNum() {
     return num;
 }
@@ -87,3 +84,4 @@ int Node::getSum() {
 int Node::getFac() {
     return fac;
 }
+
