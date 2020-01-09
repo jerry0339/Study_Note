@@ -1,5 +1,6 @@
 ## Master-of-Algorithm
 - 알고리즘PS의 시작
+## 
 
 
 # <목록>
@@ -13,7 +14,7 @@
 ~~~
 컴파일러선택 : ctrl + alt + c
 실행 : ctrl + alt + r
-코드러너 실행으로 바꿈 : ctrl + alt + N
+코드러너 실행 : ctrl + alt + N
 검색 : F1 , ctrl + shift + p
 설정 : ctrl + ,
 git소스제어 : ctrl + shift + g
@@ -98,9 +99,7 @@ int main() {
  https://blog.naver.com/acelhj/221316329745
 
  1. ios_base::sync_with_stdio(false); cin.tie(nullptr);
-
   - sync_with_stdio(false)는 c++ iostream 버퍼와 c의 stdio 버퍼의 동기화에 대한 함수 : false설정시 동기화, iostream만의 버퍼를 만듬
-
   - cin.tie(nullptr); : 없으면 무조건 cin이랑 cout 들어올 때 버퍼 비움.
 
  2. 문자열 함수인자로 받을때는 &을 꼭 이용 ( call by reference )
