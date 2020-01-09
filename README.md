@@ -46,19 +46,20 @@ int main() {
 <string 클래스 정리 (append, length, at, insert, replace, finde, compare)>
   1. String 변수 초기화방법
 
-  - string str1 = "Hello "; // 초기화방법
+    - string str1 = "Hello "; // 초기화방법
 
-  - string copys(str1); // 이렇게 복사가능 (깊은복사)
+    - string copys(str1); // 이렇게 복사가능 (깊은복사)
 
-  - cin>>str1>>str2; cin만 사용시 공백 구분하여 입력받음
+    - cin>>str1>>str2; cin만 사용시 공백 구분하여 입력받음
 
-  - str1 = str2 + str3; // 연산자로 문자열 붙이기 가능
+    - str1 = str2 + str3; // 연산자로 문자열 붙이기 가능
 
-  - getline(cin, str1); // 공백문자 포함 한번에받기. c언어의 gets(str1)와 같은함수
+    - getline(cin, str1); 
+                        공백문자 포함 한번에받기. c언어의 gets(str1)와 같은함수
 
-                        // 정확히는 -> getline(입력방식, 입력버퍼시작주소, 딜리미터)   //딜리미터 : 구분문자,
-                        
-                        // 버퍼는 여기공부 : https://kks227.blog.me/60204963264
+                        정확히는 -> getline(입력방식, 입력버퍼시작주소, 딜리미터)   //딜리미터 : 구분문자,
+
+                        버퍼는 여기공부 : https://kks227.blog.me/60204963264
 
   2. 문자열 확장  : str1.append("World"); // c의 strcat()과 비슷, str1 += "World"; // 위와 같은 코드
   3. 문자열길이   : str1.length(); // 문자열 길이출력
@@ -104,11 +105,10 @@ int main() {
  c++ 입출력, 함수인자 속도 아래 블로그참고
  https://blog.naver.com/acelhj/221316329745
  <내용>
- 1) ios_base::sync_with_stdio(false); cin.tie(nullptr);
+ 1 ios_base::sync_with_stdio(false); cin.tie(nullptr);
+    sync_with_stdio(false)는 c++ iostream 버퍼와 c의 stdio 버퍼의 동기화에 대한 함수 : false설정시 동기화, iostream만의 버퍼를 만듬
 
-  - sync_with_stdio(false)는 c++ iostream 버퍼와 c의 stdio 버퍼의 동기화에 대한 함수 : false설정시 동기화, iostream만의 버퍼를 만듬
+    cin.tie(nullptr); : 없으면 무조건 cin이랑 cout 들어올 때 버퍼 비움.
 
-  - cin.tie(nullptr); : 없으면 무조건 cin이랑 cout 들어올 때 버퍼 비움.
-
- 2) 문자열 함수인자로 받을때는 &을 꼭 이용 ( call by reference )
- 3) int값을 함수인자로 받을때는 그냥 call by value
+ 2 문자열 함수인자로 받을때는 &을 꼭 이용 ( call by reference )
+ 3 int값을 함수인자로 받을때는 그냥 call by value
