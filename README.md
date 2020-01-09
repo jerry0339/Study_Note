@@ -68,13 +68,12 @@ int main() {
 
 
 # Vector 클래스
-
 ~~~
   https://blockdmask.tistory.com/70
   * Capacity는 capacity의 크기 이상의 데이터가 들어오면 capacity의 기존메모리 x 2로 capacity가 증가함.
     
   1. vector<타입> v(n, initnum); 또는 ()안에 벡터를 넣어서 복사가능
-  2. v.at(idx) 와 v[idx] 의 차이점 -> []가 더 빠르지만, at()은 인덱스 범위(range) 점검하여 벗어나면 예외를 날림(안전).
+  2. v.at(idx) 와 v[idx] 의 차이점 -> []가 더 빠르지만, at()은 인덱스 범위(range)점검하여 벗어나면 예외날림(안전).
   3. v.assign(5, 2); -> 2의 값으로 5개 원소 할당
   4. v.front(); -> 첫번째 원소 참조(반환)
   5. v.clear(); -> 모든원소 제거
@@ -91,14 +90,13 @@ int main() {
   16. v2.swap(v1); -> v1과 v2를 완전 스왑. (즉, capacity를 바꿈)
   17. v.insert(2, 3, 4); -> 2번째 위치에 3개의 4값을 삽입 (뒤의 값들은 뒤로밀림)
   18. v.insert(2, 3); -> 2번째 위치에 3삽입, 삽입한 곳의 iterator를 반환
-  19. v.erase(iter); -> iter가 가리키는 원소제거. 범위제거하려면 인자를2개넣으면됨. https://blockdmask.tistory.com/75 참고
+  19. v.erase(iter); -> iter가 가리키는 원소제거. 범위제거시 인자를 2개넣기. https://blockdmask.tistory.com/75 참고
   20. v.empty(); -> vector가 비었으면 리턴 true (size가 0. capacity와는 상관없는것)
 ~~~
 *********************************************************************************************************
 
 
 # Linked List With Vector and Class
-
 ~~~cpp
 #include <iostream>
 #include <vector>
@@ -158,7 +156,7 @@ int main() {
 
     cout << "<Information of Nodes>" << endl;
     for (vector<Node*>::iterator it = n.begin(); it != n.end(); it++) {
-        cout << "Num : " << (*it)->getNum() << ", Sum : " << (*it)->getSum() << ", Fac : " << (*it)->getFac() << endl;
+        cout<<"Num : "<<(*it)->getNum()<<", Sum : "<< (*it)->getSum()<<", Fac : "<<(*it)->getFac()<<endl;
     }
 }
 
@@ -192,7 +190,6 @@ int Node::getFac() {
 
 
 # 기타등등
-
  c++ 입출력, 함수인자 속도 아래 블로그참고
 
  https://blog.naver.com/acelhj/221316329745
