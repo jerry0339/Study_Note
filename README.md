@@ -1,5 +1,5 @@
-# Master-of-Algorithm
-알고리즘PS의 시작
+## Master-of-Algorithm
+- 알고리즘PS의 시작
 
 
 # <목록>
@@ -10,19 +10,23 @@
 
 # < VS Code 단축키, 사용법 >
 *********************************************************************************************************
-디버깅 하는방법 : f9(빨간점)설정후 f5로 디버깅시작, f11로 한줄씩 ㄱ
-디버깅에 안보이는 변수값 보이게하려면 ? 디버깅시 조사식에 + 클릭후 추가할 변수 입력시 보임.
+~~~
+컴파일러선택 : ctrl + alt + c
 
-//컴파일러선택 : ctrl + alt + c
-//실행 : ctrl + alt + r
+실행 : ctrl + alt + r
+
 코드러너 실행으로 바꿈 : ctrl + alt + N
 
-o -> x로 바뀌면 저장 된거.
 검색 : F1 , ctrl + shift + p
+
 설정 : ctrl + ,
+
 git소스제어 : ctrl + shift + g
+
 코드정렬 : shift + alt + f
 
+o -> x로 바뀌면 저장 된거.
+~~~
 
 # <C++ defualt main code>
 *********************************************************************************************************
@@ -43,23 +47,21 @@ int main() {
    
 # <c++ 문법>
 *********************************************************************************************************
-<string 클래스 정리 (append, length, at, insert, replace, finde, compare)>
+  < string 클래스 정리 (append, length, at, insert, replace, finde, compare) >
   1. String 변수 초기화방법
 
-    - string str1 = "Hello "; // 초기화방법
+  - string str1 = "Hello "; // 초기화방법
 
-    - string copys(str1); // 이렇게 복사가능 (깊은복사)
+  - string copys(str1); // 이렇게 복사가능 (깊은복사)
 
-    - cin>>str1>>str2; cin만 사용시 공백 구분하여 입력받음
+  - cin>>str1>>str2; cin만 사용시 공백 구분하여 입력받음
 
-    - str1 = str2 + str3; // 연산자로 문자열 붙이기 가능
+  - str1 = str2 + str3; // 연산자로 문자열 붙이기 가능
 
-    - getline(cin, str1); 
-                        공백문자 포함 한번에받기. c언어의 gets(str1)와 같은함수
-
-                        정확히는 -> getline(입력방식, 입력버퍼시작주소, 딜리미터)   //딜리미터 : 구분문자,
-
-                        버퍼는 여기공부 : https://kks227.blog.me/60204963264
+  - getline(cin, str1); 
+          공백문자 포함 한번에받기. c언어의 gets(str1)와 같은함수
+          정확히는 -> getline(입력방식, 입력버퍼시작주소, 딜리미터)   //딜리미터 : 구분문자,
+          버퍼는 여기공부 : https://kks227.blog.me/60204963264
 
   2. 문자열 확장  : str1.append("World"); // c의 strcat()과 비슷, str1 += "World"; // 위와 같은 코드
   3. 문자열길이   : str1.length(); // 문자열 길이출력
@@ -75,7 +77,8 @@ int main() {
   # <vector 사용법>
   *********************************************************************************************************
   https://blockdmask.tistory.com/70
-  *Capacity는 capacity의 크기 이상의 데이터가 들어오면 capacity의 기존메모리 x 2로 capacity가 증가함.
+
+  * Capacity는 capacity의 크기 이상의 데이터가 들어오면 capacity의 기존메모리 x 2로 capacity가 증가함.
     
   1. vector<타입> v(n, initnum); 또는 ()안에 벡터를 넣어서 복사가능
   2. v.at(idx) 와 v[idx] 의 차이점 -> []가 더 빠르지만, at()은 인덱스 범위(range) 점검하여 벗어나면 예외를 날림(안전).
@@ -103,12 +106,14 @@ int main() {
 # <기타등등>
 *********************************************************************************************************
  c++ 입출력, 함수인자 속도 아래 블로그참고
- https://blog.naver.com/acelhj/221316329745
- <내용>
- 1 ios_base::sync_with_stdio(false); cin.tie(nullptr);
-    sync_with_stdio(false)는 c++ iostream 버퍼와 c의 stdio 버퍼의 동기화에 대한 함수 : false설정시 동기화, iostream만의 버퍼를 만듬
 
-    cin.tie(nullptr); : 없으면 무조건 cin이랑 cout 들어올 때 버퍼 비움.
+ https://blog.naver.com/acelhj/221316329745
+
+ 1 ios_base::sync_with_stdio(false); cin.tie(nullptr);
+
+  - sync_with_stdio(false)는 c++ iostream 버퍼와 c의 stdio 버퍼의 동기화에 대한 함수 : false설정시 동기화, iostream만의 버퍼를 만듬
+
+  - cin.tie(nullptr); : 없으면 무조건 cin이랑 cout 들어올 때 버퍼 비움.
 
  2 문자열 함수인자로 받을때는 &을 꼭 이용 ( call by reference )
  3 int값을 함수인자로 받을때는 그냥 call by value
