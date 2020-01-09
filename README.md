@@ -26,6 +26,7 @@ git소스제어 : ctrl + shift + g
 
 # <C++ defualt main code>
 *********************************************************************************************************
+{{{
 #include <bits/stdc++.h>
 #define rep(i,x,n) for(int i=x; i<n; i++)
 using namespace std;
@@ -37,17 +38,22 @@ int main() {
 	vector<int> arr(N+1);
   rep(i, 0, N) cin>>arr[i]; // i=0부터 N-1까지 (idex)
 }
-   
-   
+
+}}}
    
 # <c++ 문법>
 *********************************************************************************************************
 <string 클래스 정리 (append, length, at, insert, replace, finde, compare)>
   1. <String 변수 초기화방법>
+
     1-1) string str1 = "Hello "; // 초기화방법
+
     1-2) string copys(str1); // 이렇게 복사가능 (깊은복사)
+
     1-3) cin>>str1>>str2; cin만 사용시 공백 구분하여 입력받음
+
     1-4) str1 = str2 + str3; // 연산자로 문자열 붙이기 가능
+    
     1-5) getline(cin, str1); // 공백문자 포함 한번에받기. c언어의 gets(str1)와 같은함수
 
                              // 정확히는 -> getline(입력방식, 입력버퍼시작주소, 딜리미터)   //딜리미터 : 구분문자, 
