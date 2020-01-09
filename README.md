@@ -99,8 +99,9 @@ int main() {
  https://blog.naver.com/acelhj/221316329745
 
  1. ios_base::sync_with_stdio(false); cin.tie(nullptr);
+ ~~~
   - sync_with_stdio(false)는 c++ iostream 버퍼와 c의 stdio 버퍼의 동기화에 대한 함수 : false설정시 동기화, iostream만의 버퍼를 만듬
   - cin.tie(nullptr); : 없으면 무조건 cin이랑 cout 들어올 때 버퍼 비움.
-
+ ~~~
  2. 문자열 함수인자로 받을때는 &을 꼭 이용 ( call by reference )
  3. int값을 함수인자로 받을때는 그냥 call by value
