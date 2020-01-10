@@ -5,11 +5,12 @@
 # 목록
 1. VS Code 단축키, 사용법
 2. C++ default main code
-3. String 클래스
-4. Vector 클래스
-5. Linked List 사용예시
-6. STL의 find()와 Sting의 find()
-7. 기타...
+3. C++ References
+4. String 클래스
+5. Vector 클래스
+6. Linked List 사용예시
+7. STL의 find()와 Sting의 find()
+8. 기타...
 *********************************************************************************************************
 
 
@@ -43,6 +44,14 @@ int main() {
 ~~~
 *********************************************************************************************************
 
+
+# C++ References
+~~~
+C++이 제공하는 헤더에서 함수들에 대한 상세한 정보 확인가능
+http://www.cplusplus.com/reference/algorithm/
+
+~~~
+*********************************************************************************************************
    
 # String 클래스
 ~~~
@@ -194,6 +203,12 @@ int Node::getFac() {
 ~~~
  -Algo find-
 https://modoocode.com/261
+
+ <Algo find 속도>
+Binary Tree 기반 자료구조에서는 O(logn)
+Hashing 으로 관리한다면 O(1)
+Array 기반 자료구조는 O(n)
+
 
  -String find-
 https://modoocode.com/241
