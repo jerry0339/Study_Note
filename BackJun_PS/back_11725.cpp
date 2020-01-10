@@ -1,3 +1,4 @@
+//<트리의 부모찾기> - 11725
 #include <bits/stdc++.h>
 #define rep(i, x, n) for (int i = x; i < n; i++)
 using namespace std;

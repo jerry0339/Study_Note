@@ -1,3 +1,4 @@
+//<비슷한 단어> - 2607
 #include <bits/stdc++.h>
 #define rep(i,x,n) for(int i=x; i<n; i++)
 using namespace std;
