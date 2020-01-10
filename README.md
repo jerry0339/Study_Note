@@ -27,7 +27,7 @@ o -> x로 바뀌면 저장 된거.
 *********************************************************************************************************
 
 
-# C++ defualt main code
+# C++ default main code
 ~~~cpp
 #include <bits/stdc++.h>
 #define rep(i,x,n) for(int i=x; i<n; i++)
