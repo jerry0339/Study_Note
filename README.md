@@ -35,7 +35,7 @@ using namespace std;
 
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(nullptr);
-	int N, K;
+	int N, M;
 	cin>>N>>K;
 	vector<int> arr(N+1);
     rep(i, 0, N) cin>>arr[i]; // i=0부터 N-1까지 (idex)
