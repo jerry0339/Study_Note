@@ -4,7 +4,7 @@
 
 # 목록
 1. VS Code 단축키, 사용법
-2. C++ defualt main code
+2. C++ default main code
 3. String 클래스
 4. Vector 클래스
 5. Linked List 사용예시
