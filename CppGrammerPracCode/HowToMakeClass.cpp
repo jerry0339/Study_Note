@@ -15,6 +15,7 @@ class MyClass {
     double getF();
     int sum();
     void print();
+    MyClass() {} // 생성자
 };
 
 // static변수는 main()함수 시작전 한번 이상의 초기화가 꼭!!! 필요함.

@@ -46,7 +46,7 @@ int main() {
         if (n.empty()) break;
         int searchIdx;
         cin >> searchIdx;
-        for (auto it = n.begin(); it != n.end(); it++) {
+        for (vector<Node*>::iterator it = n.begin(); it != n.end(); it++) { // iterator 변수 생성방법, 종료조건
             if (searchIdx == (*it)->getNum()) {
                 n.erase(it);
                 break;
@@ -55,7 +55,7 @@ int main() {
     }
 
     cout << "<Information of Nodes>" << endl;
-    for (vector<Node*>::iterator it = n.begin(); it != n.end(); it++) {
+    for (auto it = n.begin(); it != n.end(); it++) { // auto 자료형으로 컴파일러가 알아서 iterator형으로 변수 생성해줌.
         cout << "Num : " << (*it)->getNum() << ", Sum : " << (*it)->getSum() << ", Fac : " << (*it)->getFac() << endl;
     }
 }

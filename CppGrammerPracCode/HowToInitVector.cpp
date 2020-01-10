@@ -40,7 +40,7 @@ int main() {
         arr2[i].push_back(i+1);
     }
 
-    // 노드가 들어간 2차원배열 생성
+    // 클래스가 들어간 2차원벡터 생성 초기화 예시 (push_back으로도 가능함)
     vector<vector<Node*>> n2(X);
     for(int i=0; i<X; i++){
         n2[i] = vector<Node*>(Y);
