@@ -216,6 +216,16 @@ int Node::getFac() {
 
 # STL의 함수들 사용예시
 
+* 목록
+~~~
+ 1. find()
+ 2. binary_search()
+ 3. lower_bound(), upper_bound()
+ 4. sort()
+ 5. includes()
+ 6. unique()
+~~~
+
 1. **find() 함수**
 ~~~cpp
 auto it = find(arr.begin(), arr.end(), a);
@@ -360,6 +370,32 @@ int main(void)
         cout << "Using less class : v4 is part of v1" << endl;
 
     return 0;
+}
+
+~~~
+
+6. **unique() 함수**
+
+~~~cpp
+#include<iostream>
+#include<algorithm>
+#include<vector>
+using namespace std;
+
+int main()
+{
+    ios_base::sync_with_stdio(false); cin.tie(nullptr);
+    int N; cin>>N;
+    vector<int> v = { 1,2,4,4,4,5,7,7,7,9,10 };
+    auto n = unique(v.begin(),v.end());
+    // uniqe함수는 중복제거후 마지막항 다음의 원소(필요없는...)의 주소를 반환해줌.
+    // 따라서 아래코드로 바로 삭제가능.
+    v.erase(n,v.end());
+    
+    //결과 확인
+    for(int num: v){
+        cout<<num<<" ";
+    }
 }
 
 ~~~
