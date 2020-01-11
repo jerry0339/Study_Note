@@ -1,5 +1,6 @@
 # **< Master-of-Algorithm >**
 - 알고리즘PS의 시작
+[길라잡이]https://ryute.tistory.com/m/33
 
 
 # 목록
