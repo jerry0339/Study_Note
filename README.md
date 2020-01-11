@@ -91,8 +91,8 @@ http://www.cplusplus.com/reference/algorithm/
   5. v.clear(); -> 모든원소 제거
   6. v.push_back(7); -> 마지막 원소뒤에 7삽입
   7. v.pop_back(); -> 마지막 원소 제거
-  8. v.begin(); -> 첫번째 원소 가리킴(참조아님) : iterator와 사용 , *첫번째 원소의 주소 반환해줌
-  9. v.end(); -> 마지막원소의 다음 가리킴(참조아님) : iterator와 사용, *마지막 원소가아닌 그다음항의 주소 반환
+  8. v.begin(); -> 첫번째 원소 가리킴(참조아님) : iterator와 사용 , *첫번째 원소의 iterator 반환해줌
+  9. v.end(); -> 마지막원소의 다음 가리킴(참조아님) : iterator와 사용, *마지막 원소가아닌 그다음항의 iterator 반환
   10. v.rbegin(); v.rend(); -> 역방향 이터레이터용 주소 반환 함수
   11. v.reserve(n); -> n개원소를 저장할 위치를 예약함 (미리 동적할당)
   12. v.resize(n); -> size를 n으로 변경. size가 더 커졌을경우는 default값인 0으로 변경 (size는 원소의 개수이므로)
@@ -388,7 +388,7 @@ int main()
     int N; cin>>N;
     vector<int> v = { 1,2,4,4,4,5,7,7,7,9,10 };
     auto n = unique(v.begin(),v.end());
-    // uniqe함수는 중복제거후 마지막항 다음의 원소(필요없는...)의 주소를 반환해줌.
+    // uniqe함수는 중복제거후 마지막항 다음의 원소(필요없는...)의 iterator(주소)를 반환해줌.
     // 따라서 아래코드로 바로 삭제가능.
     v.erase(n,v.end());
     
