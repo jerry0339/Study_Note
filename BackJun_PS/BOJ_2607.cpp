@@ -11,6 +11,7 @@ int main() {
     rep(i, 0, N) cin >> str[i];
     rep(i, 0, N) {
         sort(str[i].begin(), str[i].end());
+        //sort(str[i].begin(), str[i].end(),greater<string>()); // 위코드와 같은 동작
     }
 
     rep(i, 1, N) {

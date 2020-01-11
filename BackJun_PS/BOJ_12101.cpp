@@ -26,22 +26,13 @@ int main() {
 	}
 }
 
-//    <이 코드에서 얻어가야 할 것들> - 백준 12101번 1,2,3 더하기2
 //http://boj.kr/c1d04693d2774a559b2efb8192c1520e
-// DP의사용. 접근 
-
-// #include <bits/stdc++.h> 의 사용
-
-// 전처리기의 사용법
-
-
-
+// DP사용
 // c++ 입출력, 함수인자 속도 아래 블로그참고
 // https://blog.naver.com/acelhj/221316329745
 // <내용>
 // 1) ios_base::sync_with_stdio(false); cin.tie(nullptr);
 //     ㄴ> sync_with_stdio(false)는 c++ iostream 버퍼와 c의 stdio 버퍼의 동기화에 대한 함수 : false설정시 동기화, iostream만의 버퍼를 만듬
 //     ㄴ> cin.tie(nullptr); : 없으면 무조건 cin이랑 cout 들어올 때 버퍼 비움.
-
 // 2) 문자열 함수인자로 받을때는 &을 꼭 이용 ( call by reference )
 // 3) int값을 함수인자로 받을때는 그냥 call by value

@@ -1,7 +1,7 @@
 # **< Master-of-Algorithm >**
 - 알고리즘PS의 시작
 
-[https://ryute.tistory.com/m/33]
+[류트님길라잡이]https://ryute.tistory.com/m/33
 
 
 # 목록
@@ -82,7 +82,7 @@ http://www.cplusplus.com/reference/algorithm/
 # Vector 클래스
 ~~~
   https://blockdmask.tistory.com/70
-  * Capacity는 capacity의 크기 이상의 데이터가 들어오면 capacity의 기존메모리 x 2로 capacity가 증가함.
+  * capacity는 capacity의 크기 이상의 데이터가 들어오면 capacity의 기존메모리 x 2로 capacity가 증가함.
     
   1. vector<타입> v(n, initnum); 또는 ()안에 벡터를 넣어서 복사가능
   2. v.at(idx) 와 v[idx] 의 차이점 -> []가 더 빠르지만, at()은 인덱스 범위(range)점검하여 벗어나면 예외날림(안전).
@@ -91,8 +91,8 @@ http://www.cplusplus.com/reference/algorithm/
   5. v.clear(); -> 모든원소 제거
   6. v.push_back(7); -> 마지막 원소뒤에 7삽입
   7. v.pop_back(); -> 마지막 원소 제거
-  8. v.begin(); -> 첫번째 원소 가리킴(참조아님) : iterator와 사용
-  9. v.end(); -> 마지막 원소 가리킴(참조아님) : iterator와 사용
+  8. v.begin(); -> 첫번째 원소 가리킴(참조아님) : iterator와 사용 , *첫번째 원소의 주소 반환해줌
+  9. v.end(); -> 마지막원소의 다음 가리킴(참조아님) : iterator와 사용, *마지막 원소가아닌 그다음항의 주소 반환
   10. v.rbegin(); v.rend(); -> 역방향 이터레이터용 주소 반환 함수
   11. v.reserve(n); -> n개원소를 저장할 위치를 예약함 (미리 동적할당)
   12. v.resize(n); -> size를 n으로 변경. size가 더 커졌을경우는 default값인 0으로 변경 (size는 원소의 개수이므로)
@@ -232,7 +232,9 @@ Array 기반 자료구조는 O(n)
 2. **binary_search() 함수**
 ~~~cpp
 sort(arr.begin(), arr.end());
+// 이진탐색전 정렬필수
 auto result = binary_search(arr.begin(), arr.end(), a);
+// bool형 반환
 
 ~~~
 
@@ -261,14 +263,32 @@ lower_bound값과 upper_bound값의 차이를 통해 value의 갯수를 구할 �
 
 4. **sort() 함수**
 ~~~cpp
+//예시 1) 시작주소 ~ (끝주소 + 1) 로 지정하여 sort
+sort(str.begin(), str.end());
+
+//예시 2) 일반 자료형
+sort(v.begin(),v.end(),greater<int>());
+sort(v.begin(),v.end(),less<int>());
+
+//예시 3) stable_sort() : 구조체 or 클래스
+bool cmp(const Point&, const Point&); // 프로토타입
+sort(v.begin(),v.end(),cmp); // 함수는 포인터로 받음
+bool cmp(const Point &p1, const Point &p2){ // 오름차순정렬 되도록 설계한것.
+    if(p1.x < p2.x)
+        return true;
+    else if(p1.x == p2.x)
+        return p1.y < p2.y;
+    else
+        return false;
+}
 
 ~~~
 
-5. **includes() 함수, lower,greater 클래스**
+5. **includes() 함수, (less,greater) 클래스**
+
+사실 less는 따로 설정 안해주어도됨. 기본으로 오름차순으로 비교하기때문.
 ~~~cpp
 #include <iostream>
-#include <string>
-#include <deque>
 #include <algorithm>
 #include <vector>
 
@@ -299,19 +319,20 @@ int main(void)
     v4.push_back(20);
     v4.push_back(10);
     
-    // 정렬을 하고 난 후 includes로 비교해야함
+    // 정렬을 하고 난 후 includes로 비교해야함. 따라서 아래 코드는 not으로 뜸.
     // bool형 반환
     if(includes(v1.begin(), v1.end(), v2.begin(), v2.end()))
         cout << "v2 is part of v1" << endl;
     else
         cout << "v2 is not part of v1" << endl;
-    
+    // v3가 v1에 포함되지 않음 (60은 v1에 없음)
     if(includes(v1.begin(), v1.end(), v3.begin(), v3.end()))
         cout << "v3 is part of v1" << endl;
     else
         cout << "v3 is not part of v1" << endl;
     
-    //정렬 기준을 greater<int> 설정 ( 내림차순 )
+
+    //정렬 기준을 greater<int> 설정 ( 내림차순정렬 )
     sort(v1.begin(), v1.end(), greater<int>());
     sort(v2.begin(), v2.end(), greater<int>());
     for(int num: v1){
@@ -320,11 +341,12 @@ int main(void)
     for(int num: v2){
         cout<<num<<" ";
     } cout<<"\n";
-    //비교 기준을 greater<int> 설정
+    //비교 기준을 greater<int> 설정 ( 내림차순으로 포함관계확인 )
     if(includes(v1.begin(), v1.end(), v2.begin(), v2.end(), greater<int>()))
         cout << "Using greater class : v2 is part of v1" << endl;
-    
 
+
+    //정렬 기준을 less<int> 설정 ( 오름차순정렬 )
     sort(v1.begin(), v1.end(), less<int>());
     sort(v4.begin(), v4.end(), less<int>());
     for(int num: v4){
@@ -333,7 +355,7 @@ int main(void)
     for(int num: v1){
         cout<<num<<" ";
     } cout<<"\n";
-    //비교 기준을 less<int> 설정
+    //비교 기준을 less<int> 설정 ( 오름차순으로 포함관계확인 )
     if(includes(v1.begin(), v1.end(), v4.begin(), v4.end(), less<int>()))
         cout << "Using less class : v4 is part of v1" << endl;
 
