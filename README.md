@@ -1,6 +1,7 @@
 # **< Master-of-Algorithm >**
 - 알고리즘PS의 시작
-[길라잡이]https://ryute.tistory.com/m/33
+
+[https://ryute.tistory.com/m/33]
 
 
 # 목록
@@ -49,7 +50,7 @@ int main() {
 # C++ References
 ~~~
 C++이 제공하는 헤더에서 함수들에 대한 상세한 정보 확인가능
-http://www.cplusplus.com/reference/algorithm/
+[http://www.cplusplus.com/reference/algorithm/]
 
 ~~~
 *********************************************************************************************************
