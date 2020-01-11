@@ -13,7 +13,7 @@ int main()
     rep(i, 0, N)
         cin>>arr[i];
     sort(arr.begin(), arr.end());
-
+    
     int M;
     cin>>M;
     rep(i, 0, M){

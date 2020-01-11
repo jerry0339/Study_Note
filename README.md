@@ -50,7 +50,7 @@ int main() {
 # C++ References
 ~~~
 C++이 제공하는 헤더에서 함수들에 대한 상세한 정보 확인가능
-[http://www.cplusplus.com/reference/algorithm/]
+http://www.cplusplus.com/reference/algorithm/
 
 ~~~
 *********************************************************************************************************
@@ -110,6 +110,7 @@ C++이 제공하는 헤더에서 함수들에 대한 상세한 정보 확인가�
 
 # Linked List With Vector and Class
 ~~~cpp
+// foreach도 포함 !
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -134,10 +135,12 @@ class Node {
 };
 
 int main() {
+    ios_base::sync_with_stdio(false); cin.tie(nullptr);
     vector<Node*> n;
     int N;
     cin >> N;
 
+    // Node초기화. 1~N까지 인덱스에따라 num, sum, fac를 생성자를 이용하여 초기화
     for (int i = 1; i <= N; i++) {
         n.push_back(new Node(i));
     }
@@ -145,20 +148,21 @@ int main() {
     vector<Node*>::iterator iter = n.begin();
     iter++;  // 0 -> 1번 노드로 이동
     cout << "<Testing of iterator>" << endl;
-    cout << (*(iter - 1))->getNum() << endl;  // 1출력
-    cout << (*iter)->getNum() << endl;        // 2출력
-    cout << iter[1]->getNum() << endl;        // 3출력
-    cout << (*iter++)->getNum() << endl;      // 2출력
-    cout << (*++iter)->getNum() << endl;      // 4출력
+    cout << "print : " << (*(iter - 1))->getNum() << endl;  // 1출력
+    cout << "print : " << (*iter)->getNum() << endl;        // 2출력
+    cout << "print : " << iter[1]->getNum() << endl;        // 3출력
+    cout << "print : " << (*iter++)->getNum() << endl;      // 2출력
+    cout << "print : " << (*++iter)->getNum() << endl;      // 4출력
     cout << endl;
 
     int M;
     cin >> M;
+    // M만큼 수를 받고 그 수가 node에 있으면 삭제
     while (M--) {
         if (n.empty()) break;
         int searchIdx;
         cin >> searchIdx;
-        for (auto it = n.begin(); it != n.end(); it++) {
+        for (vector<Node*>::iterator it = n.begin(); it != n.end(); it++) { // iterator 변수 생성방법, 종료조건
             if (searchIdx == (*it)->getNum()) {
                 n.erase(it);
                 break;
@@ -166,10 +170,19 @@ int main() {
         }
     }
 
+    // iterator이용하여 Node 모두 출력
     cout << "<Information of Nodes>" << endl;
-    for (vector<Node*>::iterator it = n.begin(); it != n.end(); it++) {
-        cout<<"Num : "<<(*it)->getNum()<<", Sum : "<< (*it)->getSum()<<", Fac : "<<(*it)->getFac()<<endl;
+    for (auto it = n.begin(); it != n.end(); it++) { // auto 자료형으로 컴파일러가 알아서 iterator형으로 변수 생성해줌.
+        cout << "Num : " << (*it)->getNum() << ", Sum : " << (*it)->getSum() << ", Fac : " << (*it)->getFac() << endl;
     }
+    cout<<"\n";
+
+    // foreach문 이용하여 Node 모두 출력
+    cout << "<Information of Nodes by foreach>" << endl;
+    for(Node* it : n){
+        cout << "Num : " << it->getNum() << ", Sum : " << it->getSum() << ", Fac : " << it->getFac() << endl;
+    }
+
 }
 
 // Function Definition
@@ -201,31 +214,134 @@ int Node::getFac() {
 *********************************************************************************************************
 
 
-# STL의 함수들
-1. find() 함수
-~~~
- -Algo find-
-https://modoocode.com/261
+# STL의 함수들 사용예시
 
+1. **find() 함수**
+~~~cpp
+auto it = find(arr.begin(), arr.end(), a);
+// iterator 로 반환
+
+/*
  <Algo find 속도>
 Binary Tree 기반 자료구조에서는 O(logn)
 Hashing 으로 관리한다면 O(1)
 Array 기반 자료구조는 O(n)
-
- -String find-
-https://modoocode.com/241
+*/
 ~~~
 
-2. sort() 함수
+2. **binary_search() 함수**
 ~~~cpp
-sort(v.begin(), v.end());
-//update 예정
+sort(arr.begin(), arr.end());
+auto result = binary_search(arr.begin(), arr.end(), a);
+
 ~~~
 
-3. binary_search() 함수
+3. **lower_bound(), upper_bound() 함수**
 ~~~cpp
-//update 예정
+vector<int> v = { 1,2,4,4,4,5,7,7,7,9,10 };
+
+// lower_bound : value보다 작지 않은 값 중 첫번째 iterator를 반환
+auto l = lower_bound(v.begin(), v.end(), 4);
+cout << "4의 처음 위치 : " << (l - v.begin()) << endl;
+// 2 출력 (index)
+
+
+// upper_bound : value보다 큰 값 중 첫번째 iterator를 반환
+auto u = upper_bound(v.begin(), v.end(), 4);
+cout << "4보다 큰 값 중 처음 위치 : " << (u - v.begin()) << endl;
+// 5 출력 (index)
+
+/* 
+lower_bound값과 upper_bound값의 차이를 통해 value의 갯수를 구할 수 있다.
+위의 결과에서 u - l = 3
+4의 개수는 3개.
+*/
+
 ~~~
+
+4. **sort() 함수**
+~~~cpp
+
+~~~
+
+5. **includes() 함수, lower,greater 클래스**
+~~~cpp
+#include <iostream>
+#include <string>
+#include <deque>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+int main(void)
+{
+    int N; cin>>N;
+    vector<int> v1;
+    v1.push_back(10);
+    v1.push_back(20);
+    v1.push_back(30);
+    v1.push_back(40);
+    v1.push_back(50);
+    
+    vector<int> v2;
+    v2.push_back(10);
+    v2.push_back(40);
+    v2.push_back(20);
+   
+    vector<int> v3;
+    v3.push_back(10);
+    v3.push_back(20);
+    v3.push_back(60);
+
+    vector<int> v4;
+    v4.push_back(40);
+    v4.push_back(20);
+    v4.push_back(10);
+    
+    // 정렬을 하고 난 후 includes로 비교해야함
+    // bool형 반환
+    if(includes(v1.begin(), v1.end(), v2.begin(), v2.end()))
+        cout << "v2 is part of v1" << endl;
+    else
+        cout << "v2 is not part of v1" << endl;
+    
+    if(includes(v1.begin(), v1.end(), v3.begin(), v3.end()))
+        cout << "v3 is part of v1" << endl;
+    else
+        cout << "v3 is not part of v1" << endl;
+    
+    //정렬 기준을 greater<int> 설정 ( 내림차순 )
+    sort(v1.begin(), v1.end(), greater<int>());
+    sort(v2.begin(), v2.end(), greater<int>());
+    for(int num: v1){
+        cout<<num<<" ";
+    } cout<<"\n";
+    for(int num: v2){
+        cout<<num<<" ";
+    } cout<<"\n";
+    //비교 기준을 greater<int> 설정
+    if(includes(v1.begin(), v1.end(), v2.begin(), v2.end(), greater<int>()))
+        cout << "Using greater class : v2 is part of v1" << endl;
+    
+
+    sort(v1.begin(), v1.end(), less<int>());
+    sort(v4.begin(), v4.end(), less<int>());
+    for(int num: v4){
+        cout<<num<<" ";
+    } cout<<"\n";
+    for(int num: v1){
+        cout<<num<<" ";
+    } cout<<"\n";
+    //비교 기준을 less<int> 설정
+    if(includes(v1.begin(), v1.end(), v4.begin(), v4.end(), less<int>()))
+        cout << "Using less class : v4 is part of v1" << endl;
+
+    return 0;
+}
+
+~~~
+
 
 *********************************************************************************************************
 
