@@ -20,6 +20,8 @@ int main() {
 	}
 
 	int mean = round(sum/N);
+	//int mean = floor(sum/N + 0.5);
+	//int mean = sum/N + 0.5; // 이렇게하면 정확한값 안나옴. floor이용해야함. or round()사용
 	sort(arr.begin(), arr.end());
 	mid = arr[N/2];
 	range = arr[N-1] - arr[0];

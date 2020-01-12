@@ -8,11 +8,12 @@
 1. VS Code 단축키, 사용법
 2. C++ default main code
 3. C++ References
-4. String 클래스
-5. Vector 클래스
-6. Linked List 사용예시
-7. STL의 함수들
-8. 오류 미리 대처하기, 대처방안
+4. cmath 헤더
+5. string 헤더
+6. vector 헤더
+7. Linked List 사용예시
+8. STL의 함수들
+9. 오류 미리 대처하기, 대처방안
 *********************************************************************************************************
 
 
@@ -54,8 +55,17 @@ http://www.cplusplus.com/reference/algorithm/
 
 ~~~
 *********************************************************************************************************
-   
-# String 클래스
+
+# cmath 헤더
+~~~cpp
+ceil(val);  // 올림
+floor(val); // 내림
+round(val); // 반올림
+pow(val,n); // val의 n제곱
+~~~
+*********************************************************************************************************
+
+# String 헤더
 ~~~
 < string 클래스 정리 (append, length, at, insert, replace, finde, compare) >
   1. String 변수 초기화방법
@@ -79,7 +89,7 @@ http://www.cplusplus.com/reference/algorithm/
 *********************************************************************************************************
 
 
-# Vector 클래스
+# Vector 헤더
 ~~~
   https://blockdmask.tistory.com/70
   * capacity는 capacity의 크기 이상의 데이터가 들어오면 capacity의 기존메모리 x 2로 capacity가 증가함.
