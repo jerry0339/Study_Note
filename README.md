@@ -58,10 +58,24 @@ http://www.cplusplus.com/reference/algorithm/
 
 # cmath 헤더
 ~~~cpp
+abs(val); // 절대값
+pow(val,n); // val의 n제곱
 ceil(val);  // 올림
 floor(val); // 내림
 round(val); // 반올림
-pow(val,n); // val의 n제곱
+//round함수 오버라이딩 (pos이용하여 반올림 자릿수 설정)
+double round(double value, int pos )
+{
+	double temp = 0;
+
+	temp = value * pow( 10.0, pos );
+	temp = floor( temp + 0.5 );
+	temp = temp * pow( 10.0, -pos );
+
+	return temp;
+} 
+
+
 ~~~
 *********************************************************************************************************
 
