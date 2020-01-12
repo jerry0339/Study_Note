@@ -1,4 +1,5 @@
-//<1,2,3 더하기 2> - 12101
+// <1,2,3 더하기 2> - 12101
+// DP 이용
 #include <bits/stdc++.h>
 #define rep(i,x,n) for(int i=x; i<n; i++)
 using namespace std;

@@ -1,6 +1,6 @@
 //<구간합 구하기> - 2042
 // -backJun재귀코드-
-// -세그먼트 트리 이해용-
+// -세그먼트 트리 이용-
 #include <bits/stdc++.h>
 #define rep(i,x,n) for(int i=x; i<n; i++)
 using namespace std;

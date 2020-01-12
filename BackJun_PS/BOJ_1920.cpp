@@ -1,5 +1,5 @@
-//<수 찾기> - 1920
-// binary_search 함수 이용, 이진탐색하기위한 sort 이용.
+// <수 찾기> - 1920
+// STL : binary_search() 함수, 이진탐색하기위한 sort() 함수 이용.
 #include<bits/stdc++.h>
 #define rep(i,x,n) for(int i=x; i<n; i++)
 using namespace std;

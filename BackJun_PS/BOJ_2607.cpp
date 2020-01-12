@@ -1,4 +1,5 @@
-//<비슷한 단어> - 2607
+// <비슷한 단어> - 2607
+// string클래스 : compare(), find(), length() 이용
 #include <bits/stdc++.h>
 #define rep(i,x,n) for(int i=x; i<n; i++)
 using namespace std;

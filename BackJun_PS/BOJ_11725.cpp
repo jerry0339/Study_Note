@@ -1,4 +1,5 @@
-//<트리의 부모찾기> - 11725
+// <트리의 부모찾기> - 11725
+// bfs 이용
 #include <bits/stdc++.h>
 #define rep(i, x, n) for (int i = x; i < n; i++)
 using namespace std;
@@ -44,6 +45,7 @@ int main() {
             cout
         << parent[i] + 1 << "\n";
 }
+
 /* 
 intput(1)의 데이터에서 node에 저장된 값들. (실제 값은 인덱스로 저장되어있어서 -1해주면됨)
 1: 6 4
