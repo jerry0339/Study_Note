@@ -29,6 +29,7 @@ o -> x로 바뀌면 저장 된거.
 한줄삭제 :  shift + Delete
 모든 항목 이름변경 : Ctrl + F2
 ~~~
+
 *********************************************************************************************************
 
 
@@ -433,7 +434,9 @@ int main()
 - **오류 미리대처하기**
 
 
- 1. ios_base::sync_with_stdio(false); cin.tie(nullptr);
+ 1. c++ 입출력함수 속도
+ 
+    ios_base::sync_with_stdio(false); cin.tie(nullptr);
 
   [참고블로그]https://blog.naver.com/acelhj/221316329745
 ~~~
