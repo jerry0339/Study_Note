@@ -75,7 +75,6 @@ double round(double value, int pos )
 	return temp;
 } 
 
-
 ~~~
 *********************************************************************************************************
 
@@ -252,7 +251,7 @@ int Node::getFac() {
 
 1. **find() 함수**
 ~~~cpp
-auto it = find(arr.begin(), arr.end(), a);
+auto it = find(arr.begin(), arr.end(), val);
 // iterator 로 반환
 
 /*
@@ -267,7 +266,7 @@ Array 기반 자료구조는 O(n)
 ~~~cpp
 sort(arr.begin(), arr.end());
 // 이진탐색전 정렬필수
-auto result = binary_search(arr.begin(), arr.end(), a);
+auto result = binary_search(arr.begin(), arr.end(), val);
 // bool형 반환
 
 ~~~
