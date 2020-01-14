@@ -1,4 +1,8 @@
 # **< Master-of-Algorithm >**
+- 마크다운 문법 참고
+
+[MD Grammer](https://simhyejin.github.io/2016/06/30/Markdown-syntax/#blockquotes "마크다운 문법");
+
 - 알고리즘PS의 시작
 
 [알고리즘 길라잡이](https://ryute.tistory.com/m/33 "류트님 블로그")
@@ -240,7 +244,7 @@ int Node::getFac() {
 
 # <div id="8">STL의 함수들 사용예시</div>
 
-* <div id="8.0">목록</div>
+* **<div id="8.0">목록</div>**
 > 1. [find()](#8.1)
 > 2. [binary_search()](#8.2)
 > 3. [lower_bound(), upper_bound()](#8.3)
@@ -432,9 +436,9 @@ int main()
 
  1. c++ 입출력함수 속도
  
-    ios_base::sync_with_stdio(false); cin.tie(nullptr);
+ios_base::sync_with_stdio(false); cin.tie(nullptr);
 
-  [참고블로그]https://blog.naver.com/acelhj/221316329745
+[참고블로그](https://blog.naver.com/acelhj/221316329745)
 ~~~
   * sync_with_stdio(false)는 c++ iostream 버퍼와 c의 stdio 버퍼의 동기화에 대한 함수
     - false설정시 동기화, iostream만의 버퍼를 만듬
