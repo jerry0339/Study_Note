@@ -248,7 +248,7 @@ int Node::getFac() {
 > 5. includes()
 > 6. unique()
 
-<div id="8.1">1. **find() 함수**</div>
+1. **<div id="8.1">find() 함수</div>**
 ~~~cpp
 auto it = find(arr.begin(), arr.end(), val);
 // iterator 로 반환
@@ -261,7 +261,7 @@ Array 기반 자료구조는 O(n)
 */
 ~~~
 
-<div id="8.2">2. **binary_search() 함수**</div>
+2. **<div id="8.2">binary_search() 함수</div>**
 ~~~cpp
 sort(arr.begin(), arr.end());
 // 이진탐색전 정렬필수
