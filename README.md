@@ -4,20 +4,19 @@
 [길라잡이]https://ryute.tistory.com/m/33
 
 
-# 목록
-1. VS Code 단축키, 사용법
-2. C++ default main code
-3. C++ References
-4. cmath 헤더
-5. string 헤더
-6. vector 헤더
-7. Linked List 사용예시
-8. STL의 함수들
-9. 오류 미리 대처하기, 대처방안
+# <div id="0">목차</div>
+1. <div id="1">VS Code 단축키, 사용법</div>
+2. <div id="2">C++ default main code</div>
+3. <div id="3">C++ References</div>
+4. <div id="4">cmath 헤더</div>
+5. <div id="5">string 헤더</div>
+6. <div id="6">vector 헤더</div>
+7. <div id="7">Linked List 사용예시</div>
+8. <div id="8">STL의 함수들</div>
+9. <div id="9">오류 미리 대처하기, 대처방안</div>
 *********************************************************************************************************
 
-
-# VS Code 단축키, 사용법
+# [VS Code 단축키, 사용법](#1)
 ~~~
 코드러너 실행 : ctrl + alt + N
 검색 : F1 또는 ctrl + shift + p
