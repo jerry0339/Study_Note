@@ -4,15 +4,15 @@
 [길라잡이]https://ryute.tistory.com/m/33
 
 
-# <div id="0">목차</div>
+# [목차](#0)
 1. [VS Code 단축키, 사용법](#1)
-2. <div id="2">C++ default main code</div>
-3. <div id="3">C++ References</div>
-4. <div id="4">cmath 헤더</div>
-5. <div id="5">string 헤더</div>
-6. <div id="6">vector 헤더</div>
-7. <div id="7">Linked List 사용예시</div>
-8. <div id="8">STL의 함수들</div>
+2. [C++ default main code](#2)
+3. [C++ References](#3)
+4. [cmath 헤더](#4)
+5. [string 헤더](#5)
+6. [vector 헤더](#6)
+7. [Linked List 사용예시](#7)
+8. [STL의 함수들](#8)
 9. [오류 미리 대처하기, 대처방안](#9)
 *********************************************************************************************************
 
@@ -32,7 +32,7 @@ o -> x로 바뀌면 저장 된거.
 *********************************************************************************************************
 
 
-# C++ default main code
+# <div id="2">C++ default main code</div>
 ~~~cpp
 #include <bits/stdc++.h>
 #define rep(i,x,n) for(int i=x; i<n; i++)
@@ -49,7 +49,7 @@ int main() {
 *********************************************************************************************************
 
 
-# C++ References
+# <div id="3">C++ References</div>
 ~~~
 C++이 제공하는 헤더에서 함수들에 대한 상세한 정보 확인가능
 http://www.cplusplus.com/reference/algorithm/
@@ -57,7 +57,7 @@ http://www.cplusplus.com/reference/algorithm/
 ~~~
 *********************************************************************************************************
 
-# cmath 헤더
+# <div id="4">cmath 헤더</div>
 ~~~cpp
 abs(val); // 절대값
 pow(val,n); // val의 n제곱
@@ -79,7 +79,7 @@ double round(double value, int pos )
 ~~~
 *********************************************************************************************************
 
-# String 헤더
+# <div id="5">String 헤더</div>
 ~~~
 < string 클래스 정리 (append, length, at, insert, replace, finde, compare) >
   1. String 변수 초기화방법
@@ -103,7 +103,7 @@ double round(double value, int pos )
 *********************************************************************************************************
 
 
-# Vector 헤더
+# <div id="6">Vector 헤더</div>
 ~~~
   https://blockdmask.tistory.com/70
   * capacity는 capacity의 크기 이상의 데이터가 들어오면 capacity의 기존메모리 x 2로 capacity가 증가함.
@@ -132,7 +132,7 @@ double round(double value, int pos )
 *********************************************************************************************************
 
 
-# Linked List With Vector and Class
+# <div id="7">Linked List With Vector and Class</div>
 ~~~cpp
 // foreach도 포함 !
 #include <iostream>
@@ -238,19 +238,17 @@ int Node::getFac() {
 *********************************************************************************************************
 
 
-# STL의 함수들 사용예시
+# <div id="8">STL의 함수들 사용예시</div>
 
 * 목록
-~~~
- 1. find()
- 2. binary_search()
- 3. lower_bound(), upper_bound()
- 4. sort()
- 5. includes()
- 6. unique()
-~~~
+> 1. [find()](#8.1)
+> 2. [binary_search()](#8.2)
+> 3. lower_bound(), upper_bound()
+> 4. sort()
+> 5. includes()
+> 6. unique()
 
-1. **find() 함수**
+<div id="8.1">1. **find() 함수**</div>
 ~~~cpp
 auto it = find(arr.begin(), arr.end(), val);
 // iterator 로 반환
@@ -263,7 +261,7 @@ Array 기반 자료구조는 O(n)
 */
 ~~~
 
-2. **binary_search() 함수**
+<div id="8.2">2. **binary_search() 함수**</div>
 ~~~cpp
 sort(arr.begin(), arr.end());
 // 이진탐색전 정렬필수
