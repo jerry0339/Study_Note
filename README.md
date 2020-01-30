@@ -87,26 +87,97 @@ double round(double value, int pos )
 *********************************************************************************************************
 
 # <div id="5">String 헤더</div>
-~~~
-< string 클래스 정리 (append, length, at, insert, replace, finde, compare) >
-  1. String 변수 초기화방법
-    * string str1 = "Hello "; // 초기화방법
-    * string copys(str1); // 이렇게 복사가능 (깊은복사)
-    * cin>>str1>>str2; cin만 사용시 공백 구분하여 입력받음
-    * str1 = str2 + str3; // 연산자로 문자열 붙이기 가능
-    * getline(cin, str1); 
-        - 공백문자 포함 한번에받기. c언어의 gets(str1)와 같은함수
-        - 정확히는 -> getline(입력방식, 입력버퍼시작주소, 딜리미터)   //딜리미터 : 구분문자,
-        - 버퍼는 여기공부 : https://kks227.blog.me/60204963264
+* 참고
+    + [string라이브러리 정리 1탄](https://blog.naver.com/jhnyang/221506584628)
+    + [string라이브러리 정리 2탄](https://blog.naver.com/jhnyang/221506744964)
 
-  2. 문자열 확장  : str1.append("World"); // c의 strcat()과 비슷, str1 += "World"; // 위와 같은 코드
-  3. 문자열길이   : str1.length(); // 문자열 길이출력
-  4. 문자열인덱싱 : str1.at(3) == str1[3]
-  5. 문자열삽입   : str1.insert(6, "Happy "); //str1이 "Hello World"라면, "Hello Happy World" 가 str1에 저장됨
-  6. 문자열대체   : str1.replace(0, 5, "Bye"); // 0~5인덱스까지 삭제후 Bye로 대체.
-  7. 문자열검색   : str1.find("World"); // 탐색문자열이 있으면 그 시작 인덱스를 반환. 없으면 -1반환
-  8. 문자열비교   : str1.compare(str2); // 같으면 0 str1이 더 작으면(우선순위높으면) -1, 크면 1반환
-~~~
+### < string 라이브러리 정리 >
+  1. String 변수 초기화방법
+  ~~~cpp
+  string str1 = "Hello"; // 초기화방법
+  string str2(" !!!!");
+  string *pstr = new string(" World");
+  str1 = *pstr + str2; // 연산자로 문자열 붙이기 가능
+
+  cin>>str1>>str2;    // cin만 사용시 공백 구분하여 입력받음
+  getline(cin, str1); 
+    /*
+    공백문자 포함 한번에받기. c언어의 gets(str1)와 같은함수
+    정확히는 -> getline(입력방식, 입력버퍼시작주소, 딜리미터)   //딜리미터 : 구분문자,
+    버퍼는 여기공부 : https://kks227.blog.me/60204963264
+    */
+
+  string str3(str1); // 이렇게 복사도 가능 (깊은복사)
+  ~~~
+
+  2. 문자열인덱싱
+  ~~~cpp
+  chr1 = str1.at(3); // chr1 = str1[3]; 와 같음
+  chr1 = str1.front(); chr1 = str1.back(); 
+  // str = "abcde"; 라면 각각 a , e에 해당.
+  // begin(), end()와 비교 -> iterator반환임...!!
+  ~~~
+
+  3. 문자열확장
+  ~~~cpp
+  str2 = str1.append("World");  
+  str1 += "World"; // 위와 같은 코드
+  str1.append(5,"."); // str1 뒤에 점5개 붙임
+  str1.append(str2, 0, 4); // str2의 0~4인덱스까지의 문자열을 str1의 뒤에 확장
+  ~~~
+
+  4. 문자열길이 : num1 = str1.length(); -> 문자열 길이출력
+
+  5. 문자열삽입 : str2 = str1.insert(시작위치, 삽입문자열); -> 삽입할 문자열을 시작위치부터 새로삽입
+
+  6. 문자열대체 : str1.replace(0, 5, "Bye"); -> 0~5인덱스까지 삭제후 Bye로 대체.
+
+  7. 문자열검색 
+   * 탐색문자열이 있으면 그 시작 인덱스를 반환. 없으면 string::npos를 반환(-1)
+   * string::npos는 unsigned int 형으로 최대값(43억에 가까움)으로 설정되어 있음 -> 즉, int형으로 변환하면 -1
+  ~~~cpp
+  string str = "aa bb aa bb aa bb";
+  cout<<"length:"<<str.length()<<", ";
+  cout<<str.find("aa")<<", ";
+  cout<<str.find("bb")<<", ";
+  cout<<str.rfind("aa"); // *****
+  //find_first_of, find_last_of는 사용하지 말것.
+    
+    /* 
+    output :
+    length:21, 0, 3, 12 
+    */
+  ~~~
+
+  8. 문자열비교
+  ~~~cpp
+  num3 = str1.compare(비교문자열); // 같으면 0 str1이 더 작으면(우선순위높으면) -1, 크면 1반환
+  if(str1 <= str2) {...} // 이런식으로도 비교가 가능하다 (사전순, 작을수록 우선순위먼저)
+  ~~~
+
+  9. clear(), empty()
+  ~~~cpp
+  if(!str.empty()) { // empty()는 비어있으면 1반환
+      str.clear(); // clear()는 문자열 비워줌
+  }
+  els if(str.empty()) {
+      str = "new!!";
+  }
+  ~~~
+
+  10. 문자열추출 
+  ~~~cpp
+  str2 = str1.substr(startPos, strLength); ->기존 문자열(str1)은 그대로 두고 새로운 문자열만들어 리턴
+  ~~~
+
+  11. 문자열삭제
+  ~~~cpp
+  str1.erase(2); // 인덱스 2부터 끝까지 모두삭제
+  str1.erase(iter); // 해당 반복자 하나만 삭제 = 문자하나만 삭제
+  str1.erase(1,5); // 문자열 인덱스 1부터 5문자삭제 -> 즉, 인덱스 1~5까지 삭제
+  str1.erase(str1.begin(), str1.begin()+3); // str1첫번째부터 3문자 삭제 -> 즉 첨부터 str1.begin()+3 전까지 삭제
+  ~~~
+
 *********************************************************************************************************
 
 
@@ -497,8 +568,15 @@ endl을 쓰면 불필요하게 버퍼를 비우므로 매우 느려짐.
 ~~~
 
 4. 디버깅
-
-디버깅은 최후의 수단 !!!
+* 디버깅은 최후의 수단 !!!
+~~~
+<포인터 값으로 추적하는 에러>
+1. 0xcccccccc (3435973836) : 초기화 되지 않은 지역변수
+2. 0xcdcdcdcd (3452816845) : 초기화 되지 않은 힙에 할당된 메모리
+3. 0xdddddddd (3722304989) : 힙에서 free된 메모리
+4. 0xfeeefeee (4277075694) : 힙에서 free된 메모리
+5. 0xfdfdfdfd (4261281277) : 힙에 할당된 메모리의 초과범위
+~~~
 *********************************************************************************************************
 
 # <div id="10">알고리즘 & 자료구조 코드</div>
