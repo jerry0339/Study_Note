@@ -6,7 +6,7 @@
 - 알고리즘PS의 시작
 
 [알고리즘 길라잡이](https://ryute.tistory.com/m/33 "류트님 블로그")
-[손건영](naver.com "손건영 개짬찌")
+
 [알고리즘 공부순서](https://baactree.tistory.com/14 "박트리님 블로그")
 
 
