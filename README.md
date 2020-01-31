@@ -166,9 +166,42 @@ double round(double value, int pos )
   ~~~
 
   10. 문자열추출 
-  ~~~cpp
-  str2 = str1.substr(startPos, strLength); ->기존 문자열(str1)은 그대로 두고 새로운 문자열만들어 리턴
-  ~~~
+  
+  - str2 = str1.substr(startPos, strLength); ->기존 문자열(str1)은 그대로 두고 새로운 문자열만들어 리턴
+~~~cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(false); cin.tie(nullptr);
+    int N; cin>>N;
+    
+    string str1 = "Good Mrning Mr.AA , Mr.BB , Mr.CC , Mr.DD , Mr.EE , Mr.FF !!!!";
+    string str2 = str1.substr(5,7);
+    string str3 = str1.substr(str1.find("Mr"));
+    
+    int cnt = 0;
+    string cut = str1;
+    while(cut.find("Mr") != -1) {
+        int cutidx = cut.find("Mr");
+        cout<<cut<<"\n";
+        cut.erase(cut.begin(), cut.begin()+cutidx+2);
+    }
+
+    //위의 반복문과 같은 출력
+    cut = str1;
+    while(cut.find("Mr") != -1) {
+        int cutidx = cut.find("Mr");
+        cout<<cut<<"\n";
+        cut = cut.substr(cutidx+2);
+    }
+
+    cout<<str1<<"\n";
+    cout<<str2<<"\n";
+    cout<<str3<<"\n";
+}
+~~~
 
   11. 문자열삭제
   ~~~cpp
