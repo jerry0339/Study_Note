@@ -113,7 +113,7 @@ double round(double value, int pos )
   2. 문자열인덱싱
   ~~~cpp
   chr1 = str1.at(3); // chr1 = str1[3]; 와 같음
-  chr1 = str1.front(); chr1 = str1.back(); 
+  chr1 = str1.front(); chr1 = str1.back();
   // str = "abcde"; 라면 각각 a , e에 해당.
   // begin(), end()와 비교 -> iterator반환임...!!
   ~~~
@@ -215,11 +215,9 @@ int main() {
 *********************************************************************************************************
 
 
-# <div id="6">Vector 헤더</div>
+# <div id="6">Vector & list 헤더</div>
 
-- stack과 배열의 경우 vector 클래스를 사용함
 - 덱의 경우 list 클래스를 사용함 (deque 클래스가 느리기때문)
-
 ~~~
   https://blockdmask.tistory.com/70
   * capacity는 capacity의 크기 이상의 데이터가 들어오면 capacity의 기존메모리 x 2로 capacity가 증가함.
@@ -242,7 +240,7 @@ int main() {
   16. v2.swap(v1); -> v1과 v2를 완전 스왑. (즉, capacity를 바꿈)
   17. v.insert(2, 3, 4); -> 2번째 위치에 3개의 4값을 삽입 (뒤의 값들은 뒤로밀림)
   18. v.insert(2, 3); -> 2번째 위치에 3삽입, 삽입한 곳의 iterator를 반환
-  19. v.erase(iter); -> iter가 가리키는 원소제거. 범위제거시 인자를 2개넣기. https://blockdmask.tistory.com/75 참고
+  19. v.erase(iter); -> iter가 가리키는 원소제거. 범위제거시 인자를 2개넣기
   20. v.empty(); -> vector가 비었으면 리턴 true (size가 0. capacity와는 상관없는것)
 ~~~
 *********************************************************************************************************
@@ -424,7 +422,7 @@ sort(v.begin(),v.end(),cmp); // 함수는 포인터로 받음
 bool cmp(const Point &p1, const Point &p2){ // 오름차순정렬 되도록 설계한것.
     if(p1.x < p2.x)
         return true;
-    else if(p1.x == p2.x)
+    else if(p1.x == p2.x) // x값이 같을경우 y로 비교
         return p1.y < p2.y;
     else
         return false;
