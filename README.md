@@ -449,6 +449,12 @@ bool cmp(const Point &p1, const Point &p2){ // 오름차순정렬 되도록 설�
         return p1.y < p2.y;
     else
         return false;
+    
+    // 위의 조건문은 아래의 코드와 같이 간결하게 작성가능.
+    /*
+    if(p1.x == p2.x) return p1.y < p2.y;
+    else return p1.x < p2.x;
+    */
 }
 
 ~~~
