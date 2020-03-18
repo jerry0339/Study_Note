@@ -1,5 +1,5 @@
-// <N-Queen> - BOJ_9663
-// 백트래킹 대표문제 (DFS이용)
+// <N-Queen> - 9663
+// BackTracking
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -7,7 +7,7 @@ using namespace std;
 int n,cnt = 0;
 vector<int> dpt(1);
 
-bool isPossible(int depth){
+bool isPossible(int depth){ // Bounding
     for(int i=1; i<depth; i++){
         // 좌우는 검사할 필요x depth기준을 행으로 정했기 때문
         if(dpt[i] == dpt[depth]) // 상하(열) 확인
