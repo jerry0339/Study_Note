@@ -29,10 +29,10 @@ long long b_search(long long start, long long end) { // reversed index
         return mid;
     } else if(sum > m) {
         if(mid+1> start) return mid;
-        b_search(start,mid+1);
+        return b_search(start,mid+1);
     } else { // sum < m
         if(mid-1 < end) return mid-1;
-        b_search(mid-1,end);
+        return b_search(mid-1,end);
     }
 }
 
