@@ -1,5 +1,5 @@
 // <돌다리> - BOJ_12761
-// BFS
+// BFS (shortest path)
 
 #include<bits/stdc++.h>
 using namespace std;
