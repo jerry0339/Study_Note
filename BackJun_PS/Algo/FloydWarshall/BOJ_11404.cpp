@@ -28,11 +28,11 @@ int main() {
         if(g[a][b] > c) g[a][b] = c;
     }
     
-    for (i = 1; i <= n; i++){ // 탐색하는 노드를 for문 최상위에 놓아야함. (k >> 'i' >> j)
-		for (j = 1; j <= n; j++){
-			for (k = 1; k <= n; k++){
-				if (g[k][j] > g[k][i] + g[i][j])
-					g[k][j] = g[k][i] + g[i][j];
+    for (k = 1; k <= n; k++){ // 탐색하는 노드를 for문 최상위에 놓아야함. (k >> 'i' >> j)
+		for (i = 1; i <= n; i++){
+			for (j = 1; j <= n; j++){
+				if (g[i][j] > g[i][k] + g[k][j])
+					g[i][j] = g[i][k] + g[k][j];
 			}
 		}
 	}

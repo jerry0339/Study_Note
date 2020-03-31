@@ -20,15 +20,13 @@ void dfs(int depth, int cur) {
     }
 
     for(int i=cur; i<C; i++){
-        if(1){
-            if(check(ch[i])) flag++;
-            else flag2++;
-            str[depth] = ch[i];
-            dfs(depth+1,i+1);
-            if(check(ch[i])) flag--;
-            else flag2--;
-            str[depth] = 0;
-        }
+        if(check(ch[i])) flag++;
+        else flag2++;
+        str[depth] = ch[i];
+        dfs(depth+1,i+1);
+        if(check(ch[i])) flag--;
+        else flag2--;
+        str[depth] = 0;
     }
 
 }
