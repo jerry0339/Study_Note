@@ -27,7 +27,7 @@ void dijkstra(int st){
         // 아래 코드를 통해 그 노드에 대한 인접노드탐색을 패스함.
         
         if (dis > d[cur]) {
-            cout<<"node num : "<<cur<<",  saved dist in Q: "<<d[cur]<<",  d[num] : "<<dis<<'\n'; // 확인용 출력
+            //cout<<"node num : "<<cur<<",  saved dist in Q: "<<d[cur]<<",  d[num] : "<<dis<<'\n'; // 확인용 출력
             continue;
         }
 
