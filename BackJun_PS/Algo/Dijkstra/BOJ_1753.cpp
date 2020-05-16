@@ -12,7 +12,7 @@ int V,E,K; // 정점, 간선, 시작정점
 
 void dijkstra(int st){
     priority_queue<pii> pq; // 우선순위 큐를 사용하여 힙트리 자료구조로 
-    
+    // priority_queue<pii,vector<pii>,greater<pii>> pq; // <자료형,컨테이너,comp함수>
     pq.push({0,st});
     d[st] = 0;
 
