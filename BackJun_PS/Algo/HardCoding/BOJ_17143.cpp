@@ -1,5 +1,7 @@
 // <낚시왕> - BOJ_17143
 // Only 빡구현 문제 (삼성기출)
+// 방향을 (위,아래) (왼,오)로 한꺼번에 처리함.
+// 방향이 아래or오 일때는 인덱스 그대로 처리, 위or왼 일때의 (인덱스 + Row or Column수)로 처리함.
 
 #include<bits/stdc++.h>
 using namespace std;
