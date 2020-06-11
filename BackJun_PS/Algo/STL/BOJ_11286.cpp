@@ -17,7 +17,7 @@ struct comp{
         return a.aa > b.aa;
 	}
 };
-
+// 우선순위 큐는 기본적으로 max heap임. greater<int> 넣으면 min heap.
 priority_queue<pii, vector<pii>, comp> pq;
 int N,n;
 
