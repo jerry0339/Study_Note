@@ -100,7 +100,7 @@ int segmentIntersects(vector2 a, vector2 b, vector2 c, vector2 d) {
             return 1;
         else return MAX; // 선분교차 - 무수히 많은점 교차
     } else { // 한직선 위가 아닐때
-        int ab = ccw(a, b, c) * ccw(a, b, d);
+        int ab = ccw(a, b, c) * ccw(a, b, d); // 직선ab와 선분cd 교차 확인시 ab만 사용
         int cd = ccw(c, d, a) * ccw(c, d, b);
         return ab <= 0 && cd <= 0;
     }
