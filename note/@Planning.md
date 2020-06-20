@@ -6,7 +6,7 @@
 0. BOJ_11724 - 유니온파인드 풀이
 > > 기업투자, 2239(스도쿠), 3850(jumping monkey) 풀어야함 , 보간탐색 ??
 
-> 1. class3 달성하기
+> 1. class6 달성하기
 
 > 2. parallel binary search ??
 > 3. Segment Tree - BOJ(2042, 2357, 10868)
