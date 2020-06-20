@@ -3,12 +3,13 @@
 
 #include<bits/stdc++.h>
 using namespace std;
-#define FOR(i,N) for(int i=0;i<N;++i)
 #define all(v) (v).begin(), (v).end()
 #define rall(v) (v).rbegin(), (v).rend()
 #define sz(x) (int)(x).size()
-#define aa first
-#define bb second
+#define ini(x, y) memset(x, y, sizeof(x))
+#define fastio cin.sync_with_stdio(false); cin.tie(nullptr)
+#define xx first
+#define yy second
 typedef pair<int, int> pii;
 typedef long long ll;
 
