@@ -1,6 +1,3 @@
-// #pragma gcc optimize("O3")
-// #pragma gcc optimize("Ofast")
-
 // <바이러스> - BOJ_2606
 // 실버 기본문제
 // adj를 이용한 그래프탐색 - BFS
