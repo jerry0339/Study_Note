@@ -1,5 +1,5 @@
 // <킹세종> - BOJ_8193
-// 완전그래프, BFS, 구현
+// 완전그래프 간선개수, BFS, 구현
 // [참고](https://chris2tg.tistory.com/18)
 
 #include<bits/stdc++.h>
