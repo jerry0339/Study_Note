@@ -20,7 +20,8 @@ int main() {
 }
 
 #define abs(x) ((x) < 0 ? (-(x)) : (x))
-ll gcd(ll a,ll b){return b?gcd(b,a%b):a;}
+ll gcd(ll a, ll b) {return b ? gcd(b, a%b) : a;}
+int gcd(int a, int b) {return b ? gcd(b, a%b) : a;}
 
 priority_queue<int, vector<int>, greater<int>> pq;
 
