@@ -3,7 +3,7 @@ using namespace std;
 #define xx first
 #define yy second
 const double EPSILON = 1e-9;
-const double PI = 2.0 * acos(0.0);
+const double PI = acos(-1);
 
 struct vector2 {
     double x, y;
