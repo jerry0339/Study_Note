@@ -1,7 +1,6 @@
 // <종이의 개수> - BOJ_1780
 // 분할정복
-// 인덱스접근...!! BOJ_2293(색종이)처럼 재귀를통한 반환값을 이용해도, 
-// 인덱스접근코드랑 속도가 비슷하게나옴. 앞으로는 더 편한 인덱스접근을 사용하도록 하자.
+// 재귀 + 인덱스로 접근
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -10,14 +9,14 @@ int v[2188][2188];
 int cnt[2]={0,};
 
 void go(int y, int x, int k) {
-    bool flag=true;
+    bool flag=true; // 분할한 범위의 값이 모두 같으면 true ,
     for(int i=y;(i<y+k)&&flag;i++)
         for(int j=x;(j<x+k)&&flag;j++)
             if (v[y][x] != v[i][j])
-                flag=false;
+                flag=false; // 한개라도 다르면 false
 
-    if (flag) cnt[++v[y][x]]++;
-    else {
+    if (flag) cnt[++v[y][x]]++; // 모두 같으면 수행,
+    else { // 하나라도 다르면 해당범위 n*n으로 또 분할. 밑의 코드는 3x3으로 분할
         k/=3;
         for(int i=0;i<3;i++)
             for(int j=0;j<3;j++)
