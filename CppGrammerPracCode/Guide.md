@@ -35,7 +35,7 @@
 
 > `pair` : 이름이 'first', 'second'인 두 개의 변수를 저장할 수 있는 struct
 > `vector` : 가변 배열
-> `stack` : FILO(First In Last Out) 선입후출 자료구조
+> `stack` : FILO(First In Last Out) 선입후출 자료구조 (거의 안씀, vector를 씀)
 > `queue` : FIFO(First In First Out) 선입선출 자료구조
 > `deque` : 덱
 > `list` : 양방향 연결리스트

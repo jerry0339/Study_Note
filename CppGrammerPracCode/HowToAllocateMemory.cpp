@@ -57,7 +57,7 @@ int main() {
     }
     cout<<endl;
 
-    // 아래코드는 위와는 달리 push_back()함수를 통해 행마다 다른 열의 개수를 가질 수 있음 -> Dynamic allocation이라고 표현
+    // 아래코드는 위와는 달리 push_back()함수를 통해 행마다 다른 열의 개수를 가질 수 있음
     cout<<"Dynamic allocation of 2-Dimension Vector using push_back()"<< endl;
     int m = M;
     for (int i = 0; i < N; i++) {

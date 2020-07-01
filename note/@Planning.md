@@ -2,6 +2,8 @@
 
 > https:>ryute.tistory.com/m/33 2의 list 진행하기....
 
+> BOJ_12094
+
 0. BOJ_11724 - 유니온파인드 풀이
 > > 기업투자, 2239(스도쿠), 3850(jumping monkey) 풀어야함 , 보간탐색 ??
 
