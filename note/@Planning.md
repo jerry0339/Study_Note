@@ -1,7 +1,6 @@
 >해야 할것
 
 > https:>ryute.tistory.com/m/33 2의 list 진행하기....
-> > My Problem : 2630(색종이 만들기) , 1992(쿼드트리)
 
 0. BOJ_11724 - 유니온파인드 풀이
 > > 기업투자, 2239(스도쿠), 3850(jumping monkey) 풀어야함 , 보간탐색 ??
