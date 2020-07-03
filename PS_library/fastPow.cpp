@@ -1,8 +1,16 @@
 #include<bits/stdc++.h>
 using namespace std;
+/*
+void test() {
+    while(d){
+		if(d&1) v = b * v;
+		b = b * b;
+		d >>= 1;
+	}
+}
+*/
 
 long long a,n;
-
 // a의n제곱
 // 시간복잡도 : log(n)
 int main() {
