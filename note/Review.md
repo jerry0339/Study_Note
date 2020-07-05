@@ -837,4 +837,38 @@ int main() {
 
 
 **************************************************************************************************************************
-# 44. 
+# 44. push_back()과 emplace_back() 차이점
+> L-value, R-value란 ? ex)
+~~~cpp
+string a = "abc"; // 여기서 =의 왼쪽에 있는 a는 L-value, 오른쪽에 있는 "abc"는 R-value
+string b = a;     // 여기서는 b,a둘다 L-value
+~~~
+> 즉, R-value는 한번 쓰고 다시 안쓰는 변수(temporary, 코드에서 "abc")
+>     L-value는 callable 변수(재정의 될 수 있는 변수임).
+> 따라서 R-value를 push_back()하면 copy, L-value를 push_back()하면 move가 수행됨.
+
+
+> cpp레퍼런스 정보 
+>> std::vector<T,Allocator>::push_back 의 오버로딩 프로토타입
+>> 1. void push_back(const T& value); -> 인자로 L-value
+>> 2. void push_back(T&& value);      -> 인자로 R-value
+>> 
+
+* <정리>
+> push_back()
+>> L-value 레퍼런스가 들어오면 copy수행
+>> R-value 레퍼런스가 들어오면 move(c+11부터)를 수행
+
+> emplace_back()
+>> 1. L-value: copy 수행
+>> 2. R-value: move 수행
+>> 3. 백터내에 move없이 바로 오브젝트를 생성하는것이 가능(construct) 
+>>> ex) v.emplace_back(Info(dis,dir,y,x));
+>> 속도: 3->2->1 순으로 3이 가장 빠름
+
+* 결론 : emplace_back()만 쓰면 됨(가장 빠름)
+
+
+
+**************************************************************************************************************************
+# 45. 
