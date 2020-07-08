@@ -878,4 +878,11 @@ string b = a;     // 여기서는 b,a둘다 L-value
 
 
 **************************************************************************************************************************
-# 45. 
+# 45. lower_bound() , upper_bound()
+> lower_bound(v.begin(), v.end(), val, comp);
+>> comp : 조건이 true면 오른쪽, false면 왼쪽 노드로 이동
+
+> upper_bound(v.begin(), v.end(), val, comp);
+>> comp : 조건이 true면 왼쪽, false면 오른쪽 노드로 이동
+
+> ex) 확인해 봐야함
