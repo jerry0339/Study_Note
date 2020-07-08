@@ -7,6 +7,7 @@ using namespace std;
 #define rall(v) (v).rbegin(), (v).rend()
 #define sz(x) (int)(x).size()
 #define ini(x, y) memset(x, y, sizeof(x))
+#define FASTIO cin.tie(NULL); ios::sync_with_stdio(false)
 #define xx first
 #define yy second
 typedef pair<int, int> pii;
