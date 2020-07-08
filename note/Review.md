@@ -728,6 +728,12 @@ while(true){
         cin>>arr[..]...
         ....
     }
+    
+// 또는
+
+while(cin>>N){
+    ......
+}
 ~~~
 
 
@@ -867,6 +873,7 @@ string b = a;     // 여기서는 b,a둘다 L-value
 >> 속도: 3->2->1 순으로 3이 가장 빠름
 
 * 결론 : emplace_back()만 쓰면 됨(가장 빠름)
+* 참고동영상 : [push_back, emplace_back 차이](https://m.blog.naver.com/sorkelf/220825930008)
 
 
 
