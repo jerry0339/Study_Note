@@ -2,6 +2,7 @@
 using namespace std;
 #define xx first
 #define yy second
+typedef long long ll;
 const double EPSILON = 1e-9;
 const double PI = acos(-1);
 
@@ -57,6 +58,10 @@ int ccw(vector2 p, vector2 a, vector2 b) {
     if (fabs(ret) < EPSILON) return 0;
     else if(ret < 0) return -1;
     else return 1;
+}
+ll ccw2(vector2 p, vector2 a, vector2 b) { // 면적계산용( BOJ_2166 참고 )
+    ll ret = (a-p).cross(b-p);
+    return ret;
 }
 
 // 같은 직선상에 놓인경우(기울기 같은경우) false리턴
