@@ -6,19 +6,18 @@
 using namespace std;
 
 int N,T;
-int tree[1001][2]; // [0]: left, [1]: right
-int po[1001]; // preOrder
-int io[1001]; // intOrder
+int tree[1001][2];
+int po[1001];
+int io[1001];
+int ioIdx[1001];
 
 int makeTree(int l, int r, int k){
     if(l+1==r) return io[l];
-    for(int i=l; i<r; i++) {
-        if(po[k] == io[i]) {
-            if(i!=l) tree[po[k]][0] = makeTree(l,i,k+1);
-            if(i+1!=r) tree[po[k]][1] = makeTree(i+1,r,k+(i+1-l)); // 5,8,5
-            break;
-        }
-    }
+
+    int i = ioIdx[po[k]];
+    if(i!=l) tree[po[k]][0] = makeTree(l,i,k+1);
+    if(i+1!=r) tree[po[k]][1] = makeTree(i+1,r,k+(i+1-l));
+
     return po[k];
 }
 
@@ -38,11 +37,12 @@ int main()
         memset(tree,-1,sizeof(tree));
         cin >> N;
         for(int i=0; i<N; i++) cin>>po[i];
-        for(int i=0; i<N; i++) cin>>io[i];
+        for(int i=0; i<N; i++) {
+            cin>>io[i];
+            ioIdx[io[i]] = i;
+        }
         
         int root = makeTree(0,N,0);
-
         postorder(root); cout << "\n";
     }
-    
 }
