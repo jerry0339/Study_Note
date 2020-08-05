@@ -36,7 +36,9 @@ int main() {
                 d = vector2(b.x+dy, b.y-dx);
                 if(c.x<0 || d.x<0 || c.x>20000 || d.x>20000 || c.y<0 || d.y<0 || c.y>20000 || d.y>20000) continue;
                 else {
-                    if(s[c.x].count(c.y) && s[d.x].count(d.y)){ // set은 find보다 count하는게 더빠를 수 있음
+                    // set은 count가 필요없지만 find대신 사용
+                    // set은 find보다 count하는게 더빠를 수 있음
+                    if(s[c.x].count(c.y) && s[d.x].count(d.y)){ 
                         max_ = max(max_, dx*dx+dy*dy);
                     }
                 }
