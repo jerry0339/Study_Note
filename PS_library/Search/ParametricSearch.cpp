@@ -14,11 +14,13 @@ bool ispossible(int mid){ // int or bool확인
     // 2. 조건확인(max인 mid탐색) : ex) BOJ_1654<랜선자르기>
     if(cnt >= N) return true; // 큰 mid탐색
     else return false;  // 작은 mid탐색
+    // 조건문 없이 간단하게 리턴 (아래코드)
     // return cnt>=N; // N or M 확인!!!
 
     // 3. 조건확인(min인 mid탐색) : ex) BOJ_2792<보석상자>
     if(cnt > N) return true; // 큰 mid탐색
     else return false; // 작은 mid탐색
+    // 조건문 없이 간단하게 리턴 (아래코드)
     // return cnt>N; // N or M 확인!!!
 }
 
@@ -39,8 +41,7 @@ int b_search(int l, int r)
         // 2. ispossible로 mid가 여러가지 -> min 또는 max mid탐색: ispossible()코드 참고
         if (ispossible(mid)) s = mid + 1;
         else                 e = mid - 1;
-
-        // 3. lower bound, upper bound 구현 필요?
+        
     }
  
     return e; // -> max mid탐색시
