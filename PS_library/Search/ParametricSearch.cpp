@@ -6,44 +6,31 @@ int N;
 bool ispossible(int mid){ // int or bool확인
     int cnt = 0;
     // cnt계산 예시)
-    // for (int i = 0; i < M; i++) cnt += (c[i] - 1) / mid + 1; // N or M 확인!!!!
+    // for (int i = 0; i < M; i++) // N or M 확인!!!!
+    //    cnt += (c[i] - 1) / mid + 1;
     
-    // 1. 하나의 mid만 탐색 가능한 경우-> 계산값만 반환
-    return cnt;
+    // cnt값(조건)을 만족하는 mid가 여러개 일때,
+    // max인 mid탐색 : ex) BOJ_1654<랜선자르기>
+    if(cnt >= N) return true;
+    else return false;
+    // return cnt>=N; // 한줄 코드
 
-    // 2. 조건확인(max인 mid탐색) : ex) BOJ_1654<랜선자르기>
-    if(cnt >= N) return true; // 큰 mid탐색
-    else return false;  // 작은 mid탐색
-    // 조건문 없이 간단하게 리턴 (아래코드)
-    // return cnt>=N; // N or M 확인!!!
-
-    // 3. 조건확인(min인 mid탐색) : ex) BOJ_2792<보석상자>
-    if(cnt > N) return true; // 큰 mid탐색
-    else return false; // 작은 mid탐색
-    // 조건문 없이 간단하게 리턴 (아래코드)
-    // return cnt>N; // N or M 확인!!!
+    // min인 mid탐색 : ex) BOJ_2792<보석상자>
+    if(cnt > N) return true;
+    else return false;
+    // return cnt>N; // 한줄 코드
 }
 
 int b_search(int l, int r)
 {
-    int s = l, e = r;
-    int mid;
-    
+    int s = l, e = r, mid;
     while (s <= e) {
         mid = (s + e) / 2;
-
-        // 1. 조건(ispossible)에 의해 단 하나의 mid만 결정될 수 있는경우 예시
-        int tmp = ispossible(mid);
-        if (tmp==N) return mid;
-        else if(tmp<N) s = mid + 1;
-        else           e = mid - 1;
-
-        // 2. ispossible로 mid가 여러가지 -> min 또는 max mid탐색: ispossible()코드 참고
         if (ispossible(mid)) s = mid + 1;
         else                 e = mid - 1;
         
     }
- 
+    // iopossible에서 cnt값(조건)을 만족하는 mid가 여러개 일때,
     return e; // -> max mid탐색시
     return s; // -> min mid탐색시
 }
