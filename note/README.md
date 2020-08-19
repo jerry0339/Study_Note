@@ -1,7 +1,8 @@
 # **< Master-of-Algorithm >**
-- 마크다운 문법 참고
 
-[MD Grammer](https://simhyejin.github.io/2016/06/30/Markdown-syntax/#blockquotes "마크다운 문법");
+- c++ 레퍼런스
+
+[C++ Reference](http://www.cplusplus.com/reference/algorithm/)
 
 - 알고리즘PS의 시작
 
@@ -12,8 +13,6 @@
 [stl](https://www.acmicpc.net/group/board/view/7645/16539)
 
 [비트마스크](https://www.acmicpc.net/group/board/view/7645/16580)
-
-[C++ Reference](http://www.cplusplus.com/reference/algorithm/)
 
 
 - # <div id="0">목차</div>
