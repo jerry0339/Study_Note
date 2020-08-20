@@ -6,6 +6,8 @@
 #include <string>
 using namespace std;
 
+
+
 // 문자 하나씩 뒤로 밀어서 출력하기
 int main() {
     string s;
