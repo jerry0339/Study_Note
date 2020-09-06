@@ -11,6 +11,8 @@ a,b,c의 최솟값 +1 을하여 (?)를 구함
 
 #include <iostream>
 #include <vector>
+// DP
+
 #include <algorithm>
 using namespace std;
 
