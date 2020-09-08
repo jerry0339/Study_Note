@@ -28,6 +28,9 @@ struct comp{ // min heap
         return a.d > b.d;
     }
 };
+
+// priority_queue<자료형, 구현체, 비교 연산자>
+// 구현체는 기본적으로 vector위에서 돌아감.
 priority_queue<int, vector<int>, comp> pq;
 /************************************************************/
 
