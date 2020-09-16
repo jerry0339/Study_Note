@@ -19,6 +19,7 @@ int main() {
         string sub = s.substr(1, len - 1);  // 나머지 문자들을 문자열로 분리
         s = sub + first;                    // 두 문자열을 연결하여 새로운 문자열로 만듦
         cout << s << endl;
+        
     }
 }
 
