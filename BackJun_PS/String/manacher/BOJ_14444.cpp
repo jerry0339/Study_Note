@@ -1,5 +1,5 @@
 // <가장 긴 팰린드롬 부분 문자열> - BOJ_14444
-// 문자열, 마나허(manacher)
+// 문자열, 마나커(manacher)
 
 #include<bits/stdc++.h>
 using namespace std;

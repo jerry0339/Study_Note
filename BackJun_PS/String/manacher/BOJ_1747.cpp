@@ -1,5 +1,5 @@
 // <소수&팰린드롬> - BOJ_1747
-// 문자열, sieve, 마나허(manacher)이용 (manacher없이 그냥 팰린드롬인지 확인해도 됨)
+// 문자열, sieve, 마나커(manacher)이용 (manacher없이 그냥 팰린드롬인지 확인해도 됨)
 
 #include<bits/stdc++.h>
 using namespace std;

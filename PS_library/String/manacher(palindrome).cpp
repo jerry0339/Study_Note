@@ -1,5 +1,5 @@
 // 팰린드롬 수 찾기
-// 마나허(manacher) 알고리즘
+// 마나커(manacher) 알고리즘
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -34,3 +34,12 @@ int manacher(string str, int n){
     }
     return ans; // 가장 긴 팰린드롬 부분 문자열의 길이 반환
 }
+
+/*
+<푼문제>
+https://www.acmicpc.net/problem/14444
+https://www.acmicpc.net/problem/1747
+
+<풀어볼 문제>
+https://www.acmicpc.net/problem/2079
+*/
