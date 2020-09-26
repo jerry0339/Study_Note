@@ -1,5 +1,6 @@
 // 팰린드롬 수 찾기
 // 마나커(manacher) 알고리즘
+// O(n)
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -14,7 +15,7 @@ int manacher(string str, int n){
         S += '#';
     }
 
-    // 알고리즘 이해 - (https://www.crocus.co.kr/1075)
+    // [알고리즘 이해](https://blog.naver.com/occidere/222001720233)
     int N = S.size();
     int r = 0, p = 0, ans=0;
     for(int i=0; i<N; i++) {
