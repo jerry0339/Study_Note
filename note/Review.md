@@ -628,6 +628,7 @@ char str[2000]{};
 > 큰 크기의 배열을 초기화 하는경우,
 >> memset이 가장 빠름
 >> 그 다음 assign이 빠르고 , 그 다음 for문이 빠름
+>> memset(str,'a',sizeof(str)) -> (char는 1byte라서 가능)
 
 
 
