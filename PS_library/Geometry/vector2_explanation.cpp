@@ -64,6 +64,23 @@ ll ccw2(vector2 p, vector2 a, vector2 b) { // 면적계산용( BOJ_2166 참고 )
     return ret;
 }
 
+//두 벡터의 사이각(rad) *180/PI 해줘야 각도 나옴
+double intervalAngle(vector2 a, vector2 b) {
+	return acos(a.dot(b) / (a.norm()*b.norm()));
+}
+
+//단순 다각형 p의 넓이를 구한다.
+double area(const vector<vector2>&p){
+    double ret=0;
+    for(int i=0;i<p.size();i++)
+    {
+        int j=(i+1)%p.size();
+        //ret+=p[i].cross(p[j]);
+        ret+=p[i].x*p[j].y-p[j].x*p[i].y;
+    }
+    return fabs(ret)/2.0;
+}
+
 // 같은 직선상에 놓인경우(기울기 같은경우) false리턴
 bool lineIntersection(vector2 a, vector2 b, vector2 c, vector2 d, vector2& x) {
     double det = (b - a).cross(d - c);
