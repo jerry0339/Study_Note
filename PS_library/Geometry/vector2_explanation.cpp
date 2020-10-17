@@ -81,7 +81,7 @@ double area(const vector<vector2>&p){
     return fabs(ret)/2.0;
 }
 
-// 같은 직선상에 놓인경우(기울기 같은경우) false리턴
+// 두 직선이 평행할때(기울기만 평행, 같은직선) false, 교차시 true리턴
 bool lineIntersection(vector2 a, vector2 b, vector2 c, vector2 d, vector2& x) {
     double det = (b - a).cross(d - c);
     if (fabs(det) < EPSILON) return false;
@@ -89,11 +89,11 @@ bool lineIntersection(vector2 a, vector2 b, vector2 c, vector2 d, vector2& x) {
     return true;
 }
 
-// lineIntersection결과가 false: 두직선이 평행할때
+// 평행한 두 직선이 input, 교차판단
 bool paralleSegments(vector2 a, vector2 b, vector2 c, vector2 d, vector2& p) {
     if (b < a) swap(a, b); // 벡터ab 방향이 ba라면 ab로 바꿔줌
     if (d < c) swap(c, d); // 벡터cd 방향이 dc라면 cd로 바꿔줌
-    // 평행하지만 같은 직선에 있지않으면 ccw에 의해, 같은 직선위지만 선분ab,cd가 최소 한 점에서 교차하지 않으면 false
+    // 같은 직선에 있지않으면 ccw에 의해 false, 같은 직선위지만 선분ab,cd가 최소 한 점에서 교차하지 않으면 false
     if (ccw(a, b, c) != 0 || b < c || d < a) return false;
     if (a < c) p = c;
     else p = a;
