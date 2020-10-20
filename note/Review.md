@@ -948,6 +948,28 @@ string b = a;     // 여기서는 b,a둘다 L-value
 
 
 **************************************************************************************************************************
-
 # 48. P문제와 NP문제(NP-hard)
 > https://wkdtjsgur100.github.io/P-NP/
+
+
+
+**************************************************************************************************************************
+# 49. for문에서의 earse iterator
+> for문에서 해당 it를 지우게 되면 다음iterator(it++)를 인식하지 못함.
+> lst.erase(it++)를 사용하면 미리 iterator를 복사하고 earse를 호출하기 때문에 깔끔하게 코딩가능
+
+~~~cpp
+
+map<int,set<int>> m;
+set<int>::iterator tmp;
+
+for(auto it = m.begin(); it != m.end(); ){ // ++it를 for문 조건에 넣지않음
+    tmp = it->yy.begin();
+    ans.push_back(*tmp);
+    it->yy.erase(tmp++);
+    
+    // it++로 넣으면 반복자 복사를 먼저하고 erase하기 때문에 지우고 나서도 다음반복자 참조가능
+    if(it->yy.size()==0) m.erase(it++); 
+    else ++it; // 지우는게 아니라면 다음반복자를 참조 할 수 있도록 함
+}
+~~~
