@@ -1,6 +1,6 @@
 // <가장 가까운 두 점> - BOJ_2261
 // Line Sweeping
-// 2차원 좌표 스위핑 O(NlogN)
+// 기하학 문제는 아님
 
 #include <bits/stdc++.h>
 #define all(v) v.begin(),v.end()
@@ -33,6 +33,7 @@ int main() {
 	double md = dist(v[0],v[1]);
 	s.insert({v[0].yy,v[0].xx});
 	s.insert({v[1].yy,v[1].xx});
+	
 	int st = 0;
 	for(int i=2; i<N; i++){
 		while(st<i){
@@ -48,7 +49,7 @@ int main() {
 		auto lob = s.lower_bound({v[i].yy-mind, -INF});
 		auto upb = s.upper_bound({v[i].yy+mind, INF});
 
-		for(auto it = lob; it!=upb; ++it) // it: y좌표로 정렬 되어 있는거 조심
+		for(auto it = lob; it!=upb; ++it)
 			md = min(md, dist({it->yy,it->xx},v[i]));
 		
 		s.insert({v[i].yy, v[i].xx});
