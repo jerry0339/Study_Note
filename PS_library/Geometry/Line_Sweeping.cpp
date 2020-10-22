@@ -1,5 +1,5 @@
 // <가장 가까운 두 점> - BOJ_2261
-// Line Sweeping
+// Line Sweeping, closest pair problem
 // 2차원 좌표 스위핑 O(NlogN)
 
 #include <bits/stdc++.h>
@@ -44,9 +44,10 @@ int main() {
 			}
 		}
 
-		int mind = sqrt(md);
-		auto lob = s.lower_bound({v[i].yy-mind, -INF});
-		auto upb = s.upper_bound({v[i].yy+mind, INF});
+		int mind = sqrt(md); // double값 int형으로 변환되면서 내림수
+		auto lob = s.lower_bound({v[i].yy-mind, -INF}); // (y값 - 내림수)이상
+		auto upb = s.upper_bound({v[i].yy+mind, INF}); //  (y값 + 내림수)초과까지의 범위 확인해야 함
+		// x좌표도 lob에서는 최소, upb에서는 최대까지 범위에 포함될 수 있도록 각각 -INF, INF로 설정
 
 		for(auto it = lob; it!=upb; ++it) // it: y좌표로 정렬 되어 있는거 조심
 			md = min(md, dist({it->yy,it->xx},v[i]));

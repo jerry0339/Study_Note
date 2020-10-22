@@ -1,6 +1,5 @@
 // <가장 가까운 두 점> - BOJ_2261
-// Line Sweeping
-// 기하학 문제는 아님
+// Line Sweeping, closest pair problem
 
 #include <bits/stdc++.h>
 #define all(v) v.begin(),v.end()
