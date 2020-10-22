@@ -882,13 +882,19 @@ string b = a;     // 여기서는 b,a둘다 L-value
 **************************************************************************************************************************
 # 45. lower_bound() , upper_bound()
 > lower_bound(v.begin(), v.end(), val, comp);
->> comp : 조건이 true면 오른쪽, false면 왼쪽 노드로 이동
-
 > upper_bound(v.begin(), v.end(), val, comp);
->> comp : 조건이 true면 왼쪽, false면 오른쪽 노드로 이동
 
-> ex) 확인해 봐야함
+>> lower_bound : 이상 값
+>> upper_bound : 초과 값
 
+~~~cpp
+int arr[10] = {1,2,3,3,3,4,6,6,6,10};
+int val1 = lower_bound(arr,arr+10, 3) - arr;
+int val2 = upper_bound(arr,arr+10, 3) - arr;
+cout<<val1<<' '<<val2;
+
+// 출력: 2 5
+~~~
 
 
 **************************************************************************************************************************
