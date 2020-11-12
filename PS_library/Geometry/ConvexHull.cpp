@@ -29,16 +29,17 @@ void convexHull(){
     mpt = *min_element(all(v));
     sort(all(v),comp);
 
-    vector<pii> ans;
-    ans.eb(v[0]);
-    ans.eb(v[1]);
-    for(int i=2; i<N; i++){
-        while(sz(ans)>1 && ccw(v[i], ans[sz(ans)-2], ans[sz(ans)-1])<=0){
-            ans.pop_back();
+    // 껍질까기? -> BOJ_2254 감옥건설 참고
+    vector<pii> hull;
+    hull.eb(v[0]);
+    hull.eb(v[1]);
+    for(int i=2; i<sz(v); i++){
+        while(sz(hull)>1 && ccw(v[i], hull[sz(hull)-2], hull[sz(hull)-1])<=0){
+            hull.pop_back();
         }
-        ans.eb(v[i]);
+        hull.eb(v[i]);
     }
-    cout<<sz(ans);
+    cout<<sz(hull);
 }
 
 int main() {
