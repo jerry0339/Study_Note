@@ -25,21 +25,24 @@ bool comp(const pii &a, const pii &b){
     return ret > 0  || (ret==0 && a < b);
 }
 
-void convexHull(){
-    mpt = *min_element(all(v));
-    sort(all(v),comp);
+void convexHull(vector<pii> &v){
+    if(v.size()<3) return;
+    swap(v[0],*min_element(v.begin(), v.end()));  
+    sort(++v.begin(), v.end(), [&](pii a, pii b) -> bool {
+        int ret = ccw(v[0], a, b);
+        return ret > 0  || (ret==0 && a < b);
+    });
 
-    // 껍질까기? -> BOJ_2254 감옥건설 참고
     vector<pii> hull;
-    hull.eb(v[0]);
-    hull.eb(v[1]);
-    for(int i=2; i<sz(v); i++){
-        while(sz(hull)>1 && ccw(v[i], hull[sz(hull)-2], hull[sz(hull)-1])<=0){
+    hull.emplace_back(v[0]);
+    hull.emplace_back(v[1]);
+    for(int i=2; i<v.size(); i++){
+        while(hull.size()>1 && ccw(v[i], hull[hull.size()-2], hull[hull.size()-1])<=0){
             hull.pop_back();
         }
-        hull.eb(v[i]);
+        hull.emplace_back(v[i]);
     }
-    cout<<sz(hull);
+    v = hull;
 }
 
 int main() {
@@ -52,5 +55,6 @@ int main() {
 		v.eb(pii(a,b));
 	}
     
-    convexHull();
+    convexHull(v);
+    cout<<v.size();
 }

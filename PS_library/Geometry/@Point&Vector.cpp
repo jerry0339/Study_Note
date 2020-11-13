@@ -23,8 +23,8 @@ struct Point {
     Point operator-(const Point& pt) const {
         return Point(x - pt.x, y - pt.y);
     }
-    Point operator*(double pt) const {
-        return Point(x * pt, y * pt);
+    Point operator*(double sc) const {
+        return Point(x * sc, y * sc);
     }
     //벡터길이 반환
     double norm() const { return hypot(x,y); }
@@ -74,6 +74,7 @@ double intervalAngle(Point a, Point b) {
 //단순 다각형 p의 넓이를 구한다.
 double area(const vector<Point>&p){
     double ret=0;
+    if(p.size()<3) return 0;
     for(int i=0;i<p.size();i++) {
         int j=(i+1)%p.size();
         ret+=p[i].cross(p[j]);
