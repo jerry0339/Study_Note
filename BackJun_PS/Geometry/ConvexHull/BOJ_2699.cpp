@@ -1,3 +1,6 @@
+// <격자점 컨벡스헐> - BOJ_2699
+// 컨벡스헐
+
 #include <bits/stdc++.h>
 #define all(v) v.begin(),v.end()
 #define sz(x) (int)(x).size()
@@ -8,7 +11,7 @@ using namespace std;
 typedef long long ll;
 typedef pair<int,int> pii;
 
-int N;
+int N,T;
 vector<pii> v;
 
 int ccw(pii p, pii a, pii b){
@@ -16,9 +19,15 @@ int ccw(pii p, pii a, pii b){
     return t ? (t>0 ? 1 : -1) : 0;
 }
 
+pii mpt;
+bool comp(const pii &a, const pii &b){
+    int ret = ccw(mpt, a, b);
+    return ret > 0  || (ret==0 && a < b);
+}
+
 void convexHull(vector<pii> &v){
     if(v.size()<3) return;
-    swap(v[0],*min_element(v.begin(), v.end()));  
+    swap(v[0],*min_element(v.begin(), v.end()));
     sort(++v.begin(), v.end(), [&](pii a, pii b) -> bool {
         int ret = ccw(v[0], a, b);
         return ret > 0  || (ret==0 && a < b);
@@ -39,27 +48,27 @@ void convexHull(vector<pii> &v){
 int main() {
 	ios_base::sync_with_stdio(false);
     cin.tie(0);
-	cin>>N;
+	cin>>T;
 	int a,b;
-	for(int i=0; i<N; i++){
-		cin>>a>>b;  
-		v.eb(pii(a,b));
-	}
-    
-    convexHull(v);
-    cout<<v.size();
+    while(T--){
+        v.clear();
+        cin>>N;
+        for(int i=0; i<N; i++){
+            cin>>a>>b;
+            v.push_back({a,b});
+	    }
 
-    /*
-    // x,y값 가장 작은 점 기준으로 반시계 방향으로 정렬
-    // 선분위의 점 포함(ccw=0인 점들)
-    swap(v[0],*min_element(v.begin(), v.end()));
-    sort(++v.begin(), v.end(), [&](pii a, pii b) -> bool {
-        int ret = ccw(v[0], a, b);
-        if(ret==0) {
-            if(a.yy<=v[0].yy) return a.xx<b.xx;
-            else return a>b;
+        convexHull(v);
+        int st = min_element(v.begin(), v.end(),[&](pii a, pii b)->bool{
+            if(a.yy==b.yy) return a.xx<b.xx;
+            return a.yy>b.yy;
+        })-v.begin() + v.size();
+        
+
+        cout<<v.size()<<'\n';
+        for(int i=0; i<v.size(); i++){
+            cout<<v[st%v.size()].xx<<' '<<v[st%v.size()].yy<<'\n';
+            st--;
         }
-        return ret > 0;
-    });
-    */
+    }
 }
