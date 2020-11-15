@@ -3,7 +3,6 @@ using namespace std;
 #define xx first
 #define yy second
 typedef long long ll;
-typedef pair<Point, Point> Line;
 const double EPSILON = 1e-9;
 const double PI = acos(-1);
 
