@@ -13,6 +13,9 @@ struct Point {
     bool operator==(const Point& pt) const {
         return x == pt.x && y == pt.y;
     }
+    bool operator!=(const Point& pt) const {
+        return x != pt.x || y != pt.y;
+    }
     bool operator<(const Point& pt) const {
         return x != pt.x ? x < pt.x : y < pt.y;
     }
@@ -134,4 +137,56 @@ Point perpendicularFoot(Point p, Point a, Point b){
 
 double pointToLine(Point p, Point a, Point b) {
     return (p - perpendicularFoot(p,a,b)).norm();
+}
+
+void convexHull(vector<Point> &v, vector<Point> &hull){
+    if(v.size()<3) return;
+    swap(v[0],*min_element(v.begin(), v.end()));  
+    sort(++v.begin(), v.end(), [&](Point a, Point b) -> bool {
+        int ret = ccw(v[0], a, b);
+        return ret > 0  || (ret==0 && a < b);
+    });
+
+    hull.clear();
+    hull.emplace_back(v[0]);
+    hull.emplace_back(v[1]);
+    for(int i=2; i<v.size(); i++){
+        while(hull.size()>1 && ccw(v[i], hull[hull.size()-2], hull[hull.size()-1])<=0){
+            hull.pop_back();
+        }
+        hull.emplace_back(v[i]);
+    }
+}
+
+// 점pt들중 볼록다각형 hull내부에 위치한 점들을 res에 저장
+// 겹치는점, 다각형의 선 위에 위치한 점 포함 !!!!!
+void pointInConvexPoly(vector<Point> &hull, vector<Point> &pt, vector<Point> &res){
+    //hull의 size()가 2개인 경우(=직선인경우) 포함
+    int s=hull.size()-1;
+    int mid = max_element(hull.begin(), hull.end())-hull.begin();
+
+    vector<Point> lowerHull, upperHull;
+    upperHull.emplace_back(hull[0]);
+
+    for(int i=0; i<=mid; i++) lowerHull.emplace_back(hull[i]);
+    for(int i=s; i>=mid; i--) upperHull.emplace_back(hull[i]);
+    for(int i=0; i<pt.size(); i++){
+        int a = lower_bound(lowerHull.begin(), lowerHull.end(), pt[i])-lowerHull.begin();
+        int b = lower_bound(upperHull.begin(), upperHull.end(), pt[i])-upperHull.begin();
+        
+        if(a==0){
+            if(pt[i]!=lowerHull[0]) continue;
+        } else if(a==lowerHull.size()) continue;
+        else {
+            if(ccw(pt[i], lowerHull[a-1], lowerHull[a])<0) continue;
+        }
+        if(b==0){
+            if(pt[i]!=upperHull[0]) continue;
+        } else if(b==upperHull.size()) continue;
+        else {
+            if(ccw(pt[i], upperHull[b], upperHull[b-1])<0) continue;
+        }
+        
+        res.emplace_back(pt[i]);
+    }
 }

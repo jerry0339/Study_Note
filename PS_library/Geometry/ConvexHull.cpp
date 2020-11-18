@@ -16,6 +16,7 @@ int ccw(pii p, pii a, pii b){
     return t ? (t>0 ? 1 : -1) : 0;
 }
 
+// 점이 모두 한 직선위에 있는경우 점두개만 저장됨(시작점, 끝점)
 void convexHull(vector<pii> &v){
     if(v.size()<3) return;
     swap(v[0],*min_element(v.begin(), v.end()));  
