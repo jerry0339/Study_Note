@@ -6,11 +6,11 @@
 #include <string>
 using namespace std;
 const double EPS = 1e-8; // EPSILON
-const double PI = acos(-1);
+const double PI = 3.1415926535;
 
 struct Point {
     double x, y;
-    Point(double x_=0, double y_=0) :x(x_), y(y_){}
+    Point(double x_=0.0, double y_=0.0) :x(x_), y(y_){}
     bool operator==(const Point& pt) const {return x == pt.x && y == pt.y;}
     bool operator!=(const Point& pt) const {return x != pt.x || y != pt.y;}
     bool operator<(const Point& pt) const {return x != pt.x ? x < pt.x : y < pt.y;}
@@ -61,13 +61,13 @@ double Vector2::pointToPoint(Point a, Point b) {
 
 //두 벡터의 사이각(rad) *180/PI 해줘야 각도 나옴
 double Vector2::intervalAngle(Point a, Point b) {
-	return acos(a.dot(b) / (a.norm()*b.norm()));
+    return acos(b.dot(a) / a.norm() / b.norm());
 }
 
 //단순 다각형 p의 넓이를 구한다.
 double Vector2::area(const vector<Point> &p){
-    double ret=0;
-    if(p.size()<3) return 0;
+    double ret=0.0;
+    if(p.size()<3) return 0.0;
     for(int i=0;i<p.size();i++) {
         int j=(i+1)%p.size();
         ret+=p[i].cross(p[j]);
