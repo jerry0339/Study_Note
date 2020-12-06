@@ -1,5 +1,7 @@
 // <커피숍 2> - BOJ_1275
 // 세그먼트 트리 (비재귀)
+// Lazy propagation 비재귀 버전 공부해야 함
+// 비재귀 세그는 GCD트리의 갱신을 못한다? - 확인해봐야 함
 
 #include<bits/stdc++.h>
 #define MAX_N 100001
