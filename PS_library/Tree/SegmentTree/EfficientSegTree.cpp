@@ -1,15 +1,14 @@
 // <커피숍 2> - BOJ_1275
-// 세그먼트 트리 (비재귀)
-// Lazy propagation 비재귀 버전 공부해야 함
+// 세그먼트 트리 easy버전 (비재귀)
 // 비재귀 세그는 GCD트리의 갱신을 못한다? - 확인해봐야 함
 
 #include<bits/stdc++.h>
-#define MAX_N 100001
+#define MAX_N 100001 // need to update 'MAX_N'
 using namespace std;
 typedef long long ll;
 
 ll N,Q;
-ll t[MAX_N * 2];
+ll t[MAX_N * 2]{};
 
 void init() {
     for (ll i = N-1; i > 0; --i){
@@ -17,7 +16,15 @@ void init() {
     }
 }
 
-// input l은 0부터
+// input pos는 0부터 인자값으로 받음
+void modify(ll pos, ll val) {
+    t[pos + N] = val;
+    for (pos += N; pos > 1; pos >>= 1) {
+        t[pos >> 1] = t[pos] + t[pos ^ 1];
+    }
+}
+
+// input l은 0부터 인자값으로 받음
 ll query(ll l, ll r) { // [l, r)
     ll ans = 0;
     for (l += N, r += N; l < r; l >>= 1, r >>= 1) {
@@ -25,14 +32,6 @@ ll query(ll l, ll r) { // [l, r)
         if (r & 1) ans += t[--r];
     }
     return ans;
-}
-
-// input pos는 0부터
-void update(ll pos, ll val) {
-    t[pos + N] = val;
-    for (pos += N; pos > 1; pos >>= 1) {
-        t[pos >> 1] = t[pos] + t[pos ^ 1];
-    }
 }
 
 int main() {
@@ -53,6 +52,6 @@ int main() {
             y = t;
         }
         cout<<query(x-1,y)<<'\n';
-        update(a-1,b);
+        modify(a-1,b);
     }
 }
