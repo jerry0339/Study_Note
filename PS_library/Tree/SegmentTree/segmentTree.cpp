@@ -1,6 +1,10 @@
 // <커피숍 2> - BOJ_1275
 // 세그먼트 트리 (재귀)
 
+// [Classic Segment Tree](http://codeforces.com/blog/entry/15890)
+// [Efficient Segment Tree](http://codeforces.com/blog/entry/18051)
+// [Data Structures](http://codeforces.com/blog/entry/15729)
+
 #include <bits/stdc++.h>
 #define rep(i,x,n) for(int i=x; i<n; i++)
 using namespace std;

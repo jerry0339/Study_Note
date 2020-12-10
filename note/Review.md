@@ -1019,4 +1019,12 @@ sort(++v.begin(), v.end(), [&](Point a, Point b) -> bool {
 ~~~
 
 **************************************************************************************************************************
-# 52. 
+# 52. Segment Tree 참고링크
+
+[Classic Segment Tree](http://codeforces.com/blog/entry/15890)
+[Efficient Segment Tree](http://codeforces.com/blog/entry/18051)
+[Data Structures](http://codeforces.com/blog/entry/15729)
+
+
+**************************************************************************************************************************
+# 53.

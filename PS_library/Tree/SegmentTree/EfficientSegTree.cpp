@@ -6,6 +6,7 @@
 #define MAX_N 100001 // need to update 'MAX_N'
 using namespace std;
 typedef long long ll;
+const long long INF = 1e9;
 
 ll N,Q;
 ll t[MAX_N * 2]{};
