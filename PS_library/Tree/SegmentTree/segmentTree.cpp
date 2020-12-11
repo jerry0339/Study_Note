@@ -53,16 +53,16 @@ int main() {
     }
     init(1,0,N-1);
 
-    ll x,y,a;
-    ll b;
+    ll x,y,a,b;
+    // 인덱스 x~y 까지합
+    // 인덱스 a를 b로 고침
     while(Q--){
-        cin>>x>>y>>a;
-        cin>>b;
+        cin>>x>>y>>a>>b;
         if(x>y) swap(x,y);
-        ll diff = b - arr[a-1];
-        arr[a-1] = b;
+        
         cout<<query(1, 0, N-1, x-1, y-1)<<'\n';
-        modify(1, 0, N-1, a-1, diff);
+        modify(1, 0, N-1, a-1, b - arr[a-1]);
+        arr[a-1] = b;
     }
 
     return 0;
