@@ -786,6 +786,8 @@ while(cin>>N){
 > int의 4바이트에서 각비트당 0x3f를 할당하여 0x3f3f3f3f의 값이 int에 들어감
 > 추가로, 0x3f3f3f3f: 약 10억6천 // 0x7f7f7f7f: 약 21억4천 // 0x01010101: 약 1680만
 > 따라서 memset의 초기화수로 INF=0x3f정도가 적당(INF+INF까지 가능)
+> -INF로 초기화 하려면 ? : '0xc0'으로 초기화
+> long long 인 배열의 경우에도 memset(arr,0x3f,sizeof(arr)); 또는 0xc0(-INF인경우)로 초기화 해도 됨
 > 최소값이 0x7f7f7f7f를 넘어갈 수 있는경우 0x3f3f3f3f사용 ex-> 플로이드와샬의 경우 adj[i][k]+adj[k][j] < adj[i][j]비교 같은거
 
 
