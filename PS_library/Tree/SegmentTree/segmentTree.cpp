@@ -2,11 +2,13 @@
 // 세그먼트 트리 (재귀 - 직관적임)
 
 #include<bits/stdc++.h>
-#define MAX_N 100000 // MAX값 확인
+#define MAX 100000 // MAX값 확인 (segTree)
+#define MAX_N 100001 // MAX_N값 확인 (N개수)
 using namespace std;
 typedef long long ll;
 
-ll arr[MAX_N]{}, tree[MAX_N<<2]{};
+ll arr[MAX_N]{};
+ll tree[MAX<<2]{}; // 초기화 0, INF, -INF 확인
 ll N,Q;
 
 ll init(ll n, ll s, ll e){
@@ -59,7 +61,7 @@ int main() {
     while(Q--){
         cin>>x>>y>>a>>b;
         if(x>y) swap(x,y);
-        
+        // 인덱스 0포함인지 , MAX포함인지 확인!!
         cout<<query(1, 0, N-1, x-1, y-1)<<'\n';
         modify(1, 0, N-1, a-1, b - arr[a-1]);
         arr[a-1] = b;
