@@ -32,6 +32,16 @@ void modify(ll n, ll s, ll e, ll idx, ll diff){
     modify(n<<1|1, mid+1, e, idx, diff);
 }
 
+// 리턴값이 있는 modify버전
+// idx의 원소에 diff를 더하는것이 아니라 val로 바꿈
+ll MOD = 100000007;
+ll modify2(ll n, ll s, ll e, ll idx, ll val){
+    if(idx<s || idx>e) return tree[n];
+    if(s==e) return tree[n] = val;
+    ll mid = (s+e)>>1;
+    return tree[n] = (modify2(n<<1, s, mid, idx, val) * modify2(n<<1|1, mid+1, e, idx, val))%MOD;
+}
+
 // s: 시작 인덱스, e: 끝 인덱스
 // l, r: 구간 합을 구하고자 하는 범위
 ll query(ll n, ll s, ll e, ll l, ll r){
