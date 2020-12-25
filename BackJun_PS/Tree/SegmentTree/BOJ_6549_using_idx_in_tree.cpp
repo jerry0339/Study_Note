@@ -25,7 +25,7 @@ ll init(ll n, ll s, ll e){
 }
 
 ll query(ll n, ll s, ll e, ll l, ll r){
-    if(l>e || r<s) return 0;
+    if(l>e || r<s) return 0; // arr[0] = INF
     if(l<=s && e<=r) return tree[n];
     ll mid = (s+e)>>1;
     ll x = query(n<<1, s, mid, l, r);
@@ -36,7 +36,7 @@ ll query(ll n, ll s, ll e, ll l, ll r){
 
 // 분할정복
 ll solve(ll l, ll r) {
-	if (l > r) return 0; // arr[0] = INF
+	if (l > r) return 0; 
 	ll midx = query(1, 1, N, l, r);
 	ll ans = (r-l+1) * arr[midx];
 	ans = max(ans, solve(l, midx - 1));
