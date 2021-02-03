@@ -11,13 +11,14 @@ int find(int k) {
     if (k == parent[k]) return k;
     else return parent[k] = find(parent[k]);
 }
- 
+
 void merge(int a, int b) {
     a = find(a);
     b = find(b);
     parent[a] = b;
 }
 
+// 사용예시
 int main() {
 	ios_base::sync_with_stdio(false); 
     cin.tie(0);
@@ -32,4 +33,6 @@ int main() {
             merge(b,c);
         }
     }
+
 }
+
