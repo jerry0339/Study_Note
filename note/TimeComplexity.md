@@ -3,6 +3,9 @@
 **************************************************************************
 ### 알고리즘
 
+* Dijkstra
+> O(VlogV) + O(ElogV) = O((V+E)logV)
+
 * Graham Scan (Convex Hull)
 > 정렬 : O(NlgN)
 > Scan : O(N)
