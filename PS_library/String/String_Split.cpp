@@ -1,30 +1,34 @@
-
-// String클래스의 substr함수 이용
-// str.substr(startPos, strLength);
-
-#include <iostream>
-#include <string>
+#include<iostream>
+#include<algorithm>
+#include<sstream> // sstream 이용
+#include<string>
+#include<vector>
+#include<map>
+#define xx first
+#define yy second
 using namespace std;
+typedef long long ll;
+typedef pair<int,int> pii;
+typedef pair<ll,ll> pll;
+const int INF = 0x3f3f3f3f;
+const ll llINF = 1e18;
 
+int N;
 
-
-// 문자 하나씩 뒤로 밀어서 출력하기
 int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cin>>N;
     string s;
-    cout << "input String " << '\n';
-    getline(cin, s, '\n');  // 문자열 입력
-    int len = s.length();   // 문자열의 길이
-    for (int i = 0; i < len; i++) {
-        string first = s.substr(0, 1);      // 맨 앞의 문자 1개를 문자열로 분리
-        string sub = s.substr(1, len - 1);  // 나머지 문자들을 문자열로 분리
-        s = sub + first;                    // 두 문자열을 연결하여 새로운 문자열로 만듦
-        cout << s << endl;
+    getline(cin, s);
+    for(int i=0; i<N; i++) {
+        getline(cin, s, '\n');
+        stringstream ss(s); // #include<sstream>
+        string token;
+        while(getline(ss, token, '$')) cout<<token<<'\n'; // '$' 과 같이 구분할 문자 정할 수 있음
+        //while(ss>>token) cout<<token<<'\n';             // ' '로 알아서 구분
+        cout<<'\n';
         
+        // for(int j=0; j<4; j++) ss>>tmp;
     }
 }
-
-/*
-input:
-I love you
-
-*/
