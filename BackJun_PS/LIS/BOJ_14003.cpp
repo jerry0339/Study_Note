@@ -1,8 +1,4 @@
-// <가장 긴 증가하는 부분 수열 5> - BOJ_14003
-// LIS(Longest Increase Subsequence) : 이분탐색 이용 O(NlogN)
-// 최대값에 -INF 넣는거 확인
-// LIS길이가 아닌 sequence를 직접 구해야 함
-// -> LIS 역추적 이용, 참고 : https://www.crocus.co.kr/681
+// LIS 역추적 : https://www.crocus.co.kr/681
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -10,7 +6,7 @@ const int INF = 0x3f3f3f3f;
 
 int N;
 int m[1000010]{};
-int trace[1000010]{}; // 역추적을 위한 배열
+int trace[1000010]{};
 vector<int> lis;
 
 int main() {
@@ -36,7 +32,7 @@ int main() {
     cout<<length<<'\n';
     
     vector<int> ans;
-    for(int i=N-1; i>=0; i--){ // 자세한건 위의 주소 참고
+    for(int i=N-1; i>=0; i--){
         if(trace[i] == length) {
             ans.push_back(i);
             length--;
