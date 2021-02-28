@@ -46,3 +46,29 @@ int main() {
 
     for(int i=ans.size()-1; i>=0; i--) cout<<m[ans[i]]<<' ';
 }
+
+// 역추적 없는 버전
+/*
+#include<bits/stdc++.h>
+using namespace std;
+const int INF = 0x3f3f3f3f;
+
+int N;
+int m[1000010]{};
+vector<int> lis;
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cin>>N;
+    for(int i=0; i<N; i++) cin>>m[i];
+
+    lis.push_back(-INF);
+    for (int i = 0; i < N; i++) {
+        if (lis.back() < m[i]) lis.push_back(m[i]);
+        else *lower_bound(lis.begin(), lis.end(), m[i]) = m[i];
+    }
+
+    cout<<lis.size()-1;
+}
+*/
