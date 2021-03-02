@@ -20,7 +20,7 @@ int main() {
     for(int i=0; i<N; i++) cin>>m[i];
 
     lis.push_back(-INF);
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i < N; i++) { // N이 m의 size인지 체크
         if (lis.back() < m[i]) {
             trace[i] = lis.size();
             lis.push_back(m[i]);
@@ -64,7 +64,7 @@ int main() {
     for(int i=0; i<N; i++) cin>>m[i];
 
     lis.push_back(-INF);
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i < N; i++) { // N이 m의 size인지 체크
         if (lis.back() < m[i]) lis.push_back(m[i]);
         else *lower_bound(lis.begin(), lis.end(), m[i]) = m[i];
     }
