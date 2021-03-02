@@ -21,6 +21,20 @@ int initMax(int n, int s, int e){
     return maxt[n] = max(initMax(n<<1, s, mid) , initMax(n<<1|1, mid+1, e));
 }
 
+int minModify(int n, int s, int e, int idx, int val){
+    if(idx<s || idx>e) return mint[n];
+    if(s==e) return mint[n] = val;
+    int mid = (s+e)>>1;
+    return mint[n] = min(minModify(n<<1, s, mid, idx, val), minModify(n<<1|1, mid+1, e, idx, val));
+}
+
+int maxModify(int n, int s, int e, int idx, int val){
+    if(idx<s || idx>e) return maxt[n];
+    if(s==e) return maxt[n] = val;
+    int mid = (s+e)>>1;
+    return maxt[n] = min(maxModify(n<<1, s, mid, idx, val), maxModify(n<<1|1, mid+1, e, idx, val));
+}
+
 int minQuery(int n, int s, int e, int l, int r){
     if(l>e || r<s) return INF;
     if(l<=s && e<=r) return mint[n];

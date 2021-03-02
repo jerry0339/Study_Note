@@ -2,7 +2,7 @@
 // 세그먼트 트리 (재귀 - 직관적임)
 
 #include<bits/stdc++.h>
-#define MAX 100000 // MAX값 확인 (segTree)
+#define MAX 100001 // MAX값 확인 (segTree)
 #define MAX_N 100001 // MAX_N값 확인 (N개수)
 using namespace std;
 typedef long long ll;
@@ -34,12 +34,12 @@ void modify(ll n, ll s, ll e, ll idx, ll diff){
 
 // 리턴값이 있는 modify버전
 // idx의 원소에 diff를 더하는것이 아니라 val로 바꿈
-ll MOD = 100000007;
+// 검증안된 코드. 제출해서 검증해 봐야 함
 ll modify2(ll n, ll s, ll e, ll idx, ll val){
     if(idx<s || idx>e) return tree[n];
     if(s==e) return tree[n] = val;
     ll mid = (s+e)>>1;
-    return tree[n] = (modify2(n<<1, s, mid, idx, val) * modify2(n<<1|1, mid+1, e, idx, val))%MOD;
+    return tree[n] = modify2(n<<1, s, mid, idx, val) + modify2(n<<1|1, mid+1, e, idx, val);
 }
 
 // s: 시작 인덱스, e: 끝 인덱스
