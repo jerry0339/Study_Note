@@ -3,8 +3,6 @@
 using namespace std;
 const int INF = 0x3f3f3f3f; // MAX INF 확인. (long long 일경우)
 
-// Modify함수는 정의되어 있지 않음!!
-
 int arr[MAX_N]{};
 int mint[MAX_N<<2]{}, maxt[MAX_N<<2]{};
 int N,Q;
