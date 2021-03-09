@@ -1012,16 +1012,16 @@ sort(++v.begin(), v.end(), [&](Point a, Point b) -> bool {
 ~~~
 순위 언어   입력방법                                                     속도
 ------------------------------------------------------------------------------
-1	 C11	mmap	                                                    0.043
-2	 C11	fread	                                                    0.0799
+1	 C11	mmap                                                        0.043
+2	 C11	fread                                                       0.0799
 3	 C11    getchar	                                                    0.3496
 4	 C++17	ios_base::sync_with_stdio(false); cin.tie(NULL);            0.5938
-5	 C++17	ios_base::sync_with_stdio(false);	                        0.6348
-6	 Java	BufferedReader, Integer.parseInt	                        0.6585
-7	 C11	scanf	                                                    0.9206
-8	 PyPy	int(sys.stdin.readline())	                                0.9229
-9	 PyPy	map(int,os.read(0, 100000000).split('\n'))	                1.1169
-10	 PyPy3	map(int,os.read(0, 100000000).decode('utf-8').split('\n'))	1.5408
+5	 C++17	ios_base::sync_with_stdio(false);                           0.6348
+6	 Java	BufferedReader, Integer.parseInt                            0.6585
+7	 C11	scanf                                                       0.9206
+8	 PyPy	int(sys.stdin.readline())                                   0.9229
+9	 PyPy	map(int,os.read(0, 100000000).split('\n'))                  1.1169
+10	 PyPy3	map(int,os.read(0, 100000000).decode('utf-8').split('\n'))  1.5408
 ~~~
 
 **************************************************************************************************************************
@@ -1072,4 +1072,11 @@ cout << sum << '\n';
 ~~~
 
 **************************************************************************************************************************
-# 56. 
+# 56. Stable / Unstable sort
+> 같은 key값을 가진 노드들에 대하여, 정렬이 수행된 후 순서가 유지가 되는가 ? : 되면 stable
+> `선택`, `힙`, `퀵` -> Unstable 정렬
+> 따라서 priority_queue도 Unstable 함
+> 합병, 삽입, 버블 -> Stable
+
+**************************************************************************************************************************
+# 57. 
