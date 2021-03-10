@@ -1,39 +1,41 @@
-// 답을 정해놓고 그 답이 가능한지 이진탐색하는 종류의 문제들을 Parametric Search 라고함
+// 예시 BOJ_2110
+
 #include<bits/stdc++.h>
 using namespace std;
-int N;
+
+int N,M;
+int m[200001]{};
 
 bool isP(int mid){
-    int cnt = 0;
-    // calculate condition (cnt)
-    
-    //upper_bound condition
-    if(cnt >= N) return true;
-    else return false;
-    // return cnt>=N;
-
-    // lower_bound condition
-    if(cnt > N) return true;
-    else return false;
-    // return cnt>N;
-}
-
-int b_search(int l, int r)
-{
-    int s = l, e = r, mid;
-    while (s <= e) {
-        mid = (s + e) / 2;
-        if (isP(mid)) s = mid + 1;
-        else                 e = mid - 1;
-
+    int res=1, tmp=m[0];
+    for(int i=1; i<N; i++){
+        if(tmp+mid <= m[i]) {
+            res++;
+            tmp = m[i];
+        }
     }
-    return s; // lower_bound, upper_bound(s = mid + 1;에 =포함)
-    // ex) v = {1, 2, 2, 2, 3}; 에서 2를 search할때, lower_bound는 idx 1, upper_bound는 idx 4가 출력됨
-
-    // return e; // upper_bound(=포함) - 1
-    // ex) v = {1, 2, 2, 2, 3}; 에서 2를 search할때, upper_bound-1 출력시 idx 3이 출력됨
+    if(res >= M) return true;
+    else return false;
 }
 
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cin>>N>>M;
+    for(int i=0; i<N; i++) cin>>m[i];
+    sort(m,m+N);
+    
+    int s=1, e=m[N-1]-m[0];
+    while(s<=e){
+        int mid = (s+e)/2;
+        if(isP(mid)) s = mid + 1;
+        else e = mid - 1;
+    }
+
+    cout<<e;
+}
+
+// 함수
 int lowerBoundEx(int l, int r){
     int s = l, e = r, mid;
     while(s<=e){
