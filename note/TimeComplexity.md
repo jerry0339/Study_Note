@@ -91,10 +91,11 @@
 * 진행중 - LCA
 1. new : SCC - Tarjan
 2. 복습 : TSP, Bitmask
-3. new : Bellman-Ford
+3. new : Bellman-Ford(SPFA로)
 4. new : Segment Tree lazy propagation
 5. new : 병렬 이분탐색
 6. new : Fenwick Tree
-7. 복습 : Trie
-8. 복습 : Network Flow
-9. new : 이분매칭
+7. new : PST (persistent segment tree)
+8. 복습 : Trie
+9. 복습 : Network Flow
+10. new : 이분매칭
