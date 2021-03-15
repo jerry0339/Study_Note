@@ -1,4 +1,6 @@
 // BOJ_11689
+// https://blog.encrypted.gg/141
+// 자연수 n이 주어졌을 때, GCD(n, k) = 1을 만족하는 자연수 1 ≤ k ≤ n 의 개수 출력
 
 #include <iostream>
 using namespace std;
