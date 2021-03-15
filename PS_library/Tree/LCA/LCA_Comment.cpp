@@ -19,7 +19,7 @@ void dfs(int now, int parent) {
     dpt[now] = dpt[parent] + 1;
     
     ac[now][0] = parent;
-    for (int i = 1; i <= maxPower; i++)
+    for (int i = 1; i <= maxPower; i++) // 루트노드를 넘어가면 ac는 0으로 처리됨
         ac[now][i] = ac[ac[now][i-1]][i-1];
 
     for (int next : adj[now]) {
@@ -30,11 +30,19 @@ void dfs(int now, int parent) {
 
 int lca(int x, int y) { // O(logN)
     if (dpt[x] > dpt[y]) swap(x, y);
-    for (int i = maxPower; i >= 0; i--) {
+    // dpt[x]==dpt[y]가 되도록 계속 y를 update해줌
+    // ex) dpt[x]=2, dpt[y]=5 일때
+    //     i가 1일때 dpt[y]=3으로 바꿔주고
+    //     i가 0이되면 dpt[y]=2로 바꾸어 dpt[x]==dpt[y]==2가 됨
+    for (int i = maxPower; i >= 0; i--) { 
         if (dpt[y] - dpt[x] >= (1 << i)) 
             y = ac[y][i];
     }
-    if (x == y)return x;
+    if (x == y)return x; // x,y가 처음부터 같거나 위의 for문의 결과로 y가x와 같게 되었을때
+    
+    // 위의 for문 결과로 dpt[x]==dpt[y] 이고
+    // ac[][i]가 루트노드를 넘어갈땐 0이므로 계산에 영향x
+    // ac[x][i] 와 ac[y][i]가 달라지면 depth가 높은 ac부터 lca바로 전까지 x와 y를 업데이트 함
     for (int i = maxPower; i >= 0; i--) {
         if (ac[x][i] != ac[y][i]) {
             x = ac[x][i];
