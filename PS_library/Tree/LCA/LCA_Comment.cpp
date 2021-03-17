@@ -10,20 +10,18 @@ using namespace std;
 
 int N, M, maxPower = (int)floor(log2(MAX_N));
 int ac[MAX_N+1][21]{}; // ancestor-> [21]: 문제에 따라 21을 maxPower로 업뎃해야 함
-int vi[MAX_N+1]{};
 int dpt[MAX_N+1]{}; // depth
 vector<int> adj[MAX_N+1]{}; //graph
 
 void dfs(int now, int parent) {
-    vi[now] = true;
     dpt[now] = dpt[parent] + 1;
-    
     ac[now][0] = parent;
+
     for (int i = 1; i <= maxPower; i++) // 루트노드를 넘어가면 ac는 0으로 처리됨
         ac[now][i] = ac[ac[now][i-1]][i-1];
 
     for (int next : adj[now]) {
-        if (vi[next]) continue;
+        if (next == parent) continue; // vi 필요없음 : tree라서 parent일때만 가지쳐주면 됨
         dfs(next, now);
     }
 }
@@ -42,7 +40,7 @@ int lca(int x, int y) { // O(logN)
     
     // 위의 for문 결과로 dpt[x]==dpt[y] 이고
     // ac[][i]가 루트노드를 넘어갈땐 0이므로 계산에 영향x
-    // ac[x][i] 와 ac[y][i]가 달라지면 depth가 높은 ac부터 lca바로 전까지 x와 y를 업데이트 함
+    // ac[x][i] 와 ac[y][i]가 달라지면 depth가 높은 ac부터 lca바로 전까지 아래부터 위로가면서 x와 y를 업데이트 함
     for (int i = maxPower; i >= 0; i--) {
         if (ac[x][i] != ac[y][i]) {
             x = ac[x][i];

@@ -9,8 +9,8 @@ int LCS[1010][1010]{};
 // ex) AXBXCXY, ABCXY -> CXY
 int LCSubstring(string &A, string &B){
     int ans = 0;
-    for (int i=1; i <= A.length(); i++) { 
-        for (int j=1; j <= B.length(); j++) { 
+    for (int i=1; i <= A.length(); i++) {
+        for (int j=1; j <= B.length(); j++) {
             if (A[i-1] == B[j-1]) { 
                 LCS[i][j] = LCS[i-1][j-1] + 1; 
                 if (ans < LCS[i][j]) { 
