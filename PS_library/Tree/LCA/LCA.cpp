@@ -7,20 +7,18 @@ using namespace std;
 
 int N, M, maxPower = (int)floor(log2(MAX_N));
 int ac[MAX_N+1][21]{};
-int vi[MAX_N+1]{};
 int dpt[MAX_N+1]{};
 vector<int> adj[MAX_N+1]{};
 
 void dfs(int now, int parent) {
-    vi[now] = true;
     dpt[now] = dpt[parent] + 1;
-    
     ac[now][0] = parent;
+
     for (int i = 1; i <= maxPower; i++) 
         ac[now][i] = ac[ac[now][i-1]][i-1];
 
     for (int next : adj[now]) {
-        if (vi[next]) continue;
+        if (next == parent) continue;
         dfs(next, now);
     }
 }
