@@ -1,6 +1,3 @@
-// BOJ_11779
-// 다익스트라 + 경로역추적
-
 #include<bits/stdc++.h>
 #define xx first
 #define yy second
