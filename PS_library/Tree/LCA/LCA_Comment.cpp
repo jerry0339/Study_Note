@@ -9,7 +9,7 @@
 using namespace std;
 
 int N, M, maxPower = (int)floor(log2(MAX_N));
-int ac[MAX_N+1][21]{}; // ancestor-> [21]: 문제에 따라 21을 maxPower로 업뎃해야 함
+int ac[MAX_N+1][21]{}; // sparse table
 int dpt[MAX_N+1]{}; // depth
 vector<int> adj[MAX_N+1]{}; //graph
 
