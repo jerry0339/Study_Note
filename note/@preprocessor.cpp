@@ -46,5 +46,3 @@ typedef pair<int, ll> pil;
 typedef pair<string, int> psi;
 typedef pair<char, int> pci;
 typedef pair<int, char> pic;
-
-

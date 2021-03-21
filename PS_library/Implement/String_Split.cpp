@@ -25,10 +25,12 @@ int main() {
         getline(cin, s, '\n');
         stringstream ss(s); // #include<sstream>
         string token;
+        // 출력방법 1:
         while(getline(ss, token, '$')) cout<<token<<'\n'; // '$' 과 같이 구분할 문자 정할 수 있음
-        //while(ss>>token) cout<<token<<'\n';             // ' '로 알아서 구분
-        cout<<'\n';
+        // 출력방법 2:
+        //while(ss>>token) cout<<token<<'\n'; // ' '로 알아서 구분
         
+        cout<<'\n';
         // for(int j=0; j<4; j++) ss>>tmp;
     }
 }
