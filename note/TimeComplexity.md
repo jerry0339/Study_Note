@@ -82,8 +82,8 @@
 > push -> O(logN), pop -> O(1)
 
 * Union_find
-> find  : O(lgN)
-> Union : O(lgN)
+> find  : O(logN)
+> Union : O(logN)
 
 
 **************************************************************************
