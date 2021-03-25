@@ -1,5 +1,6 @@
 // <외판원 순회> - BOJ_2098
 // TSP-> 비트마스킹
+// O(2^N * N*2)
 
 #include<bits/stdc++.h>
 using namespace std;
