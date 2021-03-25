@@ -2,7 +2,6 @@
 // Traveling salesman problem
 // O(n^2*2^n)
 // Top-Down
-// Bottom-Up 코드는 코드 아래에 주석처리 (미완)
 
 #include<bits/stdc++.h>
 using namespace std;
