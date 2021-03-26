@@ -23,6 +23,8 @@ void merge(int a, int b){
 	if(parent[a] < parent[b]) swap(a,b);
 	parent[b] += parent[a];
 	parent[a] = b;
+    // parent[b]에 해당 집합의 크기가 -로 들어가 있음 !
+    // -parent[b]를 리턴하면 집합의 크기
 }
 
 map<string,int> m;
