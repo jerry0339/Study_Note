@@ -53,5 +53,9 @@ int main() {
     while(T--){
         cin>>N>>M;
     }
-    
+
+    double ans = 0.123456789;
+    cout.precision(2);
+    cout<<fixed;
+    cout<<ans<<'\n';
 }
