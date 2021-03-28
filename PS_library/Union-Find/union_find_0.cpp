@@ -20,7 +20,8 @@ void merge(int a, int b){
 	a = find(a);
     b = find(b);
 	if(a==b) return;
-	if(parent[a] < parent[b]) swap(a,b);
+    // parent에는 -값이 들어가므로 parent[a] < parent[b] 로 조건처리
+	if(parent[a] < parent[b]) swap(a,b); 
 	parent[b] += parent[a];
 	parent[a] = b;
     // parent[b]에 해당 집합의 크기가 -로 들어가 있음 !
