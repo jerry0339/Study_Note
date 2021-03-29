@@ -60,10 +60,10 @@ int main() {
     cin>>N>>Q;
     // 인덱싱은 0부터 안해도 됨.
     // [1, N] 과 같이 인덱싱이 가능
-    for(ll i=0; i<N; i++){
+    for(ll i=1; i<=N; i++){
         cin>>arr[i];
     }
-    init(1,0,N-1);
+    init(1,1,N);
 
     ll x,y,a,b;
     // 인덱스 x~y 까지합
@@ -72,9 +72,9 @@ int main() {
         cin>>x>>y>>a>>b;
         if(x>y) swap(x,y);
         // 인덱스 0포함인지 , MAX포함인지 확인!!
-        cout<<query(1, 0, N-1, x-1, y-1)<<'\n';
-        modify(1, 0, N-1, a-1, b - arr[a-1]);
-        arr[a-1] = b;
+        cout<<query(1, 1, N, x, y)<<'\n';
+        modify(1, 1, N, a, b - arr[a]);
+        arr[a] = b;
     }
 
     return 0;
