@@ -1,5 +1,5 @@
 // <이중 우선순위 큐> - BOJ_7662
-// multimap 이용
+// multiset 이용
 
 #include<bits/stdc++.h>
 using namespace std;

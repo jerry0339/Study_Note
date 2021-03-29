@@ -1,3 +1,5 @@
+// greedy
+
 #include<bits/stdc++.h>
 #define xx first
 #define yy second
