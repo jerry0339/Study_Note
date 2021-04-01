@@ -47,6 +47,8 @@ void lazyUpdate(ll n, ll s, ll e, ll l, ll r, ll diff) {
     ll mid = (s+e)>>1;
     lazyUpdate(n<<1, s, mid, l, r, diff);
     lazyUpdate(n<<1|1, mid+1, e, l, r, diff);
+    // (l<=s && e<=r) 조건에 포함되지 못한 범위의 tree[n]이 업데이트 됨
+    // tree[n<<1], tree[n<<1|1] 은 모두 위의 재귀로 인해 valid 하므로
     tree[n] = tree[n<<1] + tree[n<<1|1];
 }
 

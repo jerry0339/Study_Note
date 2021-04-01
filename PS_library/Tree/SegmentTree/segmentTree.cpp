@@ -20,7 +20,7 @@ ll init(ll n, ll s, ll e){
 
 // s: 시작 인덱스, e: 끝 인덱스
 // idx: 구간 합을 수정하고자 하는 노드
-// diff: 수정할 값
+// diff: 더할 값
 void modify(ll n, ll s, ll e, ll idx, ll diff){
     // 범위 밖에 있는 경우
     if(idx<s || idx>e) return;
