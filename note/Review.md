@@ -1182,4 +1182,25 @@ int main(){
 ~~~
 
 **************************************************************************************************************************
-# 65. 
+# 65. 모듈러 연산 (음수조심)
+> [BOJ_1280](https://www.acmicpc.net/problem/1280) 문제 이슈
+
+> 모듈러 연산은 덧,뺄,곱에 대하여 모두 분배법칙이 성립하지만
+> 뺄셈으로 인해 음수가 나올 수 있기 때문에 아래의 식은
+> total = ((lcnt*t)%MOD - (lsum)%MOD)%MOD;
+> total = ((total + rsum)%MOD - (rcnt*t)%MOD)%MOD;
+> res = (res * total)%MOD;
+
+> 아래와 같은 식으로 사용하는것이 옳다
+> total = ((lcnt*t) - (lsum))%MOD;
+> total = ((total + rsum) - (rcnt*t))%MOD;
+> res = (res * total)%MOD;
+
+> 또한, 위의 식에서 lcnt, total, rsum을 구하는 과정에 MOD가 있다면
+> 그 값이 MOD연산에 의해 작아지고 뒤의 -연산에 의해 음수가 될 수 있기 때문에
+> ltotal = ((lcnt*t) - lsum)%MOD;
+> rtotal = (rsum - (rcnt*t))%MOD;
+> total = (ltotal + rtotal)%MOD;
+> res = (res * total)%MOD;
+
+> 이렇게 식을 세우는 것이 옳고, lcnt, rsum을 구하는 식에서도 MOD연산을 빼주는것이 좋음
