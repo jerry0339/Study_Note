@@ -1,6 +1,5 @@
 // <이진 검색 트리> - BOJ_5639
 // upper_bound 분할정복을 이용한 Binary Search Tree
-// test 케이스에 대하여 분할되는 방법은 코드 아래에 작성했음.
 
 #include <bits/stdc++.h>
 using namespace std;
