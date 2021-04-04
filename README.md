@@ -10,8 +10,9 @@
 3. String
 4. Math
 5. Geometry
-6. Sort
-7. The others
+6. Offline Query
+7. Sort
+8. The others
 
 #### 1.Graph
 * BFS, DFS
@@ -94,9 +95,12 @@
     > 볼록다각형 점 N1 개   
     > 판별할 점 N2개 일때   
     > upper hull, lower hull을 이용하여 
-    > O(N2logN1)    
+    > O(N2logN1)  
 
-#### 6.Sort
+#### 6.Offline Query
+* Parallel Binary Search
+
+#### 7.Sort
 * Bubble : O(N^2), Stable
 * Insertion : O(N^2), Stable
 * Selection : O(N^2), Unstable
@@ -110,14 +114,14 @@
 * counting : O(N), Unstable
     > prefix sum 이용하면 Stable    
 
-#### 7.The Others
+#### 8.The Others
 * Two Pointer, Sliding Window
     > O(N)  
 
 * Prametric Search & Binary Search
     > O(logN)   
 
-* LIS
+* LIS (Longest Increasing Subsequence)
     > 이분탐색 or 세그먼트 트리 이용    
     > O(NlogN)  
 
