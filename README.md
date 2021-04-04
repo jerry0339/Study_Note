@@ -63,8 +63,10 @@
 
 * BIT(Binary Indexed Tree : Fenwick)
     > Init : O(logN), 공간복잡도 -> N
+
     > 값 update : O(logN)
-    > 구간쿼리 : O(logN)
+
+    > 구간쿼리 : O(logN)    
     > segment tree보다 상수값이 작아서 빠름
 
 #### 3.String
