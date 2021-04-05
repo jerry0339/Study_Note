@@ -1,16 +1,17 @@
 // BOJ_2042
 // BIT (fenwick) 풀이
+// 점 update, 점 query
 // 유효 인덱스 : [1,N]
 
 #include<bits/stdc++.h>
-#define MAX_N 1000001
-#define MAX 1000001
+#define MAX_N 1000000
+#define MAX 1000000
 using namespace std;
 typedef long long ll;
 
 ll N,M,K;
-ll arr[MAX_N]{};
-ll tree[MAX]{};
+ll arr[MAX_N+1]{};
+ll tree[MAX+1]{};
 
 ll query(ll idx){
 	ll ret = 0;
@@ -20,9 +21,8 @@ ll query(ll idx){
 	}
 	return ret;
 }
-
 void update(ll idx, ll diff){
-	while(idx < N){
+	while(idx < MAX+1){
 		tree[idx] += diff;
 		idx += (idx & -idx);
 	}
