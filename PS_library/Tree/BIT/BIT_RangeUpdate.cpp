@@ -1,6 +1,7 @@
 // BOJ_16975
 // 펜윅 range_update
 // 구간 update, 점 query
+// 자세한 증명은 (https://everenew.tistory.com/114) 참고
 
 #include<bits/stdc++.h>
 #define MAX_N 100000
@@ -10,13 +11,13 @@ typedef long long ll;
 
 int N,Q;
 ll arr[MAX_N+1]{};
-ll tree[MAX+1]{};
+ll tree[MAX+1]{}; // 원소는 arr[i] - arr[i-1]이 됨
 
 ll query(int idx){
 	ll ret = 0;
 	while(idx > 0){
 		ret += tree[idx];
-		idx -= (idx & -idx);
+		idx -= (idx & -idx);	
 	}
 	return ret;
 }
