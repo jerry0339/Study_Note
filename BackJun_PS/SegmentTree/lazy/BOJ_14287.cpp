@@ -1,6 +1,3 @@
-// 주식회사 승범이네 - BOJ_16404
-// BIT , euler_tour_technique : 오일러 경로 테크닉
-
 #include<bits/stdc++.h>
 #define MAX_N 100000
 #define MAX 100000
@@ -27,14 +24,11 @@ void update(ll idx, ll diff){
 	}
 }
 
-// 오일러 경로 테크닉 -> 트리에 번호를 붙여 BIT or SegTree에 사용
 ll num = 0;
 void dfs(ll now){
     st[now] = ++num;
-    // 해당 문제는 입력시 i노드의 부모노드가 입력으로 주어졌으므로 next가 부모인지 체크x
     for(auto next : adj[now])
         dfs(next);
-    
     ed[now] = num;
 }
 
@@ -51,14 +45,15 @@ int main() {
     dfs(1);
 
     ll a,b,c;
+    bool dir = false;
     while(M--){
-        cin>>a>>b;
+        cin>>a;
         if(a==1) {
-            cin>>c;
+            cin>>b>>c;
             update(st[b], c);
-            update(ed[b]+1, -c);
         } else {
-            cout<<query(st[b])<<'\n';
+            cin>>b;
+            cout<<query(ed[b])-query(st[b]-1)<<'\n';
         }
     }
 }
