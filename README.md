@@ -34,6 +34,7 @@
 * LCA
 * Segment Tree
 * BIT(Binary Indexed Tree : Fenwick)
+* Merge Sort Tree
 * Heavy Light Decomposition(HLD) - **not yet**
 
 #### 3.String
@@ -45,11 +46,14 @@
 * 유클리드 호제법
 * Euler Pi 함수
 * 에라토스테네스의 체
+    > 소수 찾기 
+    > 소인수분해    
 * Pollard-Rho
 
 #### 5. DP
 * Bitmask DP
-* Knuth Optimization
+* DP 최적화
+    > Knuth Optimization    
 
 #### 6.Geometry
 * ccw
