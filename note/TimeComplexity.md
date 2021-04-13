@@ -81,20 +81,20 @@
 
 #### 4.Math
 * 유클리드 호제법
-* Euler Pi 함수
 * 에라토스테네스의 체
     > 소수(prime number)찾기, 소인수분해    
+* Euler Pi 함수
 * Pollard-Rho
     > 소인수분해 알고리즘
 
 #### 5. DP
-* Knuth Optimization
-    > 기억안남 -> 파일합치기 2
-
-* Bitmask
+* Bitmask DP
     > 비트연산 : O(1)   
     > mask에서 1bit , 0bit 탐색이나 업데이트 모두 O(1)로 처리함     
     > 보통 mask(비트필드)를 이용한 DP으로 많이 활용하여 사용함  
+
+* Knuth Optimization
+    > 기억안남 -> 파일합치기 2
 
 #### 6.Geometry
 * ccw
@@ -103,16 +103,18 @@
 * 다각형의 넓이
     > O(N) -> 점의개수 : N  
 
-* Convex Hull(Graham Scan 이용)
-    > 정렬 : O(NlogN)   
-    > Scan : O(N)   
-    > 따라서 O(NlogN)   
+* 선분 교차판정
 
 * 볼록다각형의 내부점 판별
     > 볼록다각형 점 N1 개   
     > 판별할 점 N2개 일때   
     > upper hull, lower hull을 이용하여 
     > O(N2*logN1)  
+
+* Convex Hull(Graham Scan 이용)
+    > 정렬 : O(NlogN)   
+    > Scan : O(N)   
+    > 따라서 O(NlogN)   
 
 #### 7.Query
 * Segment Tree
@@ -132,8 +134,7 @@
     > prefix sum 이용하면 Stable    
 
 #### 9.The Others
-* LCS
-    > LCS(Longest Common Subsequence    
+* LCS(Longest Common Subsequence)
 
 * LIS (Longest Increasing Subsequence)
     > 이분탐색 or 세그먼트 트리 이용    
