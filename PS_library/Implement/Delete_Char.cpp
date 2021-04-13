@@ -20,5 +20,5 @@ int main() {
     str.erase(std::remove(str.begin(), str.end(), ' '), str.end());
 
     cout<<str;
-    // Iamnutella!!! 출력
+    // Iamnutella!!!
 }
