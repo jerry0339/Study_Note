@@ -3,7 +3,8 @@
 https://programmers.co.kr/learn/courses/30/lessons/17676#
 
 #include<bits/stdc++.h>
-
+#define xx first
+#define yy second
 using namespace std;
 
 int solution(vector<string> lines) {
@@ -27,13 +28,17 @@ int solution(vector<string> lines) {
     }
     sort(times.begin(), times.end());
     
-    int ans = 0, cnt = 0, n = times.size();
-    for(int i=0, r=-1; i<n; i++){
-        while(r+1 < n && times[r+1].first - times[i].first < 1000) 
-            cnt += times[++r].second == 1;
-        
+    // 투포인터
+    int ans=0, cnt = 0, ed=0;
+    for(int st=0; st<times.size(); st++){
+        while(ed<times.size()){
+            if(times[ed].xx - times[st].xx < 1000){
+                if(times[ed].yy==1) cnt++;
+                ed++;
+            } else break;
+        }
         ans = max(ans, cnt);
-        cnt -= times[i].second == -1;
+        if(times[st].yy==-1) cnt--;
     }
     return ans;
 }
