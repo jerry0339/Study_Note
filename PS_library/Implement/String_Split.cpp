@@ -3,34 +3,32 @@
 #include<sstream> // sstream 이용
 #include<string>
 #include<vector>
-#include<map>
-#define xx first
-#define yy second
 using namespace std;
-typedef long long ll;
-typedef pair<int,int> pii;
-typedef pair<ll,ll> pll;
-const int INF = 0x3f3f3f3f;
-const ll llINF = 1e18;
 
 int N;
+vector<string> lines;
+
+void init(){
+    lines.push_back("2016-09-15 20:59:57.421 0.351s");
+    lines.push_back("2016-09-15 20:59:58.233 1.181s");
+    lines.push_back("2016-09-15 20:59:58.299 0.8s");
+    lines.push_back("2016-09-15 20:59:58.688 1.041s");
+    lines.push_back("2016-09-15 20:59:59.591 1.412s");
+    lines.push_back("2016-09-15 21:00:00.464 1.466s");
+    lines.push_back("2016-09-15 21:00:00.741 1.581s");
+    lines.push_back("2016-09-15 21:00:00.748 2.31s");
+    lines.push_back("2016-09-15 21:00:00.966 0.381s");
+    lines.push_back("2016-09-15 21:00:02.066 2.62s");
+}
 
 int main() {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    cin>>N;
-    string s;
-    getline(cin, s);
-    for(int i=0; i<N; i++) {
-        getline(cin, s, '\n');
-        stringstream ss(s); // #include<sstream>
+    init();
+    for(auto &line : lines){
+        stringstream ss(line);
         string token;
-        // 출력방법 1:
-        while(getline(ss, token, '$')) cout<<token<<'\n'; // '$' 과 같이 구분할 문자 정할 수 있음
-        // 출력방법 2:
-        //while(ss>>token) cout<<token<<'\n'; // ' '로 알아서 구분
-        
+        // getline(ss, token, split기준)
+        while(getline(ss, token, ' ')) cout<<token<<"###"; 
         cout<<'\n';
-        // for(int j=0; j<4; j++) ss>>tmp;
     }
+    
 }
