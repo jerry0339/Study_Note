@@ -1,5 +1,3 @@
-// BOJ_10830
-
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -23,7 +21,6 @@ Matrix operator*(const Matrix &x, const Matrix &y){
     return res;
 }
 
-// 분할정복을 이용한 거듭제곱
 Matrix fastp(Matrix x, ll y){
     if(y == 0) {
         // 단위행렬 반환
