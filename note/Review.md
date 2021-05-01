@@ -1092,6 +1092,7 @@ using namespace std;
 
 int m[101]{};
 
+// 2차원배열은 arr[][N]
 void func(int arr[]) {
     for (int i = 0; i < 5; i++) 
         arr[i] += 10;
