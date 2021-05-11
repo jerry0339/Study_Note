@@ -24,6 +24,7 @@ void dijk(int st) {
         pq.pop();
 
         if(cd>d[cn]) continue;
+        
         for(int i=0; i<adj[cn].size(); i++){
             int nn = adj[cn][i].xx;
             int nd = adj[cn][i].yy + cd;
