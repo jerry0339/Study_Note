@@ -11,7 +11,7 @@
 using namespace std;
 typedef pair<int,int> pii;
 
-int N, M, maxPower = (int)floor(log2(MAX_N));
+int N, M, maxPower = 20; // (int)floor(log2(MAX_N));
 int ac[MAX_N+1][21]{};
 int minE[MAX_N+1][21]{};
 int maxE[MAX_N+1][21]{};

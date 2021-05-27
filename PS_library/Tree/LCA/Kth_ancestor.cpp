@@ -12,7 +12,7 @@ using namespace std;
 typedef long long ll;
 typedef pair<ll,ll> pll;
 
-ll N, M, maxPower = (ll)floor(log2(MAX_N));
+ll N, M, maxPower = 20; //(ll)floor(log2(MAX_N));
 ll ac[MAX_N+1][21]{};
 ll dist[MAX_N+1]{};
 ll dpt[MAX_N+1]{};

@@ -8,7 +8,7 @@
 #define MAX_N 100000 // 노드 최대 개수
 using namespace std;
 
-int N, M, maxPower = (int)floor(log2(MAX_N));
+int N, M, maxPower = 20; // (int)floor(log2(MAX_N));
 int ac[MAX_N+1][21]{}; // sparse table
 int dpt[MAX_N+1]{}; // depth
 vector<int> adj[MAX_N+1]{}; //graph

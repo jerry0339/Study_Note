@@ -8,7 +8,7 @@
 using namespace std;
 typedef pair<int,int> pii;
 
-int N, M, maxPower = (int)floor(log2(MAX_N));
+int N, M, maxPower = 20; // (int)floor(log2(MAX_N));
 int ac[MAX_N+1][21]{};
 int dpt[MAX_N+1]{};
 int dist[MAX_N+1]{};
