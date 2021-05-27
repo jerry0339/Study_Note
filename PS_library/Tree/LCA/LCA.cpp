@@ -62,7 +62,7 @@ int main() {
         adj[y].push_back(x);
     }
 
-    //dpt[0] = -1; // 루트노드의 depth를 0으로 설정
+    //dpt[0] = -1; // 루트노드의 depth를 0으로 설정하고 싶을때 사용하는 코드
     dfs(1, 0);
 
     cin>>M;
