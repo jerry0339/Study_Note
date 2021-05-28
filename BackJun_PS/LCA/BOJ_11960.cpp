@@ -7,9 +7,7 @@ int ac[MAX+1][21]{};
 int dpt[MAX+1]{};
 vector<int> adj[MAX+1]{};
 int cnt[MAX+1]{};
-int dp[MAX+1]{};
 
-int num = 0;
 void dfs(int now, int parent) {
     dpt[now] = dpt[parent] + 1;
     ac[now][0] = parent;
