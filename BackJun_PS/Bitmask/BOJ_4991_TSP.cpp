@@ -1,6 +1,3 @@
-// 로봇청소기
-// DFS + BFS
-
 #include<bits/stdc++.h>
 #define xx first
 #define yy second
@@ -9,9 +6,10 @@ using pii = pair<int,int>;
 using tpi = tuple<int,int,int>;
 const int INF = 0x3f3f3f3f;
 
-int N,M,K;
+int N,M, K, sty, stx;
 int m[20][20]{};
 pii v[11]{};
+int dp[11][1<<10]{};
 int dist[11][11]{};
 int dy[4] = {-1,1,0,0};
 int dx[4] = {0,0,-1,1};
@@ -45,31 +43,17 @@ bool bfs(int st){
     return true;
 }
 
-int ans;
-bool vi[11]{};
-void dfs(int now, int sum, int dpt){
-    if(dpt==K){
-        ans = min(ans, sum);
-        return;
-    }
-
-    for(int i=1; i<=K; i++){
-        if(vi[i]) continue;
-        vi[i] = true;
-        sum += dist[now][i];
-        dfs(i, sum, dpt+1);
-        sum -= dist[now][i];
-        vi[i] = false;
-    }
-}
-
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    int tt = 0;
     while(1){
+        tt++;
         cin>>M>>N;
         if(!N) break;
         memset(m,-1,sizeof(m));
+        memset(dp,0x3f,sizeof(dp));
+
         K=0;
         string str;
         for(int i=0; i<N; i++){
@@ -94,9 +78,24 @@ int main() {
             continue;
         }
         
-        ans = INF;
-        dfs(0,0,0);
-        cout<<ans<<'\n';
+        // Bottom-Up TSP
+        dp[0][0] = 0;
+        for(int mask=1; mask<(1<<K); mask++){
+            for(int i=1; i<=K; i++){
+                if(mask & (1<<(i-1))) {
+                    int pre = mask ^ (1<<(i-1));
+                    for(int j=0; j<=K; j++){
+                        if(dp[j][pre] >= INF) continue;
+                        dp[i][mask] = min(dp[i][mask], dp[j][pre] + dist[j][i]);
+                    }
+                }
+            }
+        }
+
+        int res = INF;
+        for(int i=1; i<=K; i++){
+            res = min(res, dp[i][(1<<K)-1]);
+        }
+        cout<<res<<'\n';
     }
-    
 }
