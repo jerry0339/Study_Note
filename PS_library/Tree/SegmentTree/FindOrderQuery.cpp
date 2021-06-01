@@ -33,8 +33,9 @@ void modify(int n, int s, int e, int idx, int diff){
 int query(int n, int s, int e, int val){
     if(s==e) return s;
     int mid = (s+e)>>1;
-    if(val<=tree[n<<1]) return query(n<<1, s, mid, val);
-    return query(n<<1|1, mid+1, e, val-tree[n<<1]);
+    int next = tree[n<<1];
+    if(val <= next) return query(n<<1, s, mid, val);
+    return query(n<<1|1, mid+1, e, val-next);
 }
 
 // 인덱스로 반환
