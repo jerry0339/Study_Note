@@ -30,7 +30,7 @@ int maxModify(int n, int s, int e, int idx, int val){
     if(idx<s || idx>e) return maxt[n];
     if(s==e) return maxt[n] = val;
     int mid = (s+e)>>1;
-    return maxt[n] = min(maxModify(n<<1, s, mid, idx, val), maxModify(n<<1|1, mid+1, e, idx, val));
+    return maxt[n] = max(maxModify(n<<1, s, mid, idx, val), maxModify(n<<1|1, mid+1, e, idx, val));
 }
 
 int minQuery(int n, int s, int e, int l, int r){
