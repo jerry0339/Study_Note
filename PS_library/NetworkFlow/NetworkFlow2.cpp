@@ -12,13 +12,14 @@ int N;
 // flo: flow, cap: capacity
 int flo[MAX][MAX]{}, cap[MAX][MAX]{}; 
 vector<int> adj[MAX]{};
-int prev[MAX]; // 역추적, 방문처리 같이 처리
 
 // 에드몬드 카프 Algorithm
 // st: Source, ed: Sink
 int networkFlow(int st, int ed){ 
     int totalFlow = 0;
-
+    // 역추적, 방문처리 같이 처리
+    int prev[MAX]; // prev는 예약어 이므로 전역변수로 선언하지 말기
+    
     while(1){ // 증가경로(augmenting path) BFS로 찾기
         memset(prev, -1, sizeof(prev)); // 방문하지 않았으면 -1처리
         queue<int> q;
