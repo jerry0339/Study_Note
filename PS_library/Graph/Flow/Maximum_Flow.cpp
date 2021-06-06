@@ -3,8 +3,11 @@
 // TC: O(VE^2)
 // https://gseok.gitbooks.io/algorithm/content/b124-d2b8-c6cc-d06c-d50c-b85c-c6b0/d3ec-b4dc-d480-cee4-c2a828-ford-fulkerson-c560-b4dc-baac-b4dc-ce74-d50428-edmonds-karp.html
 
-// Maximum Flow
+// 포드 풀커슨 참고?
+// https://gseok.gitbooks.io/algorithm/content/b124-d2b8-c6cc-d06c-d50c-b85c-c6b0/d3ec-b4dc-d480-cee4-c2a828-ford-fulkerson-c560-b4dc-baac-b4dc-ce74-d50428-edmonds-karp.html
+// TC: O(V+E)F -> F는 flow의 max수치 (간선의 가중치의 최대값 이라고 보면 됨)
 
+// Maximum Flow
 #include<bits/stdc++.h>
 #define MAX 52
 using namespace std;
@@ -67,6 +70,7 @@ int networkFlow(int st, int ed){
     return totalFlow;
 }
 
+// BOJ_6086
 int main(){
     ios_base::sync_with_stdio(0);
     cin.tie(0);
@@ -79,6 +83,7 @@ int main(){
         // 역방향 데이터가 존재하는 경우의 예외처리는 되어있지 않음
         // ex) capacity(a,b) = 3, 
         //     capacity(b,a) = 5 (역방향) : 그래프에 노드를 추가하여 간선을 연결해 주어야 함
+        // 양방향 간선인 경우 아래에 cap용량 추가
         
         if(x>='a' && x<='z') a = x-'a'+26;
         else a = x-'A';
@@ -88,7 +93,7 @@ int main(){
         adj[a].push_back(b); 
         adj[b].push_back(a);
         cap[a][b] += k;
-        cap[b][a] += k; // flow가 아니므로 +k
+        cap[b][a] += k; // 양방향 간선이므로
     }
     
     cout<<networkFlow(0,'Z'-'A');
