@@ -1,7 +1,9 @@
 // 네트워크 플로우
-// 에드몬드 카프(Edmonds-Karp) 알고리즘 : brute force
+// 에드몬드 카프(Edmonds-Karp) 알고리즘 -> brute force
 // TC: O(VE^2)
 // https://gseok.gitbooks.io/algorithm/content/b124-d2b8-c6cc-d06c-d50c-b85c-c6b0/d3ec-b4dc-d480-cee4-c2a828-ford-fulkerson-c560-b4dc-baac-b4dc-ce74-d50428-edmonds-karp.html
+
+// Maximum Flow
 
 #include<bits/stdc++.h>
 #define MAX 52
@@ -19,7 +21,7 @@ int networkFlow(int st, int ed){
     int totalFlow = 0;
     // 역추적, 방문처리 같이 처리
     int prev[MAX]; // prev는 예약어 이므로 전역변수로 선언하지 말기
-    
+
     while(1){ // 증가경로(augmenting path) BFS로 찾기
         memset(prev, -1, sizeof(prev)); // 방문하지 않았으면 -1처리
         queue<int> q;
