@@ -20,13 +20,13 @@
 * 0-1 BFS
 * Floyd-Warshall
 * Dijkstra 
-* Bellman-Ford -> **not yet**
 * Topology Sort
 * MST(Minimum Spanning Tree)
     > Prim  
     > Kruskal   
 * Network Flow
-* SCC -> **not yet**
+    > Maximum Flow  
+    > Bipartite Matching
 
 #### 2.Tree
 * Tree Order
@@ -35,12 +35,10 @@
 * Segment Tree
 * BIT(Binary Indexed Tree : Fenwick)
 * Merge Sort Tree
-* Heavy Light Decomposition(HLD) - **not yet**
 
 #### 3.String
 * manacher
 * Trie
-* KMP -> **not yet**
 
 #### 4.Math
 * 유클리드 호제법
@@ -64,7 +62,7 @@
 
 #### 7.Query
 * Segment Tree
-* Parallel Binary Search
+* Parallel Binary Search(PBS)
 
 #### 8.Sort
 * Bubble Sort : O(N^2), Stable
@@ -94,6 +92,5 @@
 * 이진 Heap
 * Priority Queue
 * Union_find
-* Splay Tree -> **not yet**
 
 **************************************************************************

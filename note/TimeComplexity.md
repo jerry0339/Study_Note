@@ -38,9 +38,11 @@
 
 * MST(Minimum Spanning Tree)
     > Prim : O(N^2) (N은 정점의 개수, min-Heap 이용)    
-    > Kruskal : O(NlogN) (N은 간선의 개수, 퀵정렬, Union-Find 이용)   
+    > Kruskal : O(ElogE) (E는 간선의 개수, 퀵정렬, Union-Find 이용) 
 
 * Network Flow
+    > Maximum Flow : O(VE^2) (Edmonds-Karp 알고리즘)    
+    > 이분매칭(Bipartite Matching) : O(VE)  
 
 * SCC - not yet
 
@@ -119,7 +121,7 @@
 #### 7.Query
 * Segment Tree
     > lazy seg, BIT, Merge Sort Tree 와 같은 알고리즘 모두 Query문제에서 효과적인 알고리즘임    
-* Parallel Binary Search
+* Parallel Binary Search(PBS)
 
 #### 8.Sort
 * Bubble Sort : O(N^2), Stable
