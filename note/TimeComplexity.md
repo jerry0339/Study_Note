@@ -118,6 +118,11 @@
     > Scan : O(N)   
     > 따라서 O(NlogN)   
 
+* Rotating Calipers
+    > 볼록 다각형의 지름 구하기
+    > Convex Hull, 정렬 : O(NlogN)
+    > 지름 구하는 과정 : O(N)
+
 #### 7.Query
 * Segment Tree
     > lazy seg, BIT, Merge Sort Tree 와 같은 알고리즘 모두 Query문제에서 효과적인 알고리즘임    

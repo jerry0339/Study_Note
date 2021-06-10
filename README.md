@@ -59,6 +59,7 @@
 * 선분 교차판정
 * 볼록다각형의 내부점 판별
 * Convex Hull(Graham Scan)
+* Rotating Calipers(볼록 다각형의 지름 구하기)
 
 #### 7.Query
 * Segment Tree
