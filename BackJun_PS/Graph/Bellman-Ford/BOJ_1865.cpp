@@ -13,9 +13,21 @@ int dist[501]{};
 bool BellmanFord(int st){
     memset(dist,0x3f,sizeof(dist));
     dist[st] = 0;
-    queue<int> q;
-    q.push(st);
-
+    for(int k=1; k<=N; k++){
+        bool chk = false;
+        for(auto e : edge){
+            int a,b,c;
+            tie(a,b,c) = e;
+            if(dist[a]==INF) continue;
+            if(dist[b] > dist[a] + c){
+                dist[b] = dist[a] + c;
+                chk = true;
+                if(k==N) return false; // 사이클 있음
+            }
+        }
+        if(!chk) break;
+    }
+    return true; // 사이클 없음
 }
 
 int main() {
