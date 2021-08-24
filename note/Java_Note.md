@@ -4,6 +4,18 @@
 
 
 ******************************************************
+### 0. BufferedReader와 BufferedWriter 그리고 StringTokenizer
+Java로 알고리즘 PS를 할때, 입출력으로 Scanner와 System.out.println 대신
+**BufferedReader**와 **BufferedWriter**를 사용해야 함.
+가장 빠르기 때문
+
+파싱할때는 split대신 **StringTokenizer**를 사용해야 함
+
+
+
+<br>
+
+******************************************************
 ### 1. 데이터 입력받기
 입력은 Scanner 보다 BufferedReader가 더 빠름
 
@@ -98,28 +110,28 @@ System.out.println(dx[0]+" "+dx[1]+" "+dx[2]+" "+dx[3]); // 1 0 -1 0 출력
 ~~~java
 int N = 10;
 Student[] stu = new Student[N];
-        for(int i=0; i<N; i++){
-            int sum = 0;
-            st = new StringTokenizer(br.readLine());
-            str = st.nextToken();
-            a = Integer.parseInt(st.nextToken());
-            b = Integer.parseInt(st.nextToken());
-            c = Integer.parseInt(st.nextToken());
-            sum = c*10000 + b*100 + a;
-            stu[i] = new Student(sum, str);
-        }
-
-        Arrays.sort(stu, new Comparator<Student>() {
-            @Override
-            public int compare(Student a, Student b) {
-                return Integer.compare(a.birth, b.birth);
-            }
-        });
-
-        System.out.println(stu[N-1].name);
-        System.out.println(stu[0].name);
-    }
+for(int i=0; i<N; i++){
+    int sum = 0;
+    st = new StringTokenizer(br.readLine());
+    str = st.nextToken();
+    a = Integer.parseInt(st.nextToken());
+    b = Integer.parseInt(st.nextToken());
+    c = Integer.parseInt(st.nextToken());
+    sum = c*10000 + b*100 + a;
+    stu[i] = new Student(sum, str);
 }
+
+Arrays.sort(stu, new Comparator<Student>() {
+    @Override
+    public int compare(Student a, Student b) {
+        return Integer.compare(a.birth, b.birth);
+    }
+});
+
+System.out.println(stu[N-1].name);
+System.out.println(stu[0].name);
+
+//---------------------------------------------------
 
 class Student {
     public int birth;
@@ -151,29 +163,48 @@ Dual Pivot Quick Sort의 경우
 Arrays.sort()의 경우 O(Nlog(N))을 보장하지 못하므로
 java.util의 Collections.sort를 사용하는것이 좋음 -> O(Nlog(N)) 보장
 Collections.sort를 사용하기 위해서는 **ArrayList**를 사용해야 함
-Primitive Type이 아닌 객체를 정렬할 때에는 아래와 같이 오버라이딩 하여 정렬할 수 있음
 
+sort할때 c++은 true false기준으로 정렬했다면
+java는 음수, 0, 1 기준으로 정렬
+
+* 정렬 예시
 ~~~java
-class Student {
-    public int birth;
-    public String name;
+import java.util.ArrayList;
+import java.util.Collections;
 
-    public Student(int birth, String name){
-        this.birth = birth;
-        this.name = name;
+public class Main {
+    public static void main(String[] args) {
+
+        ArrayList<Oiis> arr = new ArrayList<>();
+
+        for(int i=0; i<20; i++){
+            arr.add(new Oiis((int)(Math.random()*10), (int)(Math.random()*10), "123"));
+        }
+        
+        Collections.sort(arr, (fir, sec) -> {
+            if(fir.a == sec.a) return fir.b - sec.b;
+            return fir.a - sec.a;
+        });
+
+        for (Oiis next : arr) {
+            System.out.println(next.a +" "+next.b+" "+next.str);
+        }
+
+    }
+    static class Oiis{ // Object int, int, string
+        int a;
+        int b;
+        String str;
+
+        public Oiis(int a, int b, String str) {
+            this.a = a;
+            this.b = b;
+            this.str = str;
+        }
     }
 }
-
-//......
-List<Student> stus = new ArrayList<Student>();
-//......
-Collections.sort(stus, new Comparator<Student>() {
-    @Override
-    public int compare(Student a, Student b) {
-        return Integer.compare(a.birth, b.birth);
-    }
-});
 ~~~
+
 
 <br>
 
@@ -188,10 +219,21 @@ Collections.sort(stus, new Comparator<Student>() {
 3. binarySearch : 이분탐색으로 지정된 객체를 검색해 인덱스를 반환
 4. copy : 컬렉션 복사, 새로운 컬렉션 반환
 5. reverse : 지정된 컬렉션의 순서를 반대로 변경
+6. reverseOrder : 내림차순으로 바꿔줌
+
+* **reverseOrder**
+사용예시
+~~~java
+TreeSet<String> set = new TreeSet<>(Collections.reverseOrder());
+~~~
 
 * **binarySearch**
-`int pos = Collections.binarySearch(list, key);` 와 같이 사용
-key가 list에 없을시 (-1*pos -1)이 lower_bound위치
+key가 list에 없을시 (-1*pos -1)이 lower_bound위치임
+사용예시
+~~~java
+int pos = Collections.binarySearch(list, key);
+~~~
+
 
 
 
@@ -200,11 +242,333 @@ key가 list에 없을시 (-1*pos -1)이 lower_bound위치
 ******************************************************
 ### 8. 자료구조 정리
 1. List인터페이스의 ArrayList
+대량의 자료를 추가/삭제시 복사가 일어 나게 되어 성능 저하, non-thread-safe
 add : O(1)
 remove : O(n)
 get : O(1)
 Contains : O(n)
 iterator.remove : O(n)
-특징 : 대량의 자료를 추가/삭제시 복사가 일어 나게 되어 성능 저하, non-thread-safe
 
-Set Map Queue 업데이트 예정
+2. Set인터페이스의 TreeSet, TreeMap
+레드블랙트리임
+add : O(logN)
+remove : O(logN)
+next : O(logN)
+
+* TreeMap 생성
+~~~java
+Map<Oiis, Integer> map = new TreeMap<>(Comparator.reverseOrder());
+~~~
+
+List Set Map Queue 인터페이스 사용해 본 후 Note 업데이트 예정
+[참고링크](https://unordinarydays.tistory.com/194)
+
+
+
+<br>
+
+******************************************************
+### 9. Java Arrays.fill
+C++의 memset과 같은 기능
+
+* 사용예시
+~~~java
+int[][] arr2 = new int[5][5];  
+for(int[] arr1 : arr2) 
+    Arrays.fill(arr1, 1);
+~~~
+
+
+<br>
+
+******************************************************
+### 10. 출력할 문자열이 많을때, 빠른 출력
+출력해야할 문자열이 많다면 아래와 같은 방법을 사용하면 빠른 시간안에 출력이 가능함
+~~~java
+TreeSet<String> set = new TreeSet<>();
+//....
+StringBuilder sb = new StringBuilder();
+for (String s : set) {
+    sb.append(s);
+    sb.append("\n");
+}
+System.out.println(sb.toString());
+~~~
+
+
+<br>
+
+
+
+******************************************************
+### 11. String 함수
+* charAt
+C++과는 다르게 str[i] 대신 str.charAt(i)로 함수를 사용
+
+* substring
+C++의 substr(start_Idx, length) 였다면,
+java는
+substring(length) : 0부터 length-1까지의 substring
+substring(start_Idx, end_Idx)
+
+* 업뎃 예정
+
+
+<br>
+
+******************************************************
+### 12. reverse()
+* 문자열을 reverse하고 싶다면?
+~~~java
+StringBuilder sb = new StringBuilder(a);
+a = sb.reverse().toString();
+// 또는 StringBuilder그대로 사용하기
+~~~
+
+* 리스트를 reverse하고 싶다면?
+Collections.reverse() 를 이용
+단, ArrayList이용해야 함
+
+
+
+<br>
+
+******************************************************
+### 13. String.format()
+서식형을 이용하여 문자열을 만들어 낼 수 있음
+C언어와 서식형이 다르지 않음. ex) %d, %c, %s
+[참고링크](https://blog.jiniworld.me/68)
+
+* Integer formating 예시
+~~~java
+int i = 123456789;
+
+System.out.println(String.format("%,d_", i));
+System.out.println(String.format("%,15d_", i));
+System.out.println(String.format("%,-15d_", i));
+System.out.println(String.format("%,015d_", i));
+
+/*
+출력결과
+123,456,789_
+    123,456,789_
+123,456,789    _
+0000123,456,789_
+*/
+
+~~~
+
+
+
+<br>
+
+******************************************************
+### 14. Optional, null
+> reference타입 -> null이 될 수 있음 -> NullpointerException을 일으킴
+> Optional을 이용하여 null을 사용하지 않고 해결
+
+**Optioanl을 이용한 null데이터**
+* null 데이터 : `Optional.empty()` 대입
+* null아닌 데이터 : `Optional.of(객체)` 대입
+
+* null인지 아닌지 확인하기
+~~~java
+test = Optional.of(new User(123L));
+bool chk1 = test.isEmpty();  // test에 값이 없으면 true
+bool chk2 = test.isPresent(); // test에 값이 있으면 true
+~~~
+
+
+
+
+<br>
+
+******************************************************
+### 15. 문자열 비교 (NULL 관련)
+`변수.equals("문자")`, `"문자".equals(변수)` 중 어떤것이 더 좋은 방법일까 ?
+`변수.equals("문자")` 에서 변수에 Null이오면 NullPointerException이 날 수 있음
+따라서 `"문자".equals(변수)`로 문자열을 비교하는것이 옳다.
+
+
+
+
+<br>
+
+******************************************************
+### 16. Queue 사용 예시
+BOJ_21736 코드
+
+~~~java
+import java.io.*;
+import java.util.*;
+
+public class Main{
+    static int N,M;
+    static char[][] m;
+    static int sty=0, stx=0;
+    static int[] dy = {-1,1,0,0};
+    static int[] dx = {0,0,-1,1};
+    static boolean[][] vi;
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+        m = new char[N][M];
+        vi = new boolean[N][M];
+        for(int i=0; i<N; i++){
+            m[i] = br.readLine().toCharArray();
+            for(int j=0; j<M; j++){
+                if('I' == m[i][j]){
+                    sty = i;
+                    stx = j;
+                }
+            }
+        }
+
+        int ans = bfs();
+        if(ans==0) bw.write("TT");
+        else bw.write(ans+"");
+        bw.flush();
+        bw.close();
+        br.close();
+    }
+
+    static int bfs(){
+        int ret = 0;
+        Queue<Point> q = new LinkedList<>();
+        q.add(new Point(sty,stx));
+
+        while(!q.isEmpty()){
+            Point pt = q.poll();
+            int cy = pt.y;
+            int cx = pt.x;
+            for(int i=0; i<4; i++){
+                int ny = cy + dy[i];
+                int nx = cx + dx[i];
+                if(ny<0 || nx<0 || ny>=N || nx>=M || vi[ny][nx] || 'X' == m[ny][nx]) continue;
+                if('P' == m[ny][nx]) ret++;
+                q.add(new Point(ny,nx));
+                vi[ny][nx] = true;
+            }
+        }
+
+        return ret;
+    }
+
+    static class Point{
+        int y=0;
+        int x=0;
+
+        public Point(int y, int x) {
+            this.y = y;
+            this.x = x;
+        }
+    }
+}
+
+~~~
+
+
+
+<br>
+
+******************************************************
+### 18. BufferedReader, BufferedWriter, StringTokenizer 다시 정리
+예시로 익히기
+
+~~~java
+int N,M;
+char[][] m; // char 이차원 배열일 경우
+int sty=0, stx=0;
+
+BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+StringTokenizer st = new StringTokenizer(br.readLine());
+N = Integer.parseInt(st.nextToken());
+M = Integer.parseInt(st.nextToken());
+
+m = new char[N][M];
+for(int i=0; i<N; i++){
+    m[i] = br.readLine().toCharArray(); // toCharArray로 배열로 받아올 수 있음
+    for(int j=0; j<M; j++){
+        if('I' == m[i][j]){
+            sty = i;
+            stx = j;
+        }
+    }
+}
+~~~
+
+
+
+<br>
+
+******************************************************
+### 19. 
+
+
+
+
+<br>
+
+******************************************************
+### 20. 
+
+
+
+
+<br>
+
+******************************************************
+### 21. 
+
+
+
+
+<br>
+
+******************************************************
+### 22. 
+
+
+
+
+<br>
+
+******************************************************
+### 23.
+
+
+
+
+<br>
+
+******************************************************
+### 24.
+
+
+
+
+<br>
+
+******************************************************
+### 25.
+
+
+
+
+<br>
+
+******************************************************
+### 26.
+
+
+
+
+<br>
+
+******************************************************
+### 27.
