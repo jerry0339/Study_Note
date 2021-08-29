@@ -378,6 +378,9 @@ bool chk1 = test.isEmpty();  // test에 값이 없으면 true
 bool chk2 = test.isPresent(); // test에 값이 있으면 true
 ~~~
 
+* optional의 **get()은 사용하면 안됨!!!** -> null을 감싼것을 다시 풀기 때문에 optional을 사용한 의미가 없어짐
+> filter(), map() 과 같은 메소드로 조건을 확인하고
+> orElse(), orElseGet(), orElseThrow()로 결과 반환 하는 과정을 거쳐야 함
 
 
 
