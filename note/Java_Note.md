@@ -382,6 +382,8 @@ bool chk2 = test.isPresent(); // test에 값이 있으면 true
 > filter(), map() 과 같은 메소드로 조건을 확인하고
 > orElse(), orElseGet(), orElseThrow()로 결과 반환 하는 과정을 거쳐야 함
 
+* of() 와 ofNullable 어느것을 사용해야 할까 ?
+
 
 
 <br>
@@ -525,18 +527,49 @@ LinkedList vs ArrayDeque 어느것이 더 효율적일까 ?
 <br>
 
 ******************************************************
-### 20. 
+### 20. equals()와 HashCode()의 오버라이딩
+논리적 동등비교를 위해 equals를 오버라이딩 해야 한다면
+equals()와 hashCode() 둘 모두를 오버라이딩 해야 함
+equals()로 객체를 비교하면 아래와 같은 과정을 거침
+![](2021-09-05-17-47-03.png)
+
+#### 재정의를 하지 않으면 생기는 문제점
+같은 값을 가진 객체가 서로 다른 해시값을 갖게 될 수 있다.
+특히 HashSet, HashMap, HashTable의 key 값으로 해당 객체를 사용할 경우 문제가 발생한다.
+
+
+
+#### Object클래스의 equals() 규약
+* equals 메서드는 null이 아닌 개체 참조에 대해 동등성 관계를 구현
+1. reflexive(재귀의) : 자기 자신과의 비교에서 항상 true를 return한다. x.equals(x) == true
+2. symmetric(대칭적인) : x.equals(y) = y.equals(x) =true (교환 법칙)
+3. transitive(전이하는) : x.equals(y) = y.equals(z) 이면  x.equals(z) (추이 법칙)
+4. consistent(일관된) : 반복된 비교에도 일관된 결과를 반환 -> 멱등성(idempotent)에 관한 설명
+5. Null과의 equals 비교는 항상 false 출력
+
+
+
+#### Object클래스의 hashCode() 규약
+1. hashCode 메서드는 몇 번을 호출해도 항상 같은 값을 반환
+2. equals(Object)가 두 객체를 같다고 판단했으면, 두 객체의 hashCode 값은 항상 같아야 함
+3. 하지만 equals(Object)가 두 객체를 다르다고 판단했더라도, 두 객채의 hashCode 값은 같을 수 있다. (해시 충돌)
 
 
 
 
-<br>
+<br><br>
 
 ******************************************************
-### 21. 
+### 21. Object클래스의 hashCode() 규약
 
 
+hashCode 메서드는 몇 번을 호출해도 항상 같은 값을 반환
+equals(Object)가 두 객체를 같다고 판단했으면, 두 객체의 hashCode 값은 항상 같아야 함
+하지만 equals(Object)가 두 객체를 다르다고 판단했더라도, 두 객채의 hashCode 값은 같을 수 있다. (해시 충돌)
 
+재정의를 하지 않으면 생기는 문제점
+같은 값을 가진 객체가 서로 다른 해시값을 갖게 될 수 있다.
+특히 HashMap의 key 값으로 해당 객체를 사용할 경우 문제가 발생한다.
 
 <br>
 
