@@ -10,6 +10,7 @@
 
 <br> <br>
 
+******
 ### 1. Spring Security Architecture
 * 거시적인 관점에서 Spring Security는 웹 요청을 가로챈 후 사용자를 인증하고, 인증된 사용자가 적절한 권한을 지니고 있는 확인함
     - **AuthenticationManager** 사용자 **인증** 관련 처리
@@ -20,6 +21,7 @@
 
 <br> <br>
 
+******
 ### 2. FilterChainProxy (Spring Security 필터 체인)
 * Spring Security의 실제적인 구현은 서블릿 필터 (javax.servlet.Filter 인터페이스 구현체) 를 통해 이루어짐
     - 서블릿 필터는 웹 요청을 가로챈 후 전처리 또는 후처리를 수행하거나, 요청 자체를 리다이렉트 하기도 함
@@ -43,6 +45,7 @@
 
 <br> <br>
 
+******
 ### 3. 주요 Security Filter
 * FilterChainProxy를 구성하는 Filter 목록
     - 정말 다양한 필터 구현을 제공함
@@ -68,6 +71,7 @@
 
 <br> <br>
 
+******
 ### 4. filter : RequestCacheAwareFilter
 인증 요청에 의해 가로채어진 원래 요청으로 이동하기
  = 최초 요청했던 페이지로 리다이렉션 시켜줌
@@ -88,6 +92,7 @@
 
 <br> <br>
 
+******
 ### 5. filter : ChannelProcessingFilter
 * 웹 요청이 어떤 프로토콜로 (http 또는 https) 전달되어야 하는지 처리
 * SSL암호화, 대칭키암호화, RSA암호화에 대한 이해가 필요함
@@ -131,6 +136,7 @@
 
 <br> <br>
 
+******
 ### 6. filter : AnonymousAuthenticationFilter
 해당 인증 필터에 도달할때까지 사용자가 아직 인증되지 않았다면, 익명 사용자로 처리하도록 함
 
@@ -162,6 +168,7 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
 
 <br> <br>
 
+******
 ### 7. filter : ExceptionTranslationFilter
 * FilterSecurityInterceptor 바로 위에 위치하며, FilterSecurityInterceptor 실행 중 발생할 수 있는 예외를 잡고 처리함
 
@@ -204,14 +211,32 @@ protected void configure(HttpSecurity http) throws Exception {
 
 <br> <br>
 
-### 8.
+******
+### 8. Thread Per Request 모델
 
+* Thread Per Request 모델
+    - WAS는 ThradPool을 생성함 (Tomcat 기본값 200)
+    - HTTP 요청이 들어오면 Queue에 적재되고, ThreadPool 내의 특정 Thread가 Queue에서 요청을 가져와 처리하게됨
+    - HTTP 요청은 처음부터 끝까지 동일한 Thread에서 처리됨
+    - HTTP 요청 처리가 끝나면 Thread는 다시 ThreadPool에 반납됨
+    - 즉, WAS의 최대 동시 처리 HTTP 요청의 갯수는 ThreadPool의 갯수와 같음
+    - Thead갯수를 늘리면 동시 처리 갯수가 늘어나지만, Thread Context스위칭에 의한 오버헤드도 커져서 성능이 선형적으로 증가하지는 않음
 
+* Spring web mvc는 Thread Per Request 모델을 기반으로 하고 있음
 
+* Thread Per Request 모델에서는 client의 요청을 처리하기 위해 Thread pool을 사용하고 있음
+* Spring web mvc에서 Thread Local 변수를 사용할때에는 client요청처리가 모두 완료된 후에 Thread local변수를 반드시 clear시켜주어야 함
+
+![](2021-11-21-23-51-17.png)
+
+* p.s) 최근 소개된 WebFlux 같은 기술은 Thread 갯수를 작은 갯수로 유지하며 HTTP  요청을 동시 처리 할 수 있도록 함
+    - spring web mvc에서는 Thread Per Request 이지만,
+    - WebFlux에서의 HTTP 요청은 하나 이상의 Thread에 바인딩되어 처리될 수 있음
 
 
 <br> <br>
 
+******
 ### 9.
 
 
@@ -220,6 +245,7 @@ protected void configure(HttpSecurity http) throws Exception {
 
 <br> <br>
 
+******
 ### 10.
 
 
@@ -228,6 +254,7 @@ protected void configure(HttpSecurity http) throws Exception {
 
 <br> <br>
 
+******
 ### 11.
 
 
@@ -236,6 +263,7 @@ protected void configure(HttpSecurity http) throws Exception {
 
 <br> <br>
 
+******
 ### 12. 
 
 
@@ -244,6 +272,7 @@ protected void configure(HttpSecurity http) throws Exception {
 
 <br> <br>
 
+******
 ### 13. 
 
 
@@ -251,6 +280,7 @@ protected void configure(HttpSecurity http) throws Exception {
 
 <br> <br>
 
+******
 ### 14. 
 
 
@@ -259,6 +289,7 @@ protected void configure(HttpSecurity http) throws Exception {
 
 <br> <br>
 
+******
 ### 15. 
 
 
@@ -266,3 +297,4 @@ protected void configure(HttpSecurity http) throws Exception {
 
 
 <br> <br>
+
