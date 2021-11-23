@@ -237,9 +237,22 @@ protected void configure(HttpSecurity http) throws Exception {
 <br> <br>
 
 ******
-### 9.
+### 9. SecurityContextHolder, SecurityContext, Authentication
+* 8.과 관련있는 내용임
 
+* 클래스 구조
+![](2021-11-23-01-16-10.png)
 
+* Principle : 인증전에는 String, 인증후에는 로그인한 사용자 객체가 들어올 수 있음
+* Credentials : 비밀번호 같은 값 ?
+* Authorities : 사용자 권한 목록
+
+* SecurityContextHolder는 SecurityContext 데이터를 쓰거나 읽을수 있는 API를 제공 (기본 구현은 ThreadLocal를 이용함)
+* ThreadLocal이 기본 구현? -> Thread Per Request 이 기본모델 (물론 Spring Security는 Webflux를 지원하기도 함)
+    - FilterChainProxy 구현을 보면 finally 블록에서 SecurityContextHolder.clearContext() 메소드를 호출하는 확인할 수 있음
+    - 이것은 HTTP 요청 처리가 완료되고 Thread가 ThreadPool에 반환되기전 ThreadLocal 변수 값을 제거하기 위함
+
+* SecurityContext와 Authentication클래스에 대한 내용은 클래스를 직접 참고
 
 
 
