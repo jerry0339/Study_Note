@@ -60,19 +60,24 @@
     - 정말 다양한 필터 구현을 제공함
     - 결국 Spring Security를 잘 이해하고 활용한다는 것은 이들 Filter 를 이해하고, 적절하게 사용한다는 것을 의미함
 
+<br>
+
+* 볼드체의 필터들은 아직 정리 안한 필터들임
+
 1. ChannelProcessingFilter                  : 웹 요청이 어떤 프로토콜로 (http 또는 https) 전달되어야 하는지 처리 
 2. SecurityContextPersistenceFilter         : SecurityContextRepository를 통해 SecurityContext를 Load/Save 처리
 3. LogoutFilter                             : 로그아웃 URL로 요청을 감시하여 매칭되는 요청이 있으면 해당 사용자를 로그아웃 시킴
-4. UsernamePasswordAuthenticationFilter     : ID/비밀번호 기반 Form 인증 요청 URL(기본값: /login) 을 감시하여 사용자를 인증함
+4. **UsernamePasswordAuthenticationFilter**     : ID/비밀번호 기반 Form 인증 요청 URL(기본값: /login) 을 감시하여 사용자를 인증함
 5. DefaultLoginPageGeneratingFilter         : 로그인을 수행하는데 필요한 HTML을 생성함
 6. RequestCacheAwareFilter                  : 로그인 성공 이후 인증 요청에 의해 가로채어진 사용자의 원래 요청으로 이동하기 위해 사용됨
-7. SecurityContextHolderAwareRequestFilter  : 서블릿 3 API지원을 위해 HttpServletRequest를 HttpServletRequestWrapper 하위 클래스로 감쌈
+7. **SecurityContextHolderAwareRequestFilter**  : 서블릿 3 API지원을 위해 HttpServletRequest를 HttpServletRequestWrapper 하위 클래스로 감쌈
 8. RememberMeAuthenticationFilter           : 요청의 일부로 remeber-me 쿠키 제공 여부를 확인하고, 쿠키가 있으면 사용자 인증을 시도함
 9. AnonymousAuthenticationFilter            : 해당 인증 필터에 도달할때까지 사용자가 아직 인증되지 않았다면, 익명 사용자로 처리하도록 함
-10. ExceptionTranslationFilter              : 요청을 처리하는 도중 발생할 수 있는 예외에 대한 라우팅과 위임을 처리함
-11. FilterSecurityInterceptor               : 접근 권한 확인을 위해 요청을 AccessDecisionManager로 위임
+10. SessionManagementFilter                 : Session 변조 공격 방지, 최대 세션수를 설정, 세션 생성전략 설정등을 제공
+11. ExceptionTranslationFilter              : 요청을 처리하는 도중 발생할 수 있는 예외에 대한 라우팅과 위임을 처리함
+12. **FilterSecurityInterceptor**               : 접근 권한 확인을 위해 요청을 AccessDecisionManager로 위임
 
-
+* 이외에도 많은 필터가 있음. 아래의 공식문서 참고
 * [Spring Security Reference](https://docs.spring.io/spring-security/site/docs/current/reference/html5/#servlet-security-filters)
 
 
@@ -270,7 +275,7 @@ protected void configure(HttpSecurity http) throws Exception {
 <br> <br>
 
 ******
-### 10. 인증 처리
+### 10. 인증(Authentication) 처리
 * 인증(Authentication) : 사용자가 주장하는 본인이 맞는지 확인하는 절차를 의미
 * 인증전 사용자의 경우 `6. filter : AnonymousAuthenticationFilter` 참고
 * 아래의 flow가 끝나면 다음 Filter로 이동
@@ -426,15 +431,63 @@ Authentication을 보관하는 역할을 하며, SecurityContext를 통해 Authe
 <br> <br>
 
 ******
-### 18. 
+### 18. Filter : SessionManagementFilter
+**제공하는 기능**
+* **세션 고정 보호** (session-fixation protection) (아래 코드에서 `.sessionFixation()`에 해당)
+    - **session-fixation attack** — 세션 하이재킹 기법중 하나로 정상 사용자의 세션을 탈취하여 인증을 우회하는 기법
+    - session-fixation attack을 막기위해 Spring Security에서는 4가지 설정 가능한 옵션을 제공함
+        - none — 아무것도 하지 않음 (세션을 그대로 유지함)
+        - newSession — 새로운 세션을 만들고, 기존 데이터는 복제하지 않음
+        - migrateSession — 새로운 세션을 만들고, 데이터를 모두 복제함 (servlet 3.0 이상시 기본값)
+        - **changeSession** — 새로운 세션을 만들지 않지만, session-fixation 공격을 방어함 (단, **servlet 3.1 이상**에서만 지원)
+* 유효하지 않은 세션 감지 시 지정된 URL로 리다이렉트 (아래 코드에서 `.invalidSessionUrl()`에 해당)
+    - 로그아웃 했을 경우 세션을 만료시킴
+    - 유효하지 않은 세션이 접근했을때 보낼 URL 설정
+* 세션 생성 전략 설정 (아래 코드에서 `.sessionCreationPolicy()`에 해당)
+    - IF_REQUIRED — 필요시 생성함 (기본값)
+    - NEVER — Spring Security에서는 세션을 생성하지 않지만, 세션이 존재하면 사용함
+    - STATELESS — 세션을 완전히 사용하지 않음 (JWT 인증이 사용되는 REST API 서비스에 적합)
+    - ALWAYS — 항상 세션을 사용함
+* 동일 사용자의 중복 로그인 감지 및 처리 (아래 코드에서 `.maximumSessions()`에 해당)
+    - maximumSessions — 동일 사용자의 최대 동시 세션 갯수 : **동시 접속을 제한**하는 기능
+    - maxSessionsPreventsLogin — 최대 갯수를 초과하게 될 경우 인증 시도를 차단할지 여부 (기본값 false)
 
+<br>
+
+* 코드
+~~~java
+@Configuration
+@EnableWebSecurity
+public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
+
+    // ....
+    @Override
+    protected void configure(HttpSecurity http)
+        throws Exception {
+        http
+            // ....
+
+            // Note : SessionManagementFilter
+            .sessionManagement()
+            .sessionFixation().changeSessionId() // 세션 고정 보호(session-fixation protection) 전략중 changeSession 전략(servlet 3.1 이상에서만)
+            .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) // 세션 생성 전략중 IF_REQUIRED전략, default임
+            .invalidSessionUrl("/") // 유효하지 않은 세션 감지됐을때 이동시킬 url
+            .maximumSessions(1) // 최대로 동시 로그인 가능한 세션 개수
+                .maxSessionsPreventsLogin(false) // default는 false, true설정시 위의 maximumSession개수에 도달하면 기존의 로그인이 풀리기 전까지 새로운 로그인이 안됨
+                .and()
+            .and()
+            // ....
+        ;
+    }
+}
+~~~
 
 
 
 <br> <br>
 
 ******
-### 19. 
+### 19. 인가(Authorization) 처리
 
 
 
