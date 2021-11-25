@@ -1,21 +1,29 @@
 # Spring Security
-[강의자료](https://iyboklee.notion.site/iyboklee/Spring-Boot-Spring-Security-54d0e411d5d74f8b8caa53a20983842a)
-
 * Spring Security의 실제적인 구현은 서블릿 필터 (javax.servlet.Filter 인터페이스 구현체) 를 통해 이루어짐
 * 즉, Spring Security는 필터의 집합체
 
-
-* devCourse - project - security 의 프로젝트파일 참고
+* Reference List
+    * [Jacson security](https://iyboklee.notion.site/iyboklee/Spring-Boot-Spring-Security-54d0e411d5d74f8b8caa53a20983842a)
+    * [스프링 시큐리티 기본 API및 Filter 이해](https://catsbi.oopy.io/c0a4f395-24b2-44e5-8eeb-275d19e2a536)
+    * [Spring Security란?](https://mangkyu.tistory.com/76)
+    * [세션 정의](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=good_ray&logNo=221360993022)
+    * [상태 정보란? 쿠키와 세션](https://blog.naver.com/good_ray/221360883685)
 
 
 <br> <br>
 
 ******
-### 1. Spring Security Architecture
+### 1. Spring Security Architecture(with 인증과 인가)
 * 거시적인 관점에서 Spring Security는 웹 요청을 가로챈 후 사용자를 인증하고, 인증된 사용자가 적절한 권한을 지니고 있는 확인함
     - **AuthenticationManager** 사용자 **인증** 관련 처리
     - **AccessDecisionManager** 사용자가 보호받는 리소스에 접근할 수 있는 적절한 권한이 있는지 확인 : **인가**
 ![](2021-11-17-03-02-37.png)
+
+* 인증(Authorizatoin)과 인가(Authentication)
+인증(Authentication): 해당 사용자가 본인이 맞는지를 확인하는 절차
+인가(Authorization): 인증된 사용자가 요청한 자원에 접근 가능한지를 결정하는 절차 
+
+![](2021-11-25-20-07-45.png)
 
 
 
@@ -40,7 +48,8 @@
 * 위의 내용을 그림으로 나타내면,
 ![](2021-11-17-03-20-06.png)
 
-
+* 사용중인 filter들의 목록을 보고 싶으면 ?
+    - FilterChainProxy클래스의 doFilterInternal메소드에서 분기문에 break point를 걸어 filter들을 확인가능함
 
 
 <br> <br>
@@ -138,10 +147,12 @@
 
 ******
 ### 6. filter : AnonymousAuthenticationFilter
-해당 인증 필터에 도달할때까지 사용자가 아직 인증되지 않았다면, 익명 사용자로 처리하도록 함
+* 해당 인증 필터에 도달할때까지 사용자가 아직 인증되지 않았다면, 익명 사용자로 처리하도록 함
+* flow 그림
+![](2021-11-25-20-37-10.png)
 
 
-configure에 추가한 filter 코드 () : 익명 사용자의 이름, 권한을 설정한 코드임
+* 코드
 ~~~java
 @Configuration
 @EnableWebSecurity // security 설정 대부분 추가시켜 줌
@@ -261,9 +272,9 @@ protected void configure(HttpSecurity http) throws Exception {
 ******
 ### 10. 인증 처리
 * 인증(Authentication) : 사용자가 주장하는 본인이 맞는지 확인하는 절차를 의미
-
+* 인증전 사용자의 경우 `6. filter : AnonymousAuthenticationFilter` 참고
+* 아래의 flow가 끝나면 다음 Filter로 이동
 ![](2021-11-23-17-44-30.png)
-
 
 
 
@@ -276,7 +287,7 @@ protected void configure(HttpSecurity http) throws Exception {
 
 ~~~java
 @Configuration
-@EnableWebSecurity // security 설정 대부분 추가시켜 줌
+@EnableWebSecurity
 public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
     // ....
 
@@ -289,7 +300,7 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
             // Note : spring security가 자동으로 로그인 페이지를 생성해 주도록 설정, default는 /login 으로 페이지 만들어줌
             .formLogin()
             .defaultSuccessUrl("/") // 로그인 성공시 해당 url로 이동. "/" 는 루트임.
-            .loginPage("/mylogin") // template을 직접 만들어 커스텀할 수도 있음
+            .loginPage("/mylogin") // 로그인 페이지 자체를 커스텀 구현 가능하며, 이 경우 해당 필터는 비활성화됨
             .usernameParameter("my-username") // html에서 username에 대응하는 파라미터 이름 커스텀
             .passwordParameter("my-password") // 파라미터 이름 커스텀
             .permitAll() // 로그인 페이지에는 모두 접근 허가
@@ -309,8 +320,79 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
 <br> <br>
 
 ******
-### 12. 
+### 12. Filter : RememberMeAuthenticationFilter
+* 전체적인 인증처리 과정은 `10. 인증 처리` 그림의 flow와 동일
+* 아래의 그림에서 AuthenticationManager이후 `10. 인증 처리` 그림의 flow 참고, 완료 후 다음 filter로 이동
+* 아래의 그림은 remember me 인증토큰 발행 과정임
+* 그림1
+![](2021-11-25-20-24-03.png)
 
+<br>
+
+* 그림2
+![](2021-11-25-20-30-15.png)
+
+* 코드
+~~~java
+@Configuration
+@EnableWebSecurity
+public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
+
+    // ....
+    @Override
+    protected void configure(HttpSecurity http)
+        throws Exception {
+        http
+            // ....
+
+            // Note : 쿠키기반 자동로그인 활성화
+            .rememberMe()
+            .key("my-remember-me") // key값 고정, 안해주면 프로젝트 시작할때마다 랜덤값이 부여됨
+            .rememberMeParameter("remember-me") // 리멤버미 쿠키 파라미터명 설정(기본값: remember-me)
+            .tokenValiditySeconds(300) // 쿠키 만료 시간
+            .alwaysRemember(false) // true시 항상 remember-me 를 활성화 시킴 (기본값: false)
+            .and()
+            // ....
+        ;
+    }
+}
+~~~
+
+
+
+<br> <br>
+
+******
+### 13. SecurityContextHolder
+SecurityContextHolder는 보안 주체의 세부 정보를 포함하여 응용프래그램의 현재 보안 컨텍스트에 대한 세부 정보가 저장된다.
+SecurityContextHolder는 기본적으로 `SecurityContextHolder.MODE_INHERITABLETHREADLOCAL` 방법과
+`SecurityContextHolder.MODE_THREADLOCAL` 방법을 제공한다.
+
+
+
+<br> <br>
+
+******
+### 14. SecurityContext
+Authentication을 보관하는 역할을 하며, SecurityContext를 통해 Authentication 객체를 꺼내올 수 있다.
+
+
+
+<br> <br>
+
+******
+### 15. Filter : SecurityContextPersistenceFilter
+* SecurityContext 객체의 **생성, 저장, 조회**등의 LifeCycle을 담당하는 Filter
+* Todo : SecurityContext에 대한 자세한 이해가 필요...
+
+
+<br> <br>
+
+******
+### 16. Filter : LogoutFilter
+* flow 그림
+
+![](2021-11-25-20-32-56.png)
 
 
 
@@ -318,7 +400,25 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
 <br> <br>
 
 ******
-### 13. 
+### 17. Session & Cookie (세션과 쿠키)
+* Session 이란? : 클라이언트 별로 서버에 저장되는 정보
+* Session을 이용한 http통신 시나리오 예시
+    - 웹 클라이언트가 서버측에 요청을 보내게 되면 서버는 클라이언트를 식별하는 session id를 생성합니다.
+    - 서버는 session id를 이용해서 key와 value를 이용한 저장소인 HttpSession을 생성합니다.
+    - 서버는 session id를 저장하고 있는 쿠키를 생성하여 클라이언트에 전송합니다.
+    - 클라이언트는 서버측에 요청을 보낼때 session id를 가지고 있는 쿠키를 전송합니다.
+    - 서버는 쿠키에 있는 session id를 이용해서 그 전 요청에서 생성한 HttpSession을 찾고 사용합니다.
+
+<br>
+
+* Session과 Cookie의 등장 배경? : HTTP프로토콜의 stateless
+> HTTP프로토콜은 상태 유지가 안되는(stateless) 프로토콜
+> 이전에 무엇을 했고, 지금 무엇을 했는지에 대한 정보를 갖고 있지 않음
+> 웹 브라우저(클라이언트)의 요청에 대한 응답을 하고 나면 해당 클라이언트와의 연결을 지속하지 않음
+> 상태 유지를 위해 Cookie와 Session기술이 등장
+
+
+* [쿠키와 세션의 동작 이해](https://blog.naver.com/good_ray/221360883685)
 
 
 
@@ -326,8 +426,7 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
 <br> <br>
 
 ******
-### 14. 
-
+### 18. 
 
 
 
@@ -335,8 +434,55 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
 <br> <br>
 
 ******
-### 15. 
+### 19. 
 
+
+
+
+<br> <br>
+
+******
+### 20. 
+
+
+
+
+<br> <br>
+
+******
+### 21. 
+
+
+
+
+<br> <br>
+
+******
+### 22. 
+
+
+
+
+<br> <br>
+
+******
+### 23. 
+
+
+
+
+<br> <br>
+
+******
+### 24. 
+
+
+
+
+<br> <br>
+
+******
+### 25. 
 
 
 
