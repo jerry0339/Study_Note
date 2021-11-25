@@ -57,7 +57,7 @@
 4. UsernamePasswordAuthenticationFilter     : ID/비밀번호 기반 Form 인증 요청 URL(기본값: /login) 을 감시하여 사용자를 인증함
 5. DefaultLoginPageGeneratingFilter         : 로그인을 수행하는데 필요한 HTML을 생성함
 6. RequestCacheAwareFilter                  : 로그인 성공 이후 인증 요청에 의해 가로채어진 사용자의 원래 요청으로 이동하기 위해 사용됨
-7. SecurityContextHolderAwareRequestFilter  : 서블릿 3 API 지원을 위해 HttpServletRequest를 HttpServletRequestWrapper 하위 클래스로 감쌈
+7. SecurityContextHolderAwareRequestFilter  : 서블릿 3 API지원을 위해 HttpServletRequest를 HttpServletRequestWrapper 하위 클래스로 감쌈
 8. RememberMeAuthenticationFilter           : 요청의 일부로 remeber-me 쿠키 제공 여부를 확인하고, 쿠키가 있으면 사용자 인증을 시도함
 9. AnonymousAuthenticationFilter            : 해당 인증 필터에 도달할때까지 사용자가 아직 인증되지 않았다면, 익명 사용자로 처리하도록 함
 10. ExceptionTranslationFilter              : 요청을 처리하는 도중 발생할 수 있는 예외에 대한 라우팅과 위임을 처리함
@@ -259,7 +259,10 @@ protected void configure(HttpSecurity http) throws Exception {
 <br> <br>
 
 ******
-### 10.
+### 10. 인증 처리
+* 인증(Authentication) : 사용자가 주장하는 본인이 맞는지 확인하는 절차를 의미
+
+![](2021-11-23-17-44-30.png)
 
 
 
@@ -268,8 +271,37 @@ protected void configure(HttpSecurity http) throws Exception {
 <br> <br>
 
 ******
-### 11.
+### 11. Filter : DefaultLoginPageGeneratingFilter
+* HTTP GET 요청에 대해 디폴트 로그인 페이지를 생성해주는 필터
 
+~~~java
+@Configuration
+@EnableWebSecurity // security 설정 대부분 추가시켜 줌
+public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
+    // ....
+
+    @Override
+    protected void configure(HttpSecurity http)
+        throws Exception { // HttpSecurity : 세부적인 웹 보안기능 설정을 처리하는 API 제공
+        http
+            // ....
+
+            // Note : spring security가 자동으로 로그인 페이지를 생성해 주도록 설정, default는 /login 으로 페이지 만들어줌
+            .formLogin()
+            .defaultSuccessUrl("/") // 로그인 성공시 해당 url로 이동. "/" 는 루트임.
+            .loginPage("/mylogin") // template을 직접 만들어 커스텀할 수도 있음
+            .usernameParameter("my-username") // html에서 username에 대응하는 파라미터 이름 커스텀
+            .passwordParameter("my-password") // 파라미터 이름 커스텀
+            .permitAll() // 로그인 페이지에는 모두 접근 허가
+            .and()
+            
+            // ....
+        ;
+    }
+    // ....
+}
+
+~~~
 
 
 
