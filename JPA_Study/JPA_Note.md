@@ -1092,13 +1092,25 @@ public interface LeisureRepository extends JpaRepository<Leisure, Long> {
 <br><br>
 
 *******************************************************************
-### 47.
+### 47. `@Commit`
+* 테스트 코드 실행시 실행이 완료된 후 롤백이 됨
+* `@Commit`을 이용하면 롤백하지 않고 DB에 업데이트 된 내용을 볼 수 있음
+
 
 
 <br><br>
 
 *******************************************************************
-### 48.
+### 48. 로그에서 query의 (?) 확인방법
+* `org.hibernate.type: trace` 이용
+* ?는 그대로지만 trace 로그에서 볼 수 있음
+
+~~~yml
+logging.level:
+  org.hibernate.SQL: debug
+  org.hibernate.type: trace # trace로 해주면 trace로그에서 볼 수 있음
+~~~
+
 
 
 <br><br>
