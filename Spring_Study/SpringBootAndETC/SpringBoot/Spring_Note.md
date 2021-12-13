@@ -1,5 +1,8 @@
 # Spring Note
 
+* [붕어빵좌](https://github.com/depromeet/3dollars-in-my-pocket-backend)
+* OOP에 대한 내용도 포함됨
+
 단축키
 Ctrl + Shift + V : 마크다운 미리보기
 Shift + Alt + V  : 이미지 붙여넣기
@@ -894,21 +897,50 @@ static 또는 transient가 아닌 모든 필드들이 대상이 된다.
 `@AllArgsConstructor` : 존재하는 모든 필드에 대한 생성자를 자동으로 생성
 `@NoArgsConstructor` : 기본 생성자 생성
 
+초기화해야하는 필드가 있다면,
+생성자에 `@Builder`를 붙이고 변경가능한 값들만 파라미터로 주고 필요한 값들을 초기화 하여 빌더를 사용한다.
+
+* 예시코드
+~~~java
+@Table(name = "mapgakco")
+public class Mapgakco {
+    // ....
+    @Builder
+    public Mapgakco(String title, Integer applicantLimit, LocalDateTime deadline, String content,
+        String location, Double latitude, Double longitude, LocalDateTime meetingAt, User user
+    ) {
+        this.title = title;
+        this.applicantLimit = applicantLimit;
+        this.deadline = deadline;
+        this.content = content;
+        this.location = location;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.meetingAt = meetingAt;
+        this.user = user;
+        this.status = MapgakcoStatus.GATHERING; // 초기화하여 변경방지
+        this.view = 0; // 초기화하여 변경방지
+    }
+
+    // ....
+}
+~~~
+
 
 
 <br><br>
 
 ************************
-### 29. CRUD 네이밍
-DB SQL에서 insert, update, delete
-코드에서 save, modify, remove
+### 29. Json 직렬화, 역직렬화 어노테이션 정리
+* [자세한 내용은 생략](https://pjh3749.tistory.com/281)
 
 
 
 <br><br>
 
 ************************
-### 1. 
+### 30. Anti-OOP : if문 - 정적 팩토리 메서드 참고
+* [참고 블로그](http://redutan.github.io/2016/03/31/anti-oop-if)
 
 
 
