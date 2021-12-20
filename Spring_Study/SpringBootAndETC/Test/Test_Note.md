@@ -197,7 +197,35 @@ when(mock.isABigFlower(eq("poppy"), anyInt())).thenReturn(true);
 <br> <br>
 
 ******
-### 3. 
+### 8. doAnswer()
+BDD 스타일로는 willAnswer()
+`willAnswer().given().` 과 같이 사용
+아래의 코드는 User의 "id" 컬럼필드에 3L을 set해주는 stubbing.
+
+~~~java
+@Test
+  @DisplayName("맵각코를 삭제할 수 있다.")
+  public void shouldHaveDeleteMapgakco() {
+    // given
+    assertEquals(mapgakco.getStatus(), MapgakcoStatus.GATHERING);
+
+    // getId()를 stubbing하기 위한 코드. willAnswer 이용
+    willAnswer(invocation -> {
+      ReflectionTestUtils.setField((User) invocation.getArgument(0), "id", 3L);
+      return null;
+    }).given(userRepository).save(this.user);
+    userRepository.save(user);
+
+    given(mapgakcoRetrieveService.getMapgakcoById(any())).willReturn(mapgakco);
+
+    // when
+    mapgakcoService.deleteMapgakco(3L, any());
+
+    // then
+    then(mapgakcoRetrieveService).should().getMapgakcoById(any());
+    assertEquals(mapgakco.getStatus(), MapgakcoStatus.DELETED);
+  }
+~~~
 
 
 

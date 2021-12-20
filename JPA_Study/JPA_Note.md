@@ -1200,6 +1200,8 @@ null이 아닌지 확인하는 쿼리를 실행해야 하기 때문이다.
         * CART를 조회할때 USER도 함께 조회한다. (Fetch Join)
         * batch fetch size를 사용한다.
 
+* [참고 블로그](https://1-7171771.tistory.com/143)
+
 
 
 <br><br>

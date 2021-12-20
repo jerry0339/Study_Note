@@ -948,9 +948,81 @@ public class Mapgakco {
 <br><br>
 
 ************************
+### 31. @RequestParam null값
+* 아래와 같이 null을 허용가능
+
+~~~java
+void method(@RequestParam("userId", required = false) Long userId) {...}
+~~~
+
+* mockMvc : 
+    - 문자열이 들어가야 해서 일반 값이면 문자열("")이나 String.valueOf()로 넣어주어야 하지만
+    - null은 아래와 같이 (String)null 로 해결가능
+~~~java
+ResultActions actions = mockMvc.perform(
+   get("/api/v1/users/locations")
+    .contentType(MediaType.APPLICATION_JSON)
+    .param("course", (String) null)
+    .param("generation", (String) null)
+    .content(objectMapper.writeValueAsString(request)));
+~~~
+
+
+
+
+<br><br>
+
+************************
+### 32. `@ModelAttribute`
+`@RequestParam` 와의 차이점은 1:1매핑이냐 객체매핑이냐 차이임
+
+`@ModelAttribute`사용시 장점은 [블로그참고](https://galid1.tistory.com/769)
+
+
+
+
+<br><br>
+
+************************
+### 33. `@Valid`와 `@Validated`차이
+* `@Valid`는 java표준, `@Validated`는 스프링 전용 검증 애노테이션임
+    둘중 암거나 사용해도 동일하게 작동하지만, `@Validated`를 사용하는 이유는
+    1. `@Validated`는 groups라는 기능이 있다. (근데 안씀)
+    2. 따로 dependency를 추가할 필요도 없다. (`@Valid`는 gradle에서 의존관계 추가해 주어야 함.)
+    3. Java표준을 따르면 프레임워크 변경시 코드를 변경할 필요가 없다. 하지만 거의 spring쓰기 때문에 상관없다.
+
+* 검증순서
+    1. `@ModelAttribute`각각의 필드에 타입변환 시도
+        * 성공하면 다음으로감(2.로)
+        * 실패하면 typeMismatch로 FieldError 추가 
+        (예를들어 Integer인데 String이 오거나 하면 2.Validator적용이 안됨)
+    2. Validator 적용
+        * `@NotBlank`, `@Max` 등과 같은 어노테이션 확인함
+
+
+
+<br><br>
+
+************************
+### 34. 
+
+
+<br><br>
+
+************************
 ### 1. 
 
 
+<br><br>
+
+************************
+### 1. 
+
+
+<br><br>
+
+************************
+### 1. 
 
 
 <br><br>
