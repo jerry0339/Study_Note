@@ -973,9 +973,8 @@ ResultActions actions = mockMvc.perform(
 <br><br>
 
 ************************
-### 32. `@ModelAttribute`
+### 32. `@ModelAttribute`, `@RequestParam` 차이
 `@RequestParam` 와의 차이점은 1:1매핑이냐 객체매핑이냐 차이임
-
 `@ModelAttribute`사용시 장점은 [블로그참고](https://galid1.tistory.com/769)
 
 
@@ -1004,13 +1003,26 @@ ResultActions actions = mockMvc.perform(
 <br><br>
 
 ************************
-### 34. 
+### 34. Hibernate Validator 관련 링크
+하이버네이트 Validator 관련 링크
+* 공식 사이트: http://hibernate.org/validator/
+* 공식 메뉴얼: https://docs.jboss.org/hibernate/validator/6.2/reference/en-US/html_single/
+* 검증 애노테이션 모음: https://docs.jboss.org/hibernate/validator/6.2/reference/en-US/html_single/#validator-defineconstraints-spec
+
 
 
 <br><br>
 
 ************************
-### 1. 
+### 35. `@Validated`에서 `@ModelAttribute`와 `@RequestBody`의 차이
+`@ModelAttribute` 는 각각의 필드단위로 세밀하게 적용되므로
+`@ModelAttribute`객체에 하나의 특정 필드에만 타입에 맞지 않은 데이터가 들어온다면
+해당 데이터만 타입변환에 실패하여 검증이 이루어지지 않고, 다른 필드들은 정상적으로 검증이 이루어진다.
+
+`@RequestBody`는 전체 객체 단위로 적용되기 때문에 Dto안의 모든 필드의 Type변환이 잘 이루어 져야만
+검증이 이루어진다. 즉, Type변환이 실패하면 컨트롤러도 호출되지 않고 Validator도 적용시킬 수 없다.
+
+
 
 
 <br><br>
