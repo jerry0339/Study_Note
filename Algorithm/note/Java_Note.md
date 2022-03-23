@@ -622,7 +622,10 @@ final이 붙은 클래스는 상속을 금지시킴
 <br><br>
 
 ******************************************************
-### 25.
+### 25. ArrayList 마지막 원소 삭제
+* ArrayList.remove(인덱스) : 시간복잡도는 O(N);
+* 인덱스가 마지막 원소의 인덱스이면 O(1)
+* [참고링크](https://stackoverflow.com/questions/43145395/time-complexity-while-deleting-last-element-from-arraylist-and-linkedlist)
 
 
 

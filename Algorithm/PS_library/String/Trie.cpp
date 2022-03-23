@@ -60,8 +60,10 @@ int main() {
 
         int chk=0;
         for(int i=0; i<N; i++){
-            if(root->find(m[i])) 
+            if(root->find(m[i])){
                 chk = 1;
+                break;
+            }
         }
 
         if(chk) cout<<"NO"<<'\n';
@@ -69,5 +71,4 @@ int main() {
 
         delete root;
     }
-
 }
