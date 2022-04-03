@@ -1,3 +1,6 @@
+// 참고한 링크
+// https://www.geeksforgeeks.org/how-to-compute-mod-of-a-big-number/
+
 #include<bits/stdc++.h>
 using namespace std;
 
