@@ -7,9 +7,12 @@ using namespace std;
 int N,M;
 int parent[1000010]{};
 
+// parent 배열을 이용하여 노드들을 트리 형태로 저장할 수 있음
 int find(int k) {
     if (k == parent[k]) return k;
-    else return parent[k] = find(parent[k]);
+    else return parent[k] = find(parent[k]); // 경로 압축 최적화
+    // find(k) 과정에서 탐색되는 노드들의 부모노드가 모두 최상위 노드로 설정됨 -> 경로 압축 최적화
+    // 경로 압축 최적화가 안된 코드 : return find(parent[u])
 }
 
 void merge(int a, int b) {
