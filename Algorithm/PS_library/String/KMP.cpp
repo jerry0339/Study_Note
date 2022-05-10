@@ -1,34 +1,32 @@
 // 1786문제 코드임, https://www.acmicpc.net/problem/1786
 // KMP 알고리즘
 // O(M+N) : M -> 문자열s길이, N -> 문자열p길이
-// 실패함수란 ? -> 자세한 설명 링크 : https://kbw1101.tistory.com/54
-// fail[i] = k -> i번째 인덱스 실패시 돌아가야 할 인덱스가 k이라는 뜻
 
 #include<bits/stdc++.h>
 using namespace std;
 
 vector<int> getPI(string p) {
-    int m=p.size(), j=0;
-    vector<int> fail(m,0);
-    //p와 p끼리 KMP를 수행
-    for(int i=1; i<m; i++) {
-        while(j>0 && p[i]!=p[j]) j = fail[j-1]; // 실패함수 적용 (위 링크 참고)
-        if(p[i] == p[j]) fail[i] = ++j;
+    int M=p.size();
+    vector<int> fail(M,0);
+    //p와 p의 부분문자열을 reverse한 문자열 p`와 KMP를 수행
+    for(int i=1, j=0; i<M; i++) {
+        while(j>0 && p[i]!=p[j]) j = fail[j-1]; // 이전 실패함수 이용
+        if(p[i] == p[j]) fail[i] = ++j; // 실패함수 생성
     }
     return fail;
 }
 
 //문자열s 중에 문자열p가 등장하는 시작 인덱스들이 담긴 벡터를 리턴
 vector<int> KMP(string s, string p) { 
+    int N=s.size(), M=p.size();
     vector<int> ret, fail=getPI(p);
-    int n=s.size(), m=p.size(), j=0;
-    for(int i=0 ; i<n; i++) {
+    for(int i=0, j=0; i<N; i++) {
         while(j>0 && s[i]!=p[j]) j = fail[j-1]; // 매칭 중 불일치 발생, 이전의 매칭됐던 문자열 찾기(실패함수 이용)
-        if(s[i] == p[j]) { // 한 글자 매칭 성공한 경우
-            if(j == m-1) { // 완전 매칭 성공한 경우
-                ret.push_back(i-m+1);
+        if(s[i] == p[j]) {
+            if(j == M-1) { // 문자열p와 완전히 매칭한 경우
+                ret.push_back(i-M+1);
                 j = fail[j];
-            } else j++;
+            } else ++j; // 문자열p의 j번째까지 일치한 경우 j++
         } 
     }
     return ret;
