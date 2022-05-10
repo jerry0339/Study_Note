@@ -1,6 +1,8 @@
-// https://www.acmicpc.net/problem/1786
+// 1786문제 코드임, https://www.acmicpc.net/problem/1786
 // KMP 알고리즘
 // O(M+N) : M -> 문자열s길이, N -> 문자열p길이
+// 실패함수란 ? -> 자세한 설명 링크 : https://kbw1101.tistory.com/54
+// fail[i] = k -> i번째 인덱스 실패시 돌아가야 할 인덱스가 k이라는 뜻
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -10,7 +12,7 @@ vector<int> getPI(string p) {
     vector<int> fail(m,0);
     //p와 p끼리 KMP를 수행
     for(int i=1; i<m; i++) {
-        while(j>0 && p[i]!=p[j]) j = fail[j-1];
+        while(j>0 && p[i]!=p[j]) j = fail[j-1]; // 실패함수 적용 (위 링크 참고)
         if(p[i] == p[j]) fail[i] = ++j;
     }
     return fail;
@@ -21,7 +23,7 @@ vector<int> KMP(string s, string p) {
     vector<int> ret, fail=getPI(p);
     int n=s.size(), m=p.size(), j=0;
     for(int i=0 ; i<n; i++) {
-        while(j>0 && s[i]!=p[j]) j = fail[j-1]; // 매칭 중 불일치 발생, 이전의 매칭됐던 문자열 적용
+        while(j>0 && s[i]!=p[j]) j = fail[j-1]; // 매칭 중 불일치 발생, 이전의 매칭됐던 문자열 찾기(실패함수 이용)
         if(s[i] == p[j]) { // 한 글자 매칭 성공한 경우
             if(j == m-1) { // 완전 매칭 성공한 경우
                 ret.push_back(i-m+1);
