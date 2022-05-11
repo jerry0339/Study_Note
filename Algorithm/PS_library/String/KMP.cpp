@@ -5,6 +5,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// N,M이 선언되어 있음에 주의!!!!
 vector<int> getPI(string p) {
     int M=p.size();
     vector<int> fail(M,0);
