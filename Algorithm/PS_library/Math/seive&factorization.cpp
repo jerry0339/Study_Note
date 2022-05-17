@@ -7,11 +7,17 @@ typedef pair<ll, ll> pll;
 #define yy second
 #define all(v) (v).begin(), (v).end()
 
-ll gcd(ll a,ll b){return b?gcd(b,a%b):a;}
+bool isPrime(ll num) { // 단순 확인 함수
+    if(num<2LL) return false;
+    for(ll i=2; i*i<=num; i++){
+        if(num%i == 0) return false;
+    }
+    return true;
+}
 
 const int MAX = 200100;
 int sieve[MAX+1];
-void find_prime(){
+void find_prime(){ // 전처리 하는 함수
     memset(sieve, -1, sizeof(sieve));
     for(ll i=2; i*i<=MAX; ++i)
         if(sieve[i] == -1)
@@ -21,7 +27,7 @@ void find_prime(){
 }
 vector<int> f[MAX];
 map<int, int> cnt;
-void fac(int x){
+void fac(int x){ // 전처리한 내용을 통해 소인수분해
     cnt.clear();
     while(sieve[x] != -1){
         cnt[sieve[x]] += 1;
