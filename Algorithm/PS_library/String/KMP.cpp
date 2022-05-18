@@ -10,7 +10,7 @@ vector<int> getPI(string p) {
     int M=p.size();
     vector<int> fail(M,0);
     //p와 p의 부분문자열을 reverse한 문자열 p`와 KMP를 수행(실제로 reverse한건 아님!)
-    for(int i=1, j=0; i<M; i++) {
+    for(int i=1, j=0; i<M; i++) { // j(앞)와 i(뒤)를 비교
         while(j>0 && p[i]!=p[j]) j = fail[j-1]; // 이전 실패함수 이용
         if(p[i] == p[j]) fail[i] = ++j; // 실패함수 생성
     }
