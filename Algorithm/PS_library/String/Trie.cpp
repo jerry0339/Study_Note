@@ -29,7 +29,7 @@ struct Trie {
         else {
             int cn = *key-'0';
             if(next[cn]==NULL) next[cn] = new Trie();
-            next[cn]->insert(key+1);
+            next[cn]->insert(key+1); // key의 포인터+1를 insert -> 다음 문자열 insert
         }
     }
 
