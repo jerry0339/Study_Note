@@ -6,6 +6,14 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+/*
+고유 words 문제
+해당 코드의 query함수는 단순히 특정 문자열(s)에 words의 문자열중 하나가 포함됐는지만 판단하는 코드임
+따라서 매칭해야하는 순서가 중요하거나, 문제에서 words가 고유 문자열의 집합이 아니라면(예를들어 moo, moooo, oo)
+다른 결과가 나올 수 있으므로 코드를 수정해야 함
+ex) [BOJ_5699](https://www.acmicpc.net/problem/5699) - 해결 못한 문제
+*/
+
 const int MAXN = 100000+5, MAXC = 26;
 int trie[MAXN][MAXC]{}, piv, tpiv; // trie[p1][i] = p2: 현재노드(p1)에서 탐색하는 문자가 i일때 가는 노드 p2 -> go(p1, i) = p2
 int fail[MAXN]{}; // failure link: 현재 노드에서 해당 문자의 go 목적지가 없을 때 가는 노드
@@ -43,7 +51,7 @@ void init(vector<string> &v){
                 while(p && !trie[p][i]) p = fail[p];
                 p = trie[p][i];
                 fail[next] = p;
-                if(term[p]) term[next] = term[p];
+                if(!term[next] && term[p]) term[next] = term[p];
                 q.push(next);
             }
         }
