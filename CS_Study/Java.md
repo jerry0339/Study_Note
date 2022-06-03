@@ -12,9 +12,6 @@
 </div>
 </details>
 
-* Argument Resolver
-* Message Converter
-* Transactional Runtime Exception 잡는 방법
 
 <details>
 <summary><b>Java 8과 11 ?</b></summary>
