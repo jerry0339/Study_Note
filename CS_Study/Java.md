@@ -12,18 +12,15 @@
 </div>
 </details>
 
-* Argument Resolver
-* Message Converter
-* Transactional Runtime Exception 잡는 방법
 
 <details>
-<summary><b>Java 8과 11 ?</b></summary>
+<summary><b>Java 8과 11 ? (수정중)</b></summary>
 <div markdown="1">
 
 * 둘다 LTS 버전임
-* String 관련 문자열이 좀 더 추가됨
-* 람다식의 파라미터에 var 변수를 사용할 수 있음 -> var 변수에 어노테이션을 붙일 수 있음
-* 자세하게는 모름...
+* Java 11
+    * String 관련 문자열이 좀 더 추가됨
+    * 람다식의 파라미터에 var 변수를 사용할 수 있음 -> var 변수에 어노테이션을 붙일 수 있음
 
 </div>
 </details>
@@ -36,7 +33,7 @@
 1. 추상화(abstraction)
 2. 캡슐화(encapsulation)
 3. 상속성(inheritance)
-4. 다형성(polymorphism)
+4. 다형성(polymorphism) : 여러 형태를 받아들일 수 있는 성질
 
 </div>
 </details>
@@ -59,6 +56,28 @@
     * 왜 역전일까?
     * 추상화에 의존해야지, 구체화에 의존하면 안된다.
     * 인터페이스와 그것을 구현한 구현클래스가 있다면, 다른 클래스에서는 구현클래스가 아니라 인터페이스에 의존해야 한다.
+
+</div>
+</details>
+
+
+<details>
+<summary><b>객체와 인스턴스 차이</b></summary>
+<div markdown="1">
+
+* 클래스의 타입으로 선언된 것을 객체
+* 메모리에 할당되어 실제로 사용되면 인스턴스
+* 객체는 클래스의 인스턴스로 불림
+
+~~~java
+public static void main(String[] args) {
+    Animal cat, dog; // '객체'
+
+    // 인스턴스화
+    cat = new Animal(); // cat은 Animal 클래스의 '인스턴스'(객체를 메모리에 할당)
+    dog = new Animal(); // dog은 Animal 클래스의 '인스턴스'(객체를 메모리에 할당)
+}
+~~~
 
 </div>
 </details>
@@ -116,15 +135,15 @@
 
 
 <details>
-<summary><b>JVM 이란 ?</b></summary>
+<summary><b>컴파일 이란?</b></summary>
 <div markdown="1">
 
-* JVM (자바 가상 머신)
-* java 코드는 컴파일러를 거쳐 바이트코드(.class)로 변환이 됨
-* 바이트코드는 기계어가 아니기 때문에 OS에서 바로 실행될 수 없음
-* JVM은 이러한 자바 바이트코드를 OS에 따라 해석해주는 역할을 함
-* 자바 프로그램이 어느 기기, 어느 운영체제 상에서도 실행될 수 있게 만들어 주는것임 => WORA(Write once run anyway)
-* 자바 프로그램의 메모리를 효율적으로 관리&최적화 해줌
+~~~
+컴파일은 인간이 이해할 수 있는 언어로 작성된 소스 코드(고수준 언어 : C, C++, Java 등)를
+CPU가 이해할 수 있는 언어(저수준 언어 : 기계어)로 번역(변환)하는 작업
+~~~
+
+![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FGb9WO%2FbtrdpL4fvcQ%2Fspc9IYinoZhgHRmJ0l0kjK%2Fimg.png)
 
 </div>
 </details>
@@ -141,7 +160,22 @@
     * 소스코드를 모두 기계어로 변환한 후에 JVM 같은 가상 머신에서 기계어 코드를 실행
     * 기계어로 번역하는 빌드 과정에서는 인터프리터 언어에 비해 시간이 소요
     * 하지만 런타임 상황에서는 이미 기계어로 모든 소스코드가 변환되어 있기 때문에 빠르게 실행
-* 즉, java는 컴파일 언어이다.
+* java는 컴파일 언어이다.
+
+</div>
+</details>
+
+
+<details>
+<summary><b>JVM 이란 ?</b></summary>
+<div markdown="1">
+
+* JVM (자바 가상 머신)
+* java 코드는 컴파일러를 거쳐 바이트코드(.class)로 변환이 됨
+* 바이트코드는 기계어가 아니기 때문에 OS에서 바로 실행될 수 없음
+* JVM은 이러한 자바 바이트코드를 OS에 따라 해석해주는 역할을 함
+* 자바 프로그램이 어느 기기, 어느 운영체제 상에서도 실행될 수 있게 만들어 주는것임 => WORA(Write once run anyway)
+* 자바 프로그램의 메모리를 효율적으로 관리&최적화 해줌
 
 </div>
 </details>
@@ -230,101 +264,60 @@ Garbage Collector가 참조되지 않는 메모리를 확인하고 제거하는 
 </details>
 
 
-### 접근 제어자
-* private(클래스) -> default(패키지) -> protected(패키지, 상속) -> public 순으로 보다 많은 접근을 허용
+<details>
+<summary><b>GC(가비지 컬렉션, Garbage Collection) 이란?</b></summary>
+<div markdown="1">
+
+* [참고1](https://llnote.tistory.com/709), [참고2](https://d2.naver.com/helloworld/1329), [참고3](https://mirinae312.github.io/develop/2018/06/04/jvm_gc.html)
+* stop-the-world란, GC을 실행하기 위해 JVM이 애플리케이션 실행을 멈추는 것
+* stop-the-world가 발생하면 GC를 실행하는 쓰레드를 제외한 나머지 쓰레드는 모두 작업을 멈추고 GC작업 완료후 다시 시작
+* 가비지 컬렉터의 전제조건
+    * 대부분의 객체는 금방 접근 불가능 상태(unreachable)가 된다.
+    * 오래된 객체에서 젊은 객체로의 참조는 아주 적게 존재한다.
+
+</div>
+</details>
 
 
-<br><br>
+<details>
+<summary><b>Wrapper 클래스란?, 사용하는 이유 ?</b></summary>
+<div markdown="1">
 
-### 객체와 인스턴스 차이
-* 클래스의 타입으로 선언된 것을 객체
-* 메모리에 할당되어 실제로 사용되면 인스턴스
-* 객체는 클래스의 인스턴스로 불림
+* 기본 타입의 데이터를 객체로 바꿀필요가 있을때 Wrapper 클래스를 사용
+* 기본타입(primitive type)을 참조타입(reference type)으로 만드는것을 박싱, 반대를 언박싱 이라고 함
+* 사용하는 이유
+    1. 기본 데이터 타입을 Object로 변환할 수 있다.
+    2. java.util 패키지의 클래스는 객체만 처리하므로 Wrapper class는 이 경우에도 도움이 된다.
+    3. ArrayList 등과 같은 Collection Framework의 데이터 구조는 기본 타입이 아닌 객체만 저장하게 되고, Wrapper class를 사용하여 자동박싱/언박싱이 일어난다.
+    4. 멀티스레딩에서 동기화를 지원하려면 객체가 필요하다.
 
-~~~java
-public static void main(String[] args) {
-    Animal cat, dog; // '객체'
-
-    // 인스턴스화
-    cat = new Animal(); // cat은 Animal 클래스의 '인스턴스'(객체를 메모리에 할당)
-    dog = new Animal(); // dog은 Animal 클래스의 '인스턴스'(객체를 메모리에 할당)
-}
-~~~
-
-<br><br>
-
-## 프로그래밍 패러다임
-1. 객체지향
-2. 절차지향
-3. 함수형 프로그래밍 : 순수함수 이용
-    * 동일한 입력에는 항상 같은 값을 반환해야 하는 함수
-    * 함수의 실행이 프로그램의 실행에 영향을 미치지 않아야 하는 함수
-    * 함수 내부에서 인자의 값을 변경하거나 프로그램 상태를 변경하는 Side Effect가 없는 것
+</div>
+</details>
 
 
-<br><br>
+<details>
+<summary><b>인터페이스와 추상클래스 공통점,차이점</b></summary>
+<div markdown="1">
 
-## 컴파일 
-~~~
-컴파일은 인간이 이해할 수 있는 언어로 작성된 소스 코드(고수준 언어 : C, C++, Java 등)를
-CPU가 이해할 수 있는 언어(저수준 언어 : 기계어)로 번역(변환)하는 작업
-~~~
-![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FGb9WO%2FbtrdpL4fvcQ%2Fspc9IYinoZhgHRmJ0l0kjK%2Fimg.png)
-
-
-<br><br>
-
-
-
-## 가비지 컬렉션 Garbage Collection 동작방식
-* Java 메모리의 각 영역에서 GC가 발생하면, 사용하지 않는(참조가 존재하지 않는) 객체들은 메모리에서 제거된다.
-
-
-
-
-<br><br>
-
-### wrapper
-기본타입(primitive type)을 참조타입(reference type)으로 만드는것을 박싱, 반대를 언박싱 이라고 함
-
-
-
-<br><br>
-
-### wrapper 클래스를 사용하는 이유
-1. 기본 데이터 타입을 Object로 변환할 수 있다.
-
-2. java.util 패키지의 클래스는 객체만 처리하므로 Wrapper class는 이 경우에도 도움이 된다.
-
-3. ArrayList 등과 같은 Collection Framework의 데이터 구조는 기본 타입이 아닌 객체만 저장하게 되고, Wrapper class를 사용하여 자동박싱/언박싱이 일어난다.
-
-4. 멀티스레딩에서 동기화를 지원하려면 객체가 필요하다.
-
-
-
-<br><br>
-
-### 인터페이스와 추상클래스 공통점,차이점
 * 공통점 : 상속(extends)받거나, 구현(implements)하는 Class가 Abstract Method를 구현하도록 강제하는 공통점을 가지고 있다.
 * 차이점
     * Interface는 부모, 자식 관계인 상속 관계에 얽메이지 않고, 공통 기능이 필요 할때 (다형성과 관련)
     * Abstract Class는 상속 관계에서 부모 Class(여기서는 Abstract Class)를 상속받는 자식 Class들 간에 공통 기능을 각각 구현(상속과 관련)
-* 예시
-    * 조류라는 Abstract 클래스 하위에 독수리, 오리가 있음
-    * Eatable, flightable 이라는 인터페이스가 있음
-    * 포유류라는 Abstract클래스 하위에 박쥐가 있음
-    * 박쥐클래스는 Eatable, flightable 인터페이스를 상속받을 수 있음
+
+</div>
+</details>
 
 
+<details>
+<summary><b>Checked Exception vs Unchecked Exception</b></summary>
+<div markdown="1">
 
-<br><br>
-
-### Checked Exception vs UnChecked Exception
 * Checked Exception은 컴파일 단계에서 발생하는 Exception으로 반드시 예외처리를 해야함 (try/catch)
 * UnChecked Exception은 런타임 단계에서 발생하는 Exception으로 예외처리를 강제하지 않음 (논리오류 포함)
 
+</div>
+</details>
 
-<br><br>
 
 ### static
 * 메소드 영역에 저장된다.

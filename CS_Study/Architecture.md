@@ -3,6 +3,7 @@
 <summary><b>퍼사드 패턴이란 ?</b></summary>
 <div markdown="1">
 
+* 멘토님한테 질문했던거 언급
 * 퍼사드는 건물의 정면을 의미한다. 디자인 패턴중 하나이다.
 * 퍼사드는 공통적인 작업에 대해 간편한 메소드들을 제공한다.
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/UML_DP_Fa%C3%A7ade.png/330px-UML_DP_Fa%C3%A7ade.png)

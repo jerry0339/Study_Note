@@ -263,8 +263,14 @@ IP를 통해 패킷을 전달할 수 있음
 <div markdown="1">
 
 * HTTP 메소드는 클라이언트가 웹 서버에게 사용자 요청의 목적이나 종류를 알리는 수단
+* 멱등 : 한 번 호출하든 두 번 호출하든 결과가 같은 것을 의미
+    * POST만 멱등하지 않음
+* 안전 : 리소스를 변경하지 않는, 즉 읽기전용 메서드
+    * (GET, HEAD)를 말한다.
+* 캐시가능(Cacheable Methods) 
+    * 모두 캐시가능하지만 주로 GET, HEAD에서만 사용한다.
 * 주요 메소드 종류
-    * GET : 리소스 조회
+    * GET : 리소스 조회 
     * POST : 요청 데이터 처리, 주로 데이터 등록에 사용
     * PUT : 리소스를 대체, 해당 리소스가 없으면 생성
     * PATCH : 리소스를 일부만 변경
@@ -309,6 +315,76 @@ IP를 통해 패킷을 전달할 수 있음
         * http 1.1의 파이프라이닝은 요청을 한꺼번에 해도 결국엔 응답은 순차적으로 받는 head of line blocking 문제가 발생했다.
         * http 2.0 에서는 이를 보완하여 응답도 개별적으로 처리되어 지연이 없게 됨
 * HTTP/2와 HTTP/3의 가장 큰 차이점은 HTTP/2 까지는 TCP위에서 동작하지만 3부터는 UDP위에서 동작한다는 것이다.
+
+</div>
+</details>
+
+
+<details>
+<summary><b>JWT란 ?</b></summary>
+<div markdown="1">
+
+* JWT란 ?
+~~~
+JWT (JSON Web Token)는 Json 포맷을 이용하여 사용자에 대한 속성을 저장하는 Claim 기반의 Web Token이다.
+가볍고(compact) 자체적으로 필요한 정보를 담는(self-contained) 방식으로, 
+서버와 클라이언트 사이에서 JSON 객체를 빠르고 안전하게 전달한다.
+~~~
+
+</div>
+</details>
+
+
+<details>
+<summary><b>REST, RESTful, REST API ?</b></summary>
+<div markdown="1">
+
+#### REST 란
+> Representational State Transfer
+~~~
+간단하게 설명하자면, REST는 URI를 통해 자원을 명시하고
+HTTP Method(POST, GET, PUT, DELETE)를 통해 해당 자원에 대한 CRUD Operation을 적용하는 것을 의미한다.
+~~~
+* 클라이언트와 서버의 통신 방식
+* URI와 HTTP를 이용한, 통신 목적의 **아키텍처 스타일**(유형)
+* 아키텍처 제작시 사용되는 가이드 정도의 의미로 사용되며 명확히 준수해야할 표준은 없다.
+
+<br>
+
+#### REST의 특징 (6가지 조건)
+1. 일관된 인터페이스(Uniform interface)
+    * URI 사용, HTTP 메소드 사용, RPC미호출 등의 **지정된 인터페이스**를 준수한다.
+
+2. 클라이언트/서버 구조
+    * 클라이언트는 서버에 요청 메시지를 전송하고
+    * 서버는 요청에 대한 응답 메시지를 전송한다.
+
+3. 무상태(stateless) - `Cookie&Session파일 참고`
+    * 세션등 이전 상황(문맥) 없이도 통신할 수 있다.
+
+4. 캐시가능(Cacheable)
+    * 서버의 응답 메시지는 캐싱될 수 있다.
+
+5. 계층화된 시스템(Layered system)
+    * 계층별로 기능이 분리된다.
+    * Client는 REST API Server만 호출한다.
+    * 따라서 중간 계층의 기능(로드밸런싱, 서버증설, 인증 시스템 도입 등)이 변경되어도 통신에 영향이 없다.
+
+6. 주문형 코드(code on demand)
+    * 반드시 충족할 필요는 없는 조건이다.
+    * 손쉬운 데이터 처리를 위해 서버는 클라이언트에서 실행될 스크립트를 전송할 수 있다.
+
+
+<br>
+
+#### Rest API
+* REST 기반으로 서비스 API를 구현한것
+
+<br>
+
+#### RESTful
+* REST를 따르는 시스템을 RESTful하다 라고 함
+* REST API를 제공하는 웹 서비스를 RESTful하다고 할 수 있다.
 
 </div>
 </details>

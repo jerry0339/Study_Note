@@ -1,11 +1,28 @@
 # Spring 요약
 
+
+
+<details>
+<summary><b>Filter, Interceptor, AOP</b></summary>
+<div markdown="1">
+
+* [참고](https://baek-kim-dev.site/61)
+* Interceptor와 Filter는 Servlet 단위에서 실행된다. 반면 AOP는 메소드 앞에 Proxy패턴의 형태로 실행된다.
+* 실행순서를 보면 Filter가 가장 밖에 있고 그안에 Interceptor, 그안에 AOP가 있는 형태
+* ![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F1bEhb%2FbtqH8cRq0sY%2FdQVkF7pbrdOTVnILW7bmzK%2Fimg.png)
+
+
+</div>
+</details>
+
+
 <details>
 <summary><b>Lombok의 단점</b></summary>
 <div markdown="1">
 
 * 무분별하게 사용하면 많은 코드가 단축되기 때문에 오히려 가독성이 떨어진다.
 * 의도치 않은 값이 초기화될 수 있다.
+* 양방향 연관관계에서 `@ToString` 을 사용하면 무한 반복에 걸릴 수 있다.
 * Setter 같은 경우 무분별하게 열어두면 외부에서 필드값을 변경할 수 있는 수단이 될 수 있기 때문에 주의해서 사용해야 한다.
 
 </div>
@@ -55,7 +72,7 @@
 <summary><b>디스패처 서블릿(Dispatcher Servlet) 이란?</b></summary>
 <div markdown="1">
 
-* 디스패처 서블릿을 통해 요청을 처리할 컨트롤러를 찾아서 위임하고, 그 결과를 받아오는구나
+* 디스패처 서블릿을 통해 요청을 처리할 컨트롤러를 찾아서 위임하고, 그 결과를 받아옴
 
 </div>
 </details>
@@ -174,3 +191,4 @@ Member조회 N번, Delivery조회 N번으로 **1+N+N**번의 쿼리가 나가게
 </details>
 
 
+* self invocation ?
