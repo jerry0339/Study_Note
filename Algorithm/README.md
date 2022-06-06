@@ -39,6 +39,8 @@
 #### 3.String
 * manacher
 * Trie
+* KMP
+* Aho-Corasic
 
 #### 4.Math
 * 유클리드 호제법
@@ -93,5 +95,6 @@
 * 이진 Heap
 * Priority Queue
 * Union_find
+* Trie
 
 **************************************************************************
