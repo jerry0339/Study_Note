@@ -1,9 +1,21 @@
 
 <details>
+<summary><b>내가 생각하는 좋은 코드란?</b></summary>
+<div markdown="1">
+
+* 좋은 기능을 제공하는 코드 : 기능적으로 사용자가 만족할 수 있는 서비스를 제공할 수 있어야 함(ex 빠른 응답시간)
+* 좋은 구조적 품질을 가진 코드
+    * 아키텍처가 잘 설계되어
+    * 유지보수성, 재사용성, 확장성이 높은 코드
+
+</div>
+</details>
+
+
+<details>
 <summary><b>퍼사드 패턴이란 ?</b></summary>
 <div markdown="1">
 
-* 멘토님한테 질문했던거 언급
 * 퍼사드는 건물의 정면을 의미한다. 디자인 패턴중 하나이다.
 * 퍼사드는 공통적인 작업에 대해 간편한 메소드들을 제공한다.
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/UML_DP_Fa%C3%A7ade.png/330px-UML_DP_Fa%C3%A7ade.png)
@@ -22,27 +34,6 @@
     * 가독성을 높일 수 있음
     * 불변성을 확보할 수 있음
 * 단점 으로는 파라미터가 늘어날수록 코드를 읽기가 힘들다는 점에서 오히려 가독성이 떨어질 수 있다.
-
-</div>
-</details>
-
-
-<details>
-<summary><b>서버 사이드 렌더링 vs 클라이언트 사이드 렌더링</b></summary>
-<div markdown="1">
-
-1. 서버 사이드 렌더링
-    * 설명: 서버에서 완전한 HTML을 만들어서 내려줍니다. 대표적으로 jsp, thymeleaf, velocity, freemarker가 있습니다.
-    * 장점: 단순하고, 학습 곡선이 낮습니다. 백엔드 개발자도 쉽게 개발할 수 있습니다.
-    * 단점: 동적이면서 복잡한 화면을 만들기 어렵습니다.
-
-<br>
-
-2. 클라이언트 사이드 렌더링
-    * 설명: 서버는 API만 제공하고, 프레임워크가 템플릿과 서버 API 응답 결과를 조합해서 HTML 화면을 동적으로 만듭니다. 
-    * 대표적으로 react, vue.js, angularJS 등이 있습니다.
-    * 장점 : 동적이고, 복잡한 화면을 만들기 좋습니다.
-    * 단점 : 공부할 분량이 매우 많습니다. 자바스크립트에 능숙해야 합니다. 웹 프론트엔드 개발자라는 전문 분야가 있습니다.
 
 </div>
 </details>
@@ -85,15 +76,5 @@ TDD를 왜 해야할까
 </div>
 </details>
 
-
-<details>
-<summary><b>POJO란 ?</b></summary>
-<div markdown="1">
-
-* POJO(Plain Old Java Object) 란?
-* 객체지향적인 원리에 충실하면서, 환경과 기술에 종속되지 않고 필요에 따라 재활용될 수 있는 방식으로 설계된 오브젝트
-
-</div>
-</details>
 
 

@@ -1,13 +1,5 @@
 # Network 요약
 
-<details>
-<summary><b>제목</b></summary>
-<div markdown="1">
-
-* 내용
-
-</div>
-</details>
 
 <details>
 <summary><b>OSI 7 계층</b></summary>
@@ -223,7 +215,7 @@ IP를 통해 패킷을 전달할 수 있음
 
 
 <details>
-<summary><b>웹 브라우저 요청 흐름</b></summary>
+<summary><b>웹 브라우저 요청 흐름 (HTTP 동작 방식)</b></summary>
 <div markdown="1">
 
 * `https://www.google.com:443/search?q=hello&hl=ko` 와 같은 요청이 오면 어떤 과정을 거치게 될까?
@@ -231,8 +223,8 @@ IP를 통해 패킷을 전달할 수 있음
 <br>
 
 1. 웹 브라우저가 DNS서버에서 IP를 조회한다.
-2. scheme가 https이므로 443포트가 생략되어 있음
-3. HTTP요청 메시지를 생성함
+2. HTTP요청 메시지를 생성함
+3. scheme가 https이므로 443포트가 생략되어 있음 -> SSL(TLS) 프로토콜 수행
 4. 조회한 IP와 포트의 위치로 Socket 라이브러리를 통해 HTTP메시지를 전달
 5. 전달할 때에는 3way handshake로 TCP/IP연결
 6. HTTP메시지를 포함한 TCP/IP 패킷을 생성하여 전달
@@ -248,8 +240,9 @@ IP를 통해 패킷을 전달할 수 있음
 <summary><b>HTTP 특징: 비연결성과 무상태</b></summary>
 <div markdown="1">
 
+* HTTP는 TCP 위에서 동작하는 프로토콜 -> 연결을 해야함
 * HTTP는 비연결성(Connectionless) 프로토콜이다.
-    * 클라이언트가 서버에 요청을 하고 응답을 받으면 바로 TCP/IP 연결을 끊어 연결을 유지 하지 않는 것
+    * 클라이언트가 서버에 요청을 하고 응답을 받으면 바로 TCP/IP 연결을 끊어 **연결을 유지 하지 않는 것**
     * 이를 통해 서버의 자원을 효율적으로 관리하고, 수 많은 클라이언트의 요청에도 대응할 수 있게 함
 * HTTP는 무상태(Stateless) 프로토콜이다.
     * 서버가 클라이언트의 이전 상태를 보존하지 않는다는 의미
@@ -385,6 +378,67 @@ HTTP Method(POST, GET, PUT, DELETE)를 통해 해당 자원에 대한 CRUD Opera
 #### RESTful
 * REST를 따르는 시스템을 RESTful하다 라고 함
 * REST API를 제공하는 웹 서비스를 RESTful하다고 할 수 있다.
+
+</div>
+</details>
+
+
+<details>
+<summary><b>Web Server와 WAS 차이점</b></summary>
+<div markdown="1">
+
+* [참고](https://gmlwjd9405.github.io/2018/10/27/webserver-vs-was.html)
+* Web Server 란
+    * 클라이언트(웹 브라우저=사용자)로부터 HTTP 요청을 받아 **정적인 컨텐츠**(.html .jpeg .css 등)를 제공하는 서버
+    * 클라이언트의 동적 컨텐츠 요청을 WAS(Web Application Server)에 보내고 그 결과를 전달하는 역할도 함
+    * 대표적인 웹 서버로 **Apache**, **Nginx**가 있음
+* WAS(Web Application Server)란
+    * DB 조회나 다양한 로직 처리를 요구하는 동적인 컨텐츠를 제공하기 위해 만들어진 Application Server
+    * WAS는 `Web Server` + `Web Container`로 이루어져 있음
+    * 웹 컨테이너(Web Container)란 JSP, Servlet을 실행시킬 수 있는 소프트웨어를 말한다.
+    * 대표적인 WAS로는 **Tomcat**이 있다.
+* 정적/동적 컨텐츠를 분리하여 제공하는 이유
+    * Web Server만 이용하려면 사용자가 원하는 요청에 대한 결과값을 모두 미리 만들어 놓고 제공해야 하는데 불가능함
+    * WAS가 Web Server의 역할과 기능을 모두 수행하면 되지 않음 ?
+        1. 기능을 분리하여 서버 부하 방지
+        2. 물리적으로 분리하여 보안 강화 : Web Server를 이용하여 SSL에 대한 암복호화 처리
+        3. 여러대의 WAS를 연결 가능함으로써 얻는 이득
+            * Load Balancing (부하 분산)
+            * 무중단 운영을 위한 장애 극복에 대응가능 (failover, failback)
+    * 즉, 자원 이용의 효율성 및 장애 극복, 배포 및 유지보수의 편의성 을 위해 Web Server와 WAS를 분리
+
+![](https://gmlwjd9405.github.io/images/web/web-service-architecture.png)
+
+</div>
+</details>
+
+
+<details>
+<summary><b>서버 사이드 렌더링 vs 클라이언트 사이드 렌더링</b></summary>
+<div markdown="1">
+
+1. 서버 사이드 렌더링
+    * 설명: 서버에서 완전한 HTML을 만들어서 내려줍니다. 대표적으로 jsp, thymeleaf, velocity, freemarker가 있습니다.
+    * 장점: 단순하고, 학습 곡선이 낮습니다. 백엔드 개발자도 쉽게 개발할 수 있습니다.
+    * 단점: 동적이면서 복잡한 화면을 만들기 어렵습니다.
+
+<br>
+
+2. 클라이언트 사이드 렌더링
+    * 설명: 서버는 API만 제공하고, 프레임워크가 템플릿과 서버 API 응답 결과를 조합해서 HTML 화면을 동적으로 만듭니다. 
+    * 대표적으로 react, vue.js, angularJS 등이 있습니다.
+    * 장점 : 동적이고, 복잡한 화면을 만들기 좋습니다.
+    * 단점 : 공부할 분량이 매우 많습니다. 자바스크립트에 능숙해야 합니다. 웹 프론트엔드 개발자라는 전문 분야가 있습니다.
+
+</div>
+</details>
+
+
+<details>
+<summary><b>제목</b></summary>
+<div markdown="1">
+
+* 내용
 
 </div>
 </details>

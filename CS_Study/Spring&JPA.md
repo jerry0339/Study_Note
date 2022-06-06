@@ -1,12 +1,83 @@
 # Spring 요약
 
 
+<details>
+<summary><b>Spring Framework의 특징</b></summary>
+<div markdown="1">
+
+* [출처](https://zzdd1558.tistory.com/172)
+~~~
+IoC, DI 등 스프링의 특징이 개발자가 전체적으로 신경써야할 부분에 대해서 스트레스를 줄여줌
+비지니스 로직에 집중할 수 있기 때문에 생산성 향상됨
+~~~
+
+* 경량 컨테이너로서 자바 객체를 직접 관리한다. 
+    * 각각의 객체 생성, 소멸과 같은 라이프 사이클을 관리하며 언제든 스프링으로부터 필요한 객체를 얻어올 수 있다.
+* 제어 반전(IoC : Inversion of Control)을 지원한다. 
+    * 컨트롤의 제어권이 사용자가 아니라 프레임워크에 있어서 필요에 따라 스프링에서 사용자의 코드를 호출
+    * 객체들 간의 느슨한 결합을 유지할 수 있다.
+* 의존성 주입(DI : Dependency Injection)을 지원
+    * 각각의 계층이나 서비스들 간에 의존성이 존재할 경우 프레임워크가 알아서 주입해준다.
+    * 클래스 내부에서 의존관계 있는 다른 구현체들을 호출하는것이 아니라 외부에서 즉, Spring 컨테이너가 설정정보를 통해 주입을 해 줌
+* 관점 지향 프로그래밍(AOP : Aspect-Oriented Programming)을 지원
+    * 트랜잭션이나 로깅, 보안과 같이 여러 모듈에서 공통적으로 사용하는 기능의 경우 해당 기능을 분리하여 관리할 수 있다.
+* POJO(Plain Old Java Object) 방식의 프레임워크
+    * 별도의 API를 사용하지 않는 setter, getter 메서드로 이루어진 단순한 자바 오브젝트
+    * 순수한 자바 오브젝트이기 때문에 환경과 기술에 종속되지 않음
+* 확장성이 높다. 
+    * 필요시 다양한 라이브러리를 스프링에서 이용할 수 있다.
+
+</div>
+</details>
+
+
+<details>
+<summary><b>Spring Boot 장점, 특징</b></summary>
+<div markdown="1">
+
+* 자주 사용되는 라이브러리들의 버전 관리 자동화
+    * maven이나 gradle 등과 같은 빌드 도구에 버전을 명시하지 않아도 적합한 라이브러리 버전을 찾아서 가져와 줌
+* AutoConfig로 복잡한 설정 자동화
+    * 
+* 내장 웹서버 제공
+* 실행 가능한 JAR로 개발 가능
+
+</div>
+</details>
+
+
+<details>
+<summary><b>Spring Framework와 Spring Boot의 차이점</b></summary>
+<div markdown="1">
+
+* Spring Boot에는 Tomcat이 내장(**Embedded Tomcat**)되어 있어 애플리케이션을 바로 실행할 수 있다.
+    * build된 스프링부트 애플리케이션 jar또는 war 파일을 java 명령어로 바로 실행가능
+    * 반면, Spring은 **외장 Tomcat**을 설치하고 실행환경을 구축해 주어야 한다.
+* 
+
+
+</div>
+</details>
+
+
+<details>
+<summary><b>JUnit5 ?</b></summary>
+<div markdown="1">
+
+* Java 8 부터 지원한다.
+    * assertion method와 lamda를 함께 사용할 수 있다.
+* Spring Boot 2.2 이후부터 기본으로 제공
+* 이전 버전으로 작성된 테스트 코드여도 컴파일이 정상적으로 지원된다.
+
+</div>
+</details>
+
 
 <details>
 <summary><b>Filter, Interceptor, AOP</b></summary>
 <div markdown="1">
 
-* [참고](https://baek-kim-dev.site/61)
+* [출처](https://baek-kim-dev.site/61)
 * Interceptor와 Filter는 Servlet 단위에서 실행된다. 반면 AOP는 메소드 앞에 Proxy패턴의 형태로 실행된다.
 * 실행순서를 보면 Filter가 가장 밖에 있고 그안에 Interceptor, 그안에 AOP가 있는 형태
 * ![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F1bEhb%2FbtqH8cRq0sY%2FdQVkF7pbrdOTVnILW7bmzK%2Fimg.png)

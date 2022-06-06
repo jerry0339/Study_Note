@@ -484,11 +484,80 @@ BCNF 정규형은 3.5 정규형이라고도 하며 아래와 같은 필요조건
 
 
 <details>
+<summary><b>DML, DDL, DCL 차이점</b></summary>
+<div markdown="1">
+
+* [참고](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=potter777777&logNo=220740559802)
+* DDL (Data Define Language)
+    * 스키마/도메인/테이블/뷰/인덱스를 정의/변경/제거할 때 사용하는 언어이다.
+    * 테이블을 생성하고, 테이블 내용을 변경하고, 테이블을 없애버리는 것.
+    * 흔히 **CREATE, ALTER, DROP, TRUNCATE** 을 떠올리면 된다.
+
+* DML (Data Manipulation Language)
+    * Query(질의)를 통해서 저장된 데이터를 실질적으로 관리하는 데 사용한다.
+    * 테이블 안의 데이터 하나하나를 추가하고 삭제하고 수정하는 것.
+    * 흔히 **INSERT, SELECT, DELETE, UPDATE** 를 떠올리면 된다.
+
+* DCL (Data Control Language)
+    * 보안/무결성/회복/병행 제어 등을 정의하는데 사용한다. 데이터 관리 목적.
+    * 흔히 COMMIT, ROLLBACK, GRANT, REVOKE 를 떠올리면 된다.
+        - **COMMIT** : Transaction의 변경 내용을 최종 반영한다고 재판 결정하는 것.
+        - **ROLLBACK** : Transaction의 변경 내용을 모두 취소하고 이전 상태로 되돌리는 것.
+        (Transaction은 정상적으로 종료되면 COMMIT을 비정상적으로 종료되면 ROLLBACK 수행. )
+
+</div>
+</details>
+
+
+<details>
+<summary><b>DELETE, TRUNCATE, DROP의 차이</b></summary>
+<div markdown="1">
+
+* [참고](https://prinha.tistory.com/entry/SQL-DELETE-TRUNCATE-DROP-%EC%B0%A8%EC%9D%B4%EC%A0%90)
+* DELETE
+    - WHERE절을 사용하여 테이블에 있는 하나의 튜플을 선택하여 제거하는 방식
+    - WHERE절을 사용하지않고 테이블의 모든 데이터를 삭제하더라도, 내부적으로는 한줄 한줄 일일히 제거하는 과정을 거침
+    - 처리속도가 늦고, 퍼포먼스에 좋지않은 영향을 줄 수 있음
+    - DELETE된 데이터는 COMMIT 명령어를 사용하기 전이라면, ROLLBACK 명령어를 통해 되돌릴 수 있음
+* TRUNCATE
+    - 전체 데이터를 한번에 삭제하는 방식, 인덱스도 제거 ( <-> DELETE)
+    - 최초 생성되었을 당시의 Storage만 남기고, 데이터가 남겨있던 Storage는 Release 된다.
+    - TRUNCATE TABLE을 하면 CREATE TABLE을 한 직후의 상태와 같다.
+    - 자동 COMMIT이 되는 명령어이기 때문에, 이미 지운 데이터는 되돌릴 수 없다.
+* DROP
+    - 테이블 자체를 완전히 날려버리는 방식 -> 처음부터 없었던 테이블처럼
+    - 테이블 자체가 모두 지워지며, 해당 테이블에 생성되어있던 모든 인덱스도 사라진다.
+    - 자동 COMMIT이 되는 명령어이기 때문에, 이미 지운 데이터는 되돌릴 수 없다.
+
+</div>
+</details>
+
+
+<details>
+<summary><b>JOIN의 종류</b></summary>
+<div markdown="1">
+
+1. Inner Join : 두 테이블의 중복된 키와 관련된 값만 가져옴
+2. Left join : 왼쪽 테이블의 키 값을 기준으로 관련된 값을 가져옴
+3. Left join - Difference Set : 2번에서 오른쪽 테이블의 키가 null인 튜플을 제외 하여 왼쪽 테이블과 관련된 튜플만 가져옴
+4. RIGHT JOIN - Difference Set : 3번과 같은 원리
+5. RIGHT JOIN : 2번과 같은 원리
+6. Full Outer join : 왼쪽, 오른쪽 테이블의 키와 관련된 모든 값을 가져옴
+    * Mysql에서는 FULL OUTER JOIN을 지원하지 않아서 UNION을 사용해야 함
+7. Full Outer join-minus inner join : 합집합 - 교집합
+
+</div>
+</details>
+
+
+<details>
 <summary><b>Transaction 이란?</b></summary>
 <div markdown="1">
 
-* 트랜잭션(Transaction)은 데이터베이스의 상태를 변환시키는 **하나의 논리적 기능을 수행하기 위한 작업의 단위** 또는 **한꺼번에 모두 수행되어야 할 일련의 연산들**을 의미한다.
-
+* 트랜잭션(Transaction)은 데이터베이스의 상태를 변환시키는 **하나의 논리적 기능을 수행하기 위한 작업의 단위** 
+* **한꺼번에 모두 수행되어야 할 일련의 연산들**을 의미한다.
+* 하나의 트랜잭션은 COMMIT 되거나 ROLLBACK 되어야 한다.
+* 하나의 Transaction은 정상적으로 종료되면 COMMIT을, 비정상적으로 종료되면 ROLLBACK을 수행
 
 </div>
 </details>
@@ -654,3 +723,4 @@ BCNF 정규형은 3.5 정규형이라고도 하며 아래와 같은 필요조건
 
 </div>
 </details>
+

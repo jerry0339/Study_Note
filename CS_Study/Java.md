@@ -18,6 +18,16 @@
 <div markdown="1">
 
 * 둘다 LTS 버전임
+* Java 8
+    * Metaspace란 ?
+        * JDK 8부터 Heap영역의 Permanent Generation 영역이 제거되었다.
+        * 대신 Native Memory 영역에 Metaspace 영역이 추가되었다.
+        * Perm은 JVM에 의해 크기가 강제되던 영역이다.
+        * Metaspace는 Native memory 영역으로, OS가 자동으로 크기를 조절한다.
+        * 옵션으로 Metaspace의 크기를 줄일 수도 있다.
+        * 그 결과 기존과 비교해 큰 메모리 영역을 사용할 수 있게 되었다.
+        * Perm 영역 크기로 인한 java.lang.OutOfMemoryError(`OOM`)은 더이상 마주칠 일이 없어짐
+
 * Java 11
     * String 관련 문자열이 좀 더 추가됨
     * 람다식의 파라미터에 var 변수를 사용할 수 있음 -> var 변수에 어노테이션을 붙일 수 있음
@@ -98,9 +108,17 @@ public static void main(String[] args) {
 <summary><b>(Volatile , Synchronized) 키워드</b></summary>
 <div markdown="1">
 
+* Java의 synchronized 키워드는 Thread 사이의 동기화 문제를 해결해주는 기법중 하나
+* synchronized 키워드는 각 일반 Instance안에 존재하는 Monitor를 이용하여 Thread 사이의 동기화를 수행
+* synchronized는 특정 Thead가 해당 블럭 전체를 lock하기 때문에 자원 낭비가 심함
+* NonBlocking하면서 동기화 문제를 해결하기 위한 방법으로 Atomic이 있음.
+
+<br>
+
+* 멀티쓰레드환경, 멀티코어 환경에서는 각 CPU는 메인 메모리에서 변수값을 참조하는게 아니라 각 CPU의 캐시 영역에서 메모리를 참조
 * volatile keyword는 Java 변수를 Main Memory에 저장하겠다라는 것을 명시하는 것
 * 매번 변수의 값을 Read, Write할 때마다 CPU cache가 아닌 Main Memory에서 읽거나 작성하는것
-* Multi Thread환경에서 Thread가 변수 값을 읽어올 때 각각의 CPU Cache에 저장된 값이 다르기 때문에 변수 값 불일치 문제가 발생
+* Multi Thread환경에서 Thread가 변수 값을 읽어올 때 각각의 CPU Cache에 저장된 값이 다르기 때문에 변수 값 불일치 문제가 발생하기 때문
     ![](https://nesoy.github.io/assets/posts/20180609/2.png)
 * volatile 키워드를 추가하게 되면 Main Memory에 저장하고 읽어오기 때문에 변수 값 불일치 문제를 해결할 수 있음
     ~~~java
@@ -113,8 +131,19 @@ public static void main(String[] args) {
 
 <br>
 
-* Java의 synchronized 키워드는 Thread 사이의 동기화 문제를 해결해주는 기법중 하나
-* synchronized 키워드는 각 일반 Instance안에 존재하는 Monitor를 이용하여 Thread 사이의 동기화를 수행
+* NonBlocking하면서 동기화 문제를 해결하기 위한 방법이 Atomic.
+* Atomic의 동작 핵심원리는 바로 CAS알고리즘
+* Volatile 에서 설명했듯이, 메인메모리에 저장된 값과 CPU캐시에 저장된 값이 다른 경우가 있을 수 있음 (가시성문제)
+* 이럴때 사용하는 것이 **CAS알고리즘**임
+    * 현재 쓰레드에 저장된 값과 메인메모리에 저장된 값을 비교
+    * 일치하는경우 새로운 값으로 교체되고 , 일치하지않는다면 실패하고 재시도
+
+<br>
+
+* Volatile 키워드가 있는데 Atomic 키워드를 사용하는 이유 ?
+    * volatile 키워드는 오직 한개의 쓰레드에서 쓰기작업을할때, 그리고 다른 쓰레드는 읽기작업만을 할때 안정성을 보장
+    * 하지만 AtomicInteger는 여러 쓰레드에서 읽기/쓰기작업을 병행할 수 있음.
+    * 그래서 CAS 알고리즘을 사용하여 2중 안전을 기하는 방법을 사용하는 것임
 
 </div>
 </details>
@@ -177,55 +206,61 @@ CPU가 이해할 수 있는 언어(저수준 언어 : 기계어)로 번역(변�
 * 자바 프로그램이 어느 기기, 어느 운영체제 상에서도 실행될 수 있게 만들어 주는것임 => WORA(Write once run anyway)
 * 자바 프로그램의 메모리를 효율적으로 관리&최적화 해줌
 
-</div>
-</details>
-
-
-<details>
-<summary><b>JVM 메모리 구조 </b></summary>
-<div markdown="1">
-
-* JVM의 구조는 크게 보면, Garbage Collector, Execution Engine, Class Loader, Runtime Data Area로, 4가지로 나눌 수 있다.
-    ![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FpjywN%2FbtqSduBXLIK%2F2QEL5c2nEJXRm0cyhvwxF1%2Fimg.png)
-
-1. Class Loader
-~~~
-JVM 내로 클래스 파일을 로드하고, 링크를 통해 배치하는 작업을 수행하는 모듈
-런타임 시에 동적으로 클래스를 로드합니다.
-~~~
-
-2. Execution Engine
-~~~
-클래스 로더를 통해 JVM 내의 Runtime Data Area에 배치된 바이트 코드들을 명렁어 단위로 읽어서 실행합니다. 
-최초 JVM이 나왔을 당시에는 인터프리터 방식이었기때문에 속도가 느리다는 단점이 있었지만 
-JIT 컴파일러 방식을 통해 이 점을 보완하였습니다. 
-JIT는 바이트 코드를 어셈블러 같은 네이티브 코드로 바꿈으로써 실행이 빠르지만 역시 변환하는데 비용이 발생하였습니다. 
-이 같은 이유로 JVM은 모든 코드를 JIT 컴파일러 방식으로 실행하지 않고, 
-인터프리터 방식을 사용하다가 일정한 기준이 넘어가면 JIT 컴파일러 방식으로 실행합니다.
-~~~
- 
-3. Garbage Collector
-~~~
-Garbage Collector(GC)는 힙 메모리 영역에 생성된 객체들 중에서 참조되지 않은 객체들을 탐색 후 제거하는 역할을 합니다. 
-이때, GC가 역할을 하는 시간은 언제인지 정확히 알 수 없습니다.
-~~~
-
-4. Runtime Data Area
-~~~
-JVM의 메모리 영역으로 자바 애플리케이션을 실행할 때 사용되는 데이터들을 적재하는 영역입니다. 
-이 영역은 크게 Method Area, Heap Area, Stack Area, PC Register, Native Method Stack로 나눌 수 있습니다.
-~~~
+* 메타 데이터란? 
+    * 클래스의 이름, 생성자 정보, 필드 정보, 메소드 정보, bytecode, exception table, Annotation 등
+    * JVM이 해당 class에 대해서 알아야 하는 모든 정보
+* Runtime Constant Pool 영역이란 ?
+    * 클래스/인터페이스의 메소드, 필드, 문자열 상수등의 레퍼런스(가상주소) 가 저장됨
+    * 이들의 물리적인 메모리 위치를 참조할 경우에 사용
 
 </div>
 </details>
 
 
 <details>
-<summary><b>JVM의 Runtime Data Area</b></summary>
+<summary><b>JVM 메모리 구조 (Java7, Java8 비교) </b></summary>
 <div markdown="1">
 
-### Runtime Data Area
-![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkOOdl%2FbtqR1E0kWdB%2F7El4pzDEIvx0UGXLVanKjK%2Fimg.png)
+* 전체적인 JVM 메모리 구조와 동작방식에 대한 그림
+    ![](https://velog.velcdn.com/images/hosunghan0821/post/aea3b9ab-e226-4744-833d-da1f41b2dbf2/image.png)
+
+* JVM의 Runtime Data Area 메모리 구조(`Java 7`)
+    * Java 7에서의 Runtime Data Area는 크게 **Heap, PermGen, Native Memory** 3가지 영역이 존재한다.
+    * **PermGen(Permanent Generation)영역**은 위 그림의 **Method 영역**에 해당한다.
+    * 위 그림의 Stack, PC Resister, Native Method Stack 영역은 **Native Memory 영역** 해당한다.
+    * 위의 내용(Java 7)에 대한 자세한 메모리 구조는 아래의 그림에서 확인할 수 있다.
+    ![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FIg9mc%2FbtrAxkQGskP%2FbRhmyeWLZAfqo25b17QRC1%2Fimg.png)
+
+* Java 8 부터는 PermGen영역이 Metaspace로 완전히 대체되었다.
+    * Java 8 부터는 Java 7의 PermGen(Method 영역)이 Metaspace로 대체되었으며 Native Memory영역에 속한다.
+    * PermGen 영역은 JVM에 의해 크기가 강제되던 영역이다.
+    * PermGen 영역 크기로 인해 java.lang.OutOfMemoryError(`OOM`)가 발생한다는 단점이 있었음
+    * Java8부터는 PermGen의 메모리 할당방식을 바꾸어 Metaspace이라는 영역으로 대체했다. 
+    * Metaspace는 Native memory 영역으로, OS가 자동으로 크기를 조절하여 공간을 확보한다.
+    * 따라서 OOM 발생확률을 줄일 수 있었다. Java 8에서 바뀐 Memory 구조는 아래와 같다.
+    ![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcQbwRJ%2FbtrAzvcY2AP%2FAruhfLyp48u0JktHxhUnzK%2Fimg.png)
+
+* Java7, Java8 의 간단한 JVM 메모리 구조
+    * C Heap = Native Stack(=Native Method Stack)
+    * Thread Stack = Stack 영역
+    * Java 7의 JVM
+    ![](https://becomeweasel.me/static/51f2865401bf42f831eebc6e076cd1cf/6c2f2/jvm7.png)
+    * Java 8의 JVM
+    ![](https://becomeweasel.me/static/bb5245914008655bff34d9e7e26c4ef6/c8e86/jvm8.png)
+
+</div>
+</details>
+
+
+<details>
+<summary><b>JVM의 Runtime Data Area 자세한 설명</b></summary>
+<div markdown="1">
+
+* Java7의 JVM 구조
+    ![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FIg9mc%2FbtrAxkQGskP%2FbRhmyeWLZAfqo25b17QRC1%2Fimg.png)
+
+* Java8의 JVM 구조
+    ![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcQbwRJ%2FbtrAzvcY2AP%2FAruhfLyp48u0JktHxhUnzK%2Fimg.png)
 
 1. Method area
 ~~~
@@ -319,6 +354,17 @@ Garbage Collector가 참조되지 않는 메모리를 확인하고 제거하는 
 </details>
 
 
+<details>
+<summary><b>POJO란 ?</b></summary>
+<div markdown="1">
+
+* POJO(Plain Old Java Object) 란?
+* 객체지향적인 원리에 충실하면서, 환경과 기술에 종속되지 않고 필요에 따라 재활용될 수 있는 방식으로 설계된 오브젝트
+
+</div>
+</details>
+
+
 ### static
 * 메소드 영역에 저장된다.
 * 프로그램의 시작과 동시에 할당되고 프로그램이 종료되어야 메모리에서 소멸된다.
@@ -350,5 +396,3 @@ Garbage Collector가 참조되지 않는 메모리를 확인하고 제거하는 
 * 람다식, 익명 클래스, 익명 메소드, 함수형 인터페이스, 메소드 레퍼런스?
 * 자바에서 제공하는 함수형 인터페이스?
 * Lambda Capturing?
-
-
