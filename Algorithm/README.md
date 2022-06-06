@@ -39,6 +39,8 @@
 #### 3.String
 * manacher
 * Trie
+* KMP
+* Aho-Corasic
 
 #### 4.Math
 * 유클리드 호제법
