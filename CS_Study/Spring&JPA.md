@@ -32,29 +32,16 @@ IoC, DI 등 스프링의 특징이 개발자가 전체적으로 신경써야할 
 
 
 <details>
-<summary><b>Spring Boot 장점, 특징</b></summary>
+<summary><b>Spring Boot 장점, 특징, Spring과 차이점</b></summary>
 <div markdown="1">
 
-* 자주 사용되는 라이브러리들의 버전 관리 자동화
+* 라이브러리들의 버전 관리 자동화
     * maven이나 gradle 등과 같은 빌드 도구에 버전을 명시하지 않아도 적합한 라이브러리 버전을 찾아서 가져와 줌
-* AutoConfig로 복잡한 설정 자동화
-    * 
-* 내장 웹서버 제공
-* 실행 가능한 JAR로 개발 가능
-
-</div>
-</details>
-
-
-<details>
-<summary><b>Spring Framework와 Spring Boot의 차이점</b></summary>
-<div markdown="1">
-
+* 설정의 자동화
+    * 개발에 필요한 라이브러리들을 추가하면 스프링 부트가 이 라이브러리들을 인지해서 관련된 스프링 설정을 자동으로 처리
 * Spring Boot에는 Tomcat이 내장(**Embedded Tomcat**)되어 있어 애플리케이션을 바로 실행할 수 있다.
-    * build된 스프링부트 애플리케이션 jar또는 war 파일을 java 명령어로 바로 실행가능
+    * 애플리케이션 빌드후 패키징된 jar또는 war 파일을 java 명령어로 독립적으로, 바로 실행가능
     * 반면, Spring은 **외장 Tomcat**을 설치하고 실행환경을 구축해 주어야 한다.
-* 
-
 
 </div>
 </details>
@@ -140,10 +127,20 @@ IoC, DI 등 스프링의 특징이 개발자가 전체적으로 신경써야할 
 
 
 <details>
-<summary><b>디스패처 서블릿(Dispatcher Servlet) 이란?</b></summary>
+<summary><b>서블릿 ?, 디스패처 서블릿(Dispatcher Servlet) 이란?</b></summary>
 <div markdown="1">
 
-* 디스패처 서블릿을 통해 요청을 처리할 컨트롤러를 찾아서 위임하고, 그 결과를 받아옴
+* 서블릿(Servlet)은 웹 기반의 요청에 대해 동적으로 처리해주는 역할을 하며 Servlet Container에서 동작함
+* 디스패처 서블릿(Dispatcher Servlet)은 제일 앞에서 서버로 들어오는 모든 요청을 처리하는 Front Controller임(=Front Controller 패턴)
+
+<br>
+
+* 기존에는 Servlet을 통해 URL 매핑을 활용해 web.xml에 모두 등록해야 했음(또는 `@SpringBootApplication` 어노테이션 사용)
+* 디스패처 서블릿이 생기고 어플리케이션으로 들어오는 모든 요청을 핸들링 할 수 있게 됨
+* 즉, Controller로 향하는 모든 웹 요청의 진입점으로써 요청을 처리하고 결과를 클라이언트에게 응답해 주는 역할을 함
+* 디스패처 서블릿을 이용한다는 것은 Spring MVC를 이용하겠다는 뜻임
+
+![](https://taes-k.github.io/images//posts/2020-02-16-servlet-container-spring-container/6.png)
 
 </div>
 </details>

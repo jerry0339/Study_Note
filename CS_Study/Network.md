@@ -274,6 +274,42 @@ IP를 통해 패킷을 전달할 수 있음
 
 
 <details>
+<summary><b>HTTP 상태코드 (Status Code)</b></summary>
+<div markdown="1">
+
+
+* **HTTP 상태코드**는 클라이언트가 보낸 요청의 처리 상태를 응답에서 알려주는 기능
+* 1xx (Informational): 요청이 수신되어 처리중
+    * 거의 사용 안함
+* 2xx (Successful): 요청 정상 처리
+    * 200 : OK - 요청 성공
+    * 201 : Created - 요청 성공해서 새로운 리소스가 생성됨
+    * 202 : Accepted - 요청이 접수되었으나 처리가 완료되지 않았음
+    * 204 : No Centent - 요청성공, 응답내용 없음
+* 3xx (Redirection): 요청을 완료하려면 추가 행동이 필요 (Location 헤더가 있으면, Location 위치로 자동 이동)
+    * 300 Multiple Choices
+    * 301 Moved Permanently
+    * 302 Found
+    * 303 See Other
+    * 304 Not Modified
+    * 307 Temporary Redirect
+    * 308 Permanent Redirect
+* 4xx (Client Error): 클라이언트 오류, 잘못된 문법등으로 서버가 요청을 수행할 수 없음
+    * 400 Bad Request - 클라이언트가 잘못된 요청을 해서 서버가 요청을 처리할 수 없음
+    * 401 Unauthorized - 클라이언트가 해당 리소스에 대한 인증이 필요
+    * 403 Forbidden - 서버가 요청을 이해했지만 승인을 거부
+    * 404 Not Found - 해당 리소스를 찾을 수 없음
+* 5xx (Server Error): 서버 오류, 서버가 정상 요청을 처리하지 못함
+    * 500 Internal Server Error - 애매하면 500오류 처리
+    * 502 Bad Gateway - 서버가 게이트웨이나 프록시 역할을 하고 있거나 또는 업스트림 서버에서 잘못된 응답을 받음
+    * 503 Service Unavailable - 서비스 이용 불가, 현재 웹 사이트의 서버를 사용할 수 없음
+    * 504 Gateway Time-out - 타임아웃 에러
+
+</div>
+</details>
+
+
+<details>
 <summary><b>HTTP 1.0, 1.1, 2.0, 3.0 차이점</b></summary>
 <div markdown="1">
 
@@ -352,7 +388,7 @@ HTTP Method(POST, GET, PUT, DELETE)를 통해 해당 자원에 대한 CRUD Opera
     * 클라이언트는 서버에 요청 메시지를 전송하고
     * 서버는 요청에 대한 응답 메시지를 전송한다.
 
-3. 무상태(stateless) - `Cookie&Session파일 참고`
+3. 무상태(stateless)
     * 세션등 이전 상황(문맥) 없이도 통신할 수 있다.
 
 4. 캐시가능(Cacheable)
@@ -414,6 +450,27 @@ HTTP Method(POST, GET, PUT, DELETE)를 통해 해당 자원에 대한 CRUD Opera
 
 
 <details>
+<summary><b>커넥션 풀(DBCP)이란?, 특징?</b></summary>
+<div markdown="1">
+
+* [참고](https://linked2ev.github.io/spring/2019/08/14/Spring-3-%EC%BB%A4%EB%84%A5%EC%85%98-%ED%92%80%EC%9D%B4%EB%9E%80/)
+* 커넥션 풀(DBCP : Database Connection Pool) 이란
+    * 웹 컨테이너(WAS)가 실행되면서 DB와 미리 connection(연결)을 해놓은 객체들을 pool에 저장해두었다가.
+    * 클라이언트 요청이 오면 connection을 빌려주고, 처리가 끝나면 다시 connection을 반납받아 pool에 저장하는 방식
+* 커넥션 풀 특징?
+    * 웹 컨테이너(WAS)가 실행되면서 connection 객체를 **미리 pool에 생성해 둠**
+    * HTTP 요청에 따라 pool에서 connection객체를 가져다 쓰고 반환
+    * 이와 같은 방식으로 물리적인 데이터베이스 **connection(연결) 부하를 줄일 수 있음**
+    * pool에 미리 connection이 생성되어 있기 때문에 connection을 생성하는 데 드는 요청 마다 **연결 시간이 소비되지 않음**
+    * 커넥션을 계속해서 재사용하기 때문에 생성되는 커넥션 수를 제한적으로 설정함
+
+![](https://linked2ev.github.io/assets/img/devlog/201908/cp-s1.png)
+
+</div>
+</details>
+
+
+<details>
 <summary><b>서버 사이드 렌더링 vs 클라이언트 사이드 렌더링</b></summary>
 <div markdown="1">
 
@@ -434,11 +491,3 @@ HTTP Method(POST, GET, PUT, DELETE)를 통해 해당 자원에 대한 CRUD Opera
 </details>
 
 
-<details>
-<summary><b>제목</b></summary>
-<div markdown="1">
-
-* 내용
-
-</div>
-</details>
