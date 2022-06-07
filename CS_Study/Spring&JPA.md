@@ -1,5 +1,16 @@
 # Spring 요약
 
+<details>
+<summary><b>프레임워크와 라이브러리의 차이점</b></summary>
+<div markdown="1">
+
+* 라이브러리와 프레임워크의 차이는 제어 흐름에 대한 주도성이 누구에게/어디에 있는가에 있음.
+* 즉, 어플리케이션의 Flow를 누가 쥐고 있느냐에 달려 있음
+* 개발자가 아닌 프레임워크가 어플리케이션의 흐름을 제어함(IoC)
+
+</div>
+</details>
+
 
 <details>
 <summary><b>Spring Framework의 특징</b></summary>
@@ -48,20 +59,27 @@ IoC, DI 등 스프링의 특징이 개발자가 전체적으로 신경써야할 
 
 
 <details>
-<summary><b>JUnit5 ?</b></summary>
+<summary><b>서블릿 ?, 디스패처 서블릿(Dispatcher Servlet) 이란?</b></summary>
 <div markdown="1">
 
-* Java 8 부터 지원한다.
-    * assertion method와 lamda를 함께 사용할 수 있다.
-* Spring Boot 2.2 이후부터 기본으로 제공
-* 이전 버전으로 작성된 테스트 코드여도 컴파일이 정상적으로 지원된다.
+* 서블릿(Servlet)은 웹 기반의 요청에 대해 동적으로 처리해주는 역할을 하며 Servlet Container에서 동작함
+* 디스패처 서블릿(Dispatcher Servlet)은 제일 앞에서 서버로 들어오는 모든 요청을 처리하는 Front Controller임(=Front Controller 패턴)
+
+<br>
+
+* 기존에는 Servlet을 통해 URL 매핑을 활용해 web.xml에 모두 등록해야 했음(또는 `@SpringBootApplication` 어노테이션 사용)
+* 디스패처 서블릿이 생기고 어플리케이션으로 들어오는 모든 요청을 핸들링 할 수 있게 됨
+* 즉, Controller로 향하는 모든 웹 요청의 진입점으로써 요청을 처리하고 결과를 클라이언트에게 응답해 주는 역할을 함
+* 디스패처 서블릿을 이용한다는 것은 Spring MVC를 이용하겠다는 뜻임
+
+![](https://taes-k.github.io/images//posts/2020-02-16-servlet-container-spring-container/6.png)
 
 </div>
 </details>
 
 
 <details>
-<summary><b>Filter, Interceptor, AOP</b></summary>
+<summary><b>Filter, Interceptor, AOP 실행순서</b></summary>
 <div markdown="1">
 
 * [출처](https://baek-kim-dev.site/61)
@@ -69,6 +87,48 @@ IoC, DI 등 스프링의 특징이 개발자가 전체적으로 신경써야할 
 * 실행순서를 보면 Filter가 가장 밖에 있고 그안에 Interceptor, 그안에 AOP가 있는 형태
 * ![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F1bEhb%2FbtqH8cRq0sY%2FdQVkF7pbrdOTVnILW7bmzK%2Fimg.png)
 
+
+</div>
+</details>
+
+
+<details>
+<summary><b>필터(Filter)와 인터셉터(Interceptor) 차이</b></summary>
+<div markdown="1">
+
+* [참고](https://mangkyu.tistory.com/173)
+* **필터**에서는 기본적으로 스프링과 무관하게 전역적으로 처리해야 하는 작업들을 처리할 수 있음
+    * 필터는 Web Container 안에서 동작
+* **인터셉터**에서는 클라이언트의 요청과 관련되어 전역적으로 처리해야 하는 작업들을 처리할 수 있음
+    * 인터셉터는 Spring Container 안에서 동작
+
+![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fcjsq60%2FbtrzjoZ0qcq%2FEDsLOVpZNcmFu6prkzALFk%2Fimg.png)
+
+</div>
+</details>
+
+
+<details>
+<summary><b>Spring AOP란?</b></summary>
+<div markdown="1">
+
+* Spring AOP는 Proxy를 기반으로 한 Runtime Weaving 방식이다
+* Spring AOP에서는 JDK Dynamic Proxy 와 CGlib 을 통해 Proxy화 한다
+    * JDK Dynamic Proxy는 Reflection을 기반으로 이루어지고
+    * CGlib 은 상속을 기반으로 이루어진다
+
+</div>
+</details>
+
+
+<details>
+<summary><b>JUnit5 ?</b></summary>
+<div markdown="1">
+
+* Java 8 부터 지원한다.
+    * assertion method와 lamda를 함께 사용할 수 있다.
+* Spring Boot 2.2 이후부터 기본으로 제공
+* 이전 버전으로 작성된 테스트 코드여도 컴파일이 정상적으로 지원된다.
 
 </div>
 </details>
@@ -125,37 +185,6 @@ IoC, DI 등 스프링의 특징이 개발자가 전체적으로 신경써야할 
 </details>
 
 
-
-<details>
-<summary><b>서블릿 ?, 디스패처 서블릿(Dispatcher Servlet) 이란?</b></summary>
-<div markdown="1">
-
-* 서블릿(Servlet)은 웹 기반의 요청에 대해 동적으로 처리해주는 역할을 하며 Servlet Container에서 동작함
-* 디스패처 서블릿(Dispatcher Servlet)은 제일 앞에서 서버로 들어오는 모든 요청을 처리하는 Front Controller임(=Front Controller 패턴)
-
-<br>
-
-* 기존에는 Servlet을 통해 URL 매핑을 활용해 web.xml에 모두 등록해야 했음(또는 `@SpringBootApplication` 어노테이션 사용)
-* 디스패처 서블릿이 생기고 어플리케이션으로 들어오는 모든 요청을 핸들링 할 수 있게 됨
-* 즉, Controller로 향하는 모든 웹 요청의 진입점으로써 요청을 처리하고 결과를 클라이언트에게 응답해 주는 역할을 함
-* 디스패처 서블릿을 이용한다는 것은 Spring MVC를 이용하겠다는 뜻임
-
-![](https://taes-k.github.io/images//posts/2020-02-16-servlet-container-spring-container/6.png)
-
-</div>
-</details>
-
-
-<details>
-<summary><b>Filter와 Interceptor</b></summary>
-<div markdown="1">
-
-* 
-
-</div>
-</details>
-
-
 <details>
 <summary><b>영속성 전이 Cascade</b></summary>
 <div markdown="1">
@@ -176,19 +205,6 @@ IoC, DI 등 스프링의 특징이 개발자가 전체적으로 신경써야할 
 1. 완전 개인 소유인 경우에 사용할 수 있다. (라이프 사이클 관련)
 2. DDD의 Aggregate Root와 어울린다.
 3. 애매하면 사용하지 않는다.
-
-</div>
-</details>
-
-
-<details>
-<summary><b>Spring AOP란?</b></summary>
-<div markdown="1">
-
-* Spring AOP는 Proxy를 기반으로 한 Runtime Weaving 방식이다
-* Spring AOP에서는 JDK Dynamic Proxy 와 CGlib 을 통해 Proxy화 한다
-    * JDK Dynamic Proxy는 Reflection을 기반으로 이루어지고
-    * CGlib 은 상속을 기반으로 이루어진다
 
 </div>
 </details>

@@ -310,6 +310,8 @@ Garbage Collector가 참조되지 않는 메모리를 확인하고 제거하는 
     * 대부분의 객체는 금방 접근 불가능 상태(unreachable)가 된다.
     * 오래된 객체에서 젊은 객체로의 참조는 아주 적게 존재한다.
 
+* 아직 정리 안됨 [참고](https://code-factory.tistory.com/48)
+
 </div>
 </details>
 
