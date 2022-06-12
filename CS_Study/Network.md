@@ -508,6 +508,70 @@ HTTP Method(POST, GET, PUT, DELETE)를 통해 해당 자원에 대한 CRUD Opera
 
 
 <details>
+<summary><b>CORS란 ?</b></summary>
+<div markdown="1">
+
+* CORS : 교차 출처 리소스 공유(Cross-origin resource sharing)는 웹브라우저 에서 다른 출처의 자원을 공유하는 방법임
+* **cross-origin** 이란 다음 중 한 가지라도 다른 경우임
+    * 도메인 - domain.com과 other-domain.com은 다름
+    * 포트 번호 - 8080포트와 3000포트는 다름
+    * 프로토콜 - http와 https는 프로토콜을 가짐(포트도 다름 80, 443)
+* **CORS 란** ?
+    * **웹브라우저** 에서 다른 출처의 자원을 공유하는 방법
+    * 브라우저에서는 보안적인 이유로 cross-origin HTTP 요청들을 제한
+    * cross-origin 요청에 대한 응답을 받으려면 서버의 동의가 필요함
+    * 이러한 구조를 CORS라고 함
+* **Preflight Request** 란?
+    * cross-origin요청은 모두 preflight 요청을 함
+    * **실제 요청을 보내는 것**이 **안전한지 확인**하기 위해 먼저 OPTIONS 메서드를 사용하여 cross-origin HTTP 요청을 보내는것
+    * Preflight Request를 하는 이유는 실제 요청은 사용자 데이터에 영향을 미칠 수 있는 요청이므로 사전에 확인하기 위해 사용
+* **CORS 동작방식**
+    1. 브라우저에서 http요청이 발생하면 **브라우저**는 발생한 http요청이 CORS검증을 해야하는 상황인지 판단
+    2. 보안 정책상 검증이 필요한 상황에 해당하면 CORS 검증을 서버에 요청한다. (Preflight Request)
+    3. 서버에게서 응답받은 CORS검증 요청 결과에 따라 브라우저는 발생했던 http요청을 취소시켜버리고 에러를 발생시킴
+* 즉, **CORS 에러**는 브라우저가 CORS검증을 서버에 요청하고 거부당할때, **브라우저**에서 발생하는 오류이다.
+* CORS문제 해결방법 [출처](https://yhmane.tistory.com/214)
+    * Spring Framework에서는 2가지 방법이 있음
+    1. `@Configuration` 이용 방법 (설정정보를 이용하는 방법)
+        ~~~java
+        @Configuration
+        public class CorsConfig implements WebMvcConfigurer {
+
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                    .allowedOrigins("http://127.0.0.1:8080")
+                    .allowedMethods(
+                        HttpMethod.GET.name,
+                        HttpMethod.POST.name,
+                        HttpMethod.PUT.name,
+                        HttpMethod.DELETE.name
+                    )
+            }
+        }
+        ~~~
+    2. `@CrossOrigin` 이용 방법 (Controller에 어노테이션을 붙여주는 방법)
+        ~~~java
+        @CrossOrigin("http://localhost:3000")
+        @RestController
+        @RequestMapping("/todo")
+        public class TestController {
+            
+            //@CrossOrigin("http://localhost:3000")
+            @GetMapping public String test() {
+                // test ..
+            }
+        }
+        ~~~
+
+
+
+</div>
+</details>
+
+
+
+<details>
 <summary><b>서버 사이드 렌더링 vs 클라이언트 사이드 렌더링</b></summary>
 <div markdown="1">
 

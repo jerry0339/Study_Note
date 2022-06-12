@@ -274,5 +274,6 @@ Member조회 N번, Delivery조회 N번으로 **1+N+N**번의 쿼리가 나가게
 </div>
 </details>
 
-
-* self invocation ?
+* Todo
+    * self invocation ?
+    * jpa에서 Repository를 이용한 비관적락
