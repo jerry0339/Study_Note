@@ -410,13 +410,19 @@ Garbage Collector가 참조되지 않는 메모리를 확인하고 제거하는 
 <div markdown="1">
 
 * [참고1](https://llnote.tistory.com/709), [참고2](https://d2.naver.com/helloworld/1329), [참고3](https://mirinae312.github.io/develop/2018/06/04/jvm_gc.html)
-* stop-the-world란, GC을 실행하기 위해 JVM이 애플리케이션 실행을 멈추는 것
-* stop-the-world가 발생하면 GC를 실행하는 쓰레드를 제외한 나머지 쓰레드는 모두 작업을 멈추고 GC작업 완료후 다시 시작
+* [참고](https://beststar-1.tistory.com/15#%EA%B0%80%EB%B9%84%EC%A7%80_%EC%BB%AC%EB%A0%89%EC%85%98(Garbage_Collection))
+* [참고](https://code-factory.tistory.com/48)
+* [G1GC vs ZGC](https://huisam.tistory.com/entry/jvmgc)
 * 가비지 컬렉터의 전제조건
     * 대부분의 객체는 금방 접근 불가능 상태(unreachable)가 된다.
     * 오래된 객체에서 젊은 객체로의 참조는 아주 적게 존재한다.
-
-* 아직 정리 안됨 [참고](https://code-factory.tistory.com/48)
+* stop-the-world란, GC을 실행하기 위해 JVM이 애플리케이션 실행을 멈추는 것
+* stop-the-world가 발생하면 GC를 실행하는 쓰레드를 제외한 나머지 쓰레드는 모두 작업을 멈추고 GC작업 완료후 다시 시작
+* Heap 메모리 : Eden, Survivor1/2, Old, Metaspace
+    * Heap메모리에서 GC 동작방식, Java11에서의 메모리 상태에 따른 GC동작 방식 복잡함 -> 위 링크 참고
+* 가비지 컬렉션의 발전
+    * Mark ans Sweep 부터 Java11의 G1 GC, Java15의 ZGC까지의 발전방식(멀티스레드, 알고리즘 개선, STW줄이기위한 방법 등)
+    * 너무 복잡함, 위링크들 참고
 
 </div>
 </details>
@@ -478,12 +484,7 @@ Garbage Collector가 참조되지 않는 메모리를 확인하고 제거하는 
 * Stream 장단점, 특징
 * 중계 오퍼레이션, 종료 오퍼레이션
 
-
-
 <br><br>
 
-### Lamda
-* 람다식, 익명 클래스, 익명 메소드, 함수형 인터페이스, 메소드 레퍼런스?
-* 자바에서 제공하는 함수형 인터페이스?
 * Lambda Capturing?
 * 제네릭

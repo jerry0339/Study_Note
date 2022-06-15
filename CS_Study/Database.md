@@ -736,3 +736,6 @@ BCNF 정규형은 3.5 정규형이라고도 하며 아래와 같은 필요조건
 
 </div>
 </details>
+
+* Todo
+    * Redis
