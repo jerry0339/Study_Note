@@ -397,6 +397,20 @@ JWT (JSON Web Token)는 Json 포맷을 이용하여 사용자에 대한 속성�
 서버와 클라이언트 사이에서 JSON 객체를 빠르고 안전하게 전달한다.
 ~~~
 
+<br>
+
+### JWT Token
+* [참고](https://sol-devlog.tistory.com/22?category=1005914)
+* **Access Token과 Refresh Token**
+    * 엑세스 토큰은 접근에 관여하는 토큰이고
+    * 리프레시 토큰은 재발급에 관여하는 토큰이다.
+* Access Token을 이용하면 **사용자 권한을 인증** 할 수 있다.
+    * Access Token이 탈취되면 토큰이 만료되기 전 까지, 토큰을 획득한 사람은 누구나 권한 접근이 가능해진다
+    * 따라서 Access Token의 유효 주기는 짧게 가져가야 한다.
+* Refresh Token 자동 로그인 혹은 로그인 유지에 관여한다.
+    * Refresh Token은 한 번 발급되면 Access Token보다 훨씬 길게 발급된다.
+    * 대신에 접근에 대한 권한을 주는 것이 아니라 **Access Token 재발급에만 관여** 한다.
+
 </div>
 </details>
 

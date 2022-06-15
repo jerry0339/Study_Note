@@ -79,7 +79,7 @@ IoC, DI 등 스프링의 특징이 개발자가 전체적으로 신경써야할 
 
 
 <details>
-<summary><b>Filter, Interceptor, AOP 실행순서</b></summary>
+<summary><b>Spring에서의 API 요청흐름</b></summary>
 <div markdown="1">
 
 * [출처](https://baek-kim-dev.site/61)
@@ -101,6 +101,7 @@ IoC, DI 등 스프링의 특징이 개발자가 전체적으로 신경써야할 
     * 필터는 Web Container 안에서 동작
 * **인터셉터**에서는 클라이언트의 요청과 관련되어 전역적으로 처리해야 하는 작업들을 처리할 수 있음
     * 인터셉터는 Spring Container 안에서 동작
+* Srping Security 공부후 정리
 
 ![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fcjsq60%2FbtrzjoZ0qcq%2FEDsLOVpZNcmFu6prkzALFk%2Fimg.png)
 
@@ -116,6 +117,7 @@ IoC, DI 등 스프링의 특징이 개발자가 전체적으로 신경써야할 
 * Spring AOP에서는 JDK Dynamic Proxy 와 CGlib 을 통해 Proxy화 한다
     * JDK Dynamic Proxy는 Reflection을 기반으로 이루어지고
     * CGlib 은 상속을 기반으로 이루어진다
+* 정리해야 함
 
 </div>
 </details>
@@ -277,3 +279,4 @@ Member조회 N번, Delivery조회 N번으로 **1+N+N**번의 쿼리가 나가게
 * Todo
     * self invocation ?
     * jpa에서 Repository를 이용한 비관적락
+    * [Access Token 저장위치](https://velog.io/@neity16/NodeJS-Token-%EC%A0%80%EC%9E%A5-%EC%9C%84%EC%B9%98%EC%9D%98-%EA%B3%A0%EC%B0%B0)

@@ -27,10 +27,116 @@
         * 옵션으로 Metaspace의 크기를 줄일 수도 있다.
         * 그 결과 기존과 비교해 큰 메모리 영역을 사용할 수 있게 되었다.
         * Perm 영역 크기로 인한 java.lang.OutOfMemoryError(`OOM`)은 더이상 마주칠 일이 없어짐
-
+    * 람다 표현식 지원
+        * 람다식 : 메소드를 하나의 식으로 표현한 것
+        * 식별자 없이 실행할 수 있는 함수 표현식을 의미 = 익명 함수
 * Java 11
     * String 관련 문자열이 좀 더 추가됨
     * 람다식의 파라미터에 var 변수를 사용할 수 있음 -> var 변수에 어노테이션을 붙일 수 있음
+
+</div>
+</details>
+
+
+<details>
+<summary><b>람다 표현식, 함수형 인터페이스, 메소드 레퍼런스</b></summary>
+<div markdown="1">
+
+* 람다 표현식(Lambda Expression)이란 메소드를 하나의 식으로 표현한 것
+* 식별자 없이 실행할 수 있는 함수 표현식을 의미 = **익명 메소드(anonymous function)**
+* 메소드를 사용하려면 클래스에 대한 인스턴스를 생성하여 내부의 메소드를 호출해야 하지만,
+* 람다식을 이용하면 그렇지 않아도 메소드를 사용할 수 있음
+* 기존의 불필요한 코드를 줄여주고, 작성된 코드의 가독성을 높이는 데 그 목적이 있음
+* 람다 표현식은 **함수형 인터페이스(functional interface)** 에서만 가능
+
+<br>
+
+* 함수형 인터페이스(functional interface) : 추상메소드가 하나만 존재하는 인터페이스
+* 추상메소드가 2개이상 이라면 람다식에 어떤 메소드가 들어갈지 알 수 없기 때문
+* Functional Interface는 보통 직접 정의하지 않고 `java.util.function` 패키지에 정의되어 있는 Functional Interface를 사용한다.
+* 기본형 함수형 인터페이스
+    | **FuntionalInterface** | **method**        | **설명**                 |
+    | ---------------------- | ----------------- | ------------------------ |
+    | java.lang.Runnalbe     | void run()        | 매개변수, 반환 모두 없음 |
+    | Supplier<T>            | T get()           | 매개변수 없음, 반환 T    |
+    | Comsumer<T>            | void accept(T t)  | 매개변수 T, 반환 없음    |
+    | Function<T, R>         | R apply(T t)      | 매개변수 T, 반환 R       |
+    | Predicate<T>           | boolean test(T t) | 매개변수 T, 반환 boolean |
+
+* 매개변수가 2개인 함수형 인터페이스
+    | **FuntionalInterface** | **method**             | **설명**                   |
+    | ---------------------- | ---------------------- | -------------------------- |
+    | BiComsumer<T, U>       | void accept(T t, U u)  | 매개변수 2개, 반환 없음    |
+    | BiPredicate<T, U>      | boolean test(T t, U u) | 매개변수 2개, 반환 boolean |
+    | BiFunction<T, U, R>    | R apply(T t, U u)      | 매개변수 2개, 반환 R       |
+
+* 입력과 반환이 동일한 함수형 인터페이스
+    | **FuntionalInterface** | **method**        | **설명**                               |
+    | ---------------------- | ----------------- | -------------------------------------- |
+    | UnaryOperation<T>      | T apply(T t)      | 매개변수 1개로 반환타입과 동일         |
+    | BinaryOperation<T>     | T apply(T t, T t) | 매개변수 2개, 매개변수와 반환유형 동일 |
+
+<br>
+
+* 메소드 레퍼런스
+    * **람다 표현식에서 입력되는 값을 변경없이 바로 사용하는 경우 사용가능**
+    * 입력값을 변경하지 말라는 표현방법 이기도 함
+    * 변경의 여지를 없앨 수 있으므로 안정적이라고 볼 수 있음
+
+</div>
+</details>
+
+
+
+<details>
+<summary><b>Java 8의 Interface(default 메소드와 static 메소드 등)</b></summary>
+<div markdown="1">
+
+* Interface는 클래스와 달리 다중상속이 가능하다.
+* 인터페이스 간의 상속 관계는 extends 키워드를 사용
+* 클래스에서 인터페이스를 구현하려면 implements 키워드를 사용
+* Java8 부터 default 메소드와 static 메소드를 구현할 수 있음
+    * default 메소드
+        * 인터페이스에서 이미 구현되어 있어 클래스에서 재정의하지 않아도 됨
+        * 재정의를 할 수도 있음
+    * static 메소드
+        * 인스턴스 생성과 상관없이 인터페이스 타입으로 바로 호출가능한 메소드
+
+</div>
+</details>
+
+
+<details>
+<summary><b>static 멤버</b></summary>
+<div markdown="1">
+
+* 메소드 영역에 저장된다. -> GC가 관여하지 못함
+* 프로그램의 시작과 동시에 할당되고 프로그램이 종료되어야 메모리에서 소멸된다.
+* 정적 멤버
+    * 정적 필드
+    * 정적 메소드
+        * 정적 메소드는 클래스가 메모리에 올라갈 때 정적 메소드가 자동적으로 생성
+        * 정적 메소드는 인스턴스를 생성하지 않아도 호출을 할 수 있음
+    * 정적 클래스
+        * 외부 클래스는 정적 클래스로 만들 수 없지만 내부 클래스는 정적으로 만들 수 있음
+        * 정적 내부 클래스는 외부 클래스의 비정적 멤버에 액세스 할 수 없음
+        * 정적 내부 클래스는 해당 내부 클래스 멤버 변수에 액세스하기 위해 외부 클래스 참조가 필요하지 않음
+        * 정적 클래스는 인스턴스화 될 수 없음. 따라서 해당 정적 내부 클래스의 메서드는 클래스 이름으로 직접 액세스 할 수 있음
+
+</div>
+</details>
+
+
+<details>
+<summary><b>final 키워드</b></summary>
+<div markdown="1">
+
+* 필드에 final을 사용하면 해당 필드 변경불가
+* 메서드에 final을 사용하면 상속받은 클래스에서 부모의 final 메서드를 재정의 할 수 없음
+* final Company company = new Company();
+    * company = new Company(); : 객체를 한번 생성했다면 재생성 불가능
+    * company.setName("Jerry"); : 클래스의 필드는 변경가능
+* 클래스에 final을 사용하게되면, 그 final 클래스를 다른 클래스가 상속할 수 없다.
 
 </div>
 </details>
@@ -366,24 +472,6 @@ Garbage Collector가 참조되지 않는 메모리를 확인하고 제거하는 
 </div>
 </details>
 
-
-### static
-* 메소드 영역에 저장된다.
-* 프로그램의 시작과 동시에 할당되고 프로그램이 종료되어야 메모리에서 소멸된다.
-
-
-<br><br>
-
-### final
-* 필드에 final을 사용하면 해당 필드 변경불가
-* 메서드에 final을 사용하면 상속받은 클래스에서 부모의 final 메서드를 재정의 할 수 없음
-* final Company company = new Company();
-    company = new Company(); //객체를 한번 생성했다면 재생성 불가능
-    company.setName("ex회사"); //클래스의 필드는 변경가능
-* 클래스에 final을 사용하게되면 그 클래스는 최종상태가 되어 더이상 상속이 불가능
-
-
-
 <br><br>
 
 ### Stream
@@ -398,3 +486,4 @@ Garbage Collector가 참조되지 않는 메모리를 확인하고 제거하는 
 * 람다식, 익명 클래스, 익명 메소드, 함수형 인터페이스, 메소드 레퍼런스?
 * 자바에서 제공하는 함수형 인터페이스?
 * Lambda Capturing?
+* 제네릭
