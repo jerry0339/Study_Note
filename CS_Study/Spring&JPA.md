@@ -276,6 +276,86 @@ Member조회 N번, Delivery조회 N번으로 **1+N+N**번의 쿼리가 나가게
 </div>
 </details>
 
+
+<details>
+<summary><b>@Autowired ?</b></summary>
+<div markdown="1">
+
+* `@Autowired`는 Spring 컨테이너가 관리하는 Bean에서만 사용이 가능하다.
+* `@Autowired` 로 Bean을 매칭하는 방법
+    1. 타입 매칭 (같은 타입이거나 그 타입의 자식들을 다 가져옴)
+    2. 타입 매칭의 결과가 2개 이상인 경우 **필드명** 또는 **파라미터명** 으로 빈 이름 매칭하여 주입
+    3. 2.와 같이 매칭 결과가 여러개인 경우, 특정 빈을 주입받기 위한 방법 ? 
+        * 예시) DiscountPolicy를 상속받는 FixDiscountPolicy, RateDiscountPolicy가 있는데, DiscountPolicy를 주입받는 경우
+            ~~~java
+            @Component
+            public class OrderServiceImpl implements OrderService {
+                
+                // p.s) 왜 FixDiscountPolicy나 RateDiscountPolicy로 주입받지 않음 ? -> DIP준수 (SOLID와 다형성)
+                private final DiscountPolicy discountPolicy;
+                private final MemberRepository memberRepository;
+
+                @Autowired
+                public OrderServiceImpl(DiscountPolicy discountPolicy, MemberRepository memberRepository){
+                    this.discountPolicy = discountPolicy;
+                    this.memberRepository = memberRepository;
+                }
+                // ...
+            }
+            // 위와 같은 경우 discountPolicy에 FixDiscountPolicy로 받으려면 어떻게 해야함?
+            ~~~
+        * `@Qualifier("name")`를 이용
+            * 빈(클래스)에 `@Qualifier("name")`를 붙이고 
+            * 해당 빈을 주입받을 필드 또는 파라미터에 `@Qualifier("name")`를 붙여주면 됨
+        * `@Primary`
+            * 위와 같은 예시의 경우 FixDiscountPolicy 빈에 `@Primary`를 붙여주면
+            * 위 코드와 같은 경우 DiscountPolicy에 FixDiscountPolicy빈이 주입이 됨
+        * `@Primary`와 `@Qualifier("name")`를 모두 활용하여 깔끔하게 빈을 관리할 수 있다.
+            * 메인 데이터베이스의 커넥션을 획득하는 스프링빈과 특별한 기능으로 가끔 사용하는 데이터베이스의 커넥션을 획득하는 스프링빈이 있음
+            * 메인 데이터베이스의 스프링빈은 `@Primary`를 사용
+            * 서브 데이터베이스의 스프링빈은 `@Qualifier("name")`를 사용
+        * `@Primary`와 `@Qualifier`의 우선순위는 `@Qualifier`가 더 높다. (항상 좁은 범위의 선택권이 더 높은 우선순위를 가짐)
+
+<br>
+
+* `@Autowired`를 이용한 의존관계 주입방법
+    1. 생성자 주입
+        * 불변, 필수적인 의존관계에 있을때 효과적
+        * 생성자가 하나인 경우 `@Autowired`생략가능
+    2. 수정자(Setter) 주입
+        * 선택, 변경 가능성이 있는 의존관계에 사용
+    3. 필드 주입
+        * DI 컨테이너에 의존적인 방법
+        * 실제 어플리케이션 코드에는 적용하지 않는것이 좋음
+        * Test코드 작성시에는 유용함
+
+<br>
+
+* 롬복을 이용한 자동 의존관계 주입 (최신 트랜드)
+    * 막상 개발해 보면 대부분 불변의 의존관계를 가짐
+    * 불변의 관계의 경우 final을 사용함
+    * 위와 같은 상황에서 생성자 주입방법과 Lombok의 `@RequiredArgsConstructor`를 이용하면 코드를 깔끔하게 줄일 수 있음
+        ~~~java
+        @Component
+        @RequiredArgsConstructor
+        public class OrderServiceImpl implements OrderService {
+            
+            private final DiscountPolicy discountPolicy;
+            private final MemberRepository memberRepository;
+
+            // 아래의 코드를 생략할 수 있음
+            //@Autowired
+            //public OrderServiceImpl(DiscountPolicy discountPolicy, MemberRepository memberRepository){
+            //    this.discountPolicy = discountPolicy;
+            //    this.memberRepository = memberRepository;
+            //}
+            // ...
+        }
+        ~~~
+
+</div>
+</details>
+
 * Todo
     * self invocation ?
     * jpa에서 Repository를 이용한 비관적락

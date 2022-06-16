@@ -172,6 +172,17 @@
     * 왜 역전일까?
     * 추상화에 의존해야지, 구체화에 의존하면 안된다.
     * 인터페이스와 그것을 구현한 구현클래스가 있다면, 다른 클래스에서는 구현클래스가 아니라 인터페이스에 의존해야 한다.
+        * 예시
+        ~~~java
+        @Component
+        @RequiredArgsConstructor
+        public class OrderServiceImpl implements OrderService {
+            
+            // DiscountPolicy를 상속받는 FixDiscountPolicy와 RateDiscountPolicy 가 있음
+            private final DiscountPolicy discountPolicy; 
+            private final MemberRepository memberRepository;
+        }
+        ~~~
 
 </div>
 </details>
