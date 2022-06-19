@@ -150,22 +150,6 @@ IoC, DI 등 스프링의 특징이 개발자가 전체적으로 신경써야할 
 
 
 <details>
-<summary><b>Rabbit MQ</b></summary>
-<div markdown="1">
-
-* Rabbit MQ UI를 통해 큐를 생성
-* Gradle에 Rabbit MQ 의존성을 추가하고 야믈파일에 Rabbit MQ에 대한 Port설정과 큐에 대한 정보를 입력
-* 기존에는 API요청에 대한 내용을 받아서 JPA로 바로 처리했었지만 Rabbit MQ를 통해 메시지를 처리할 수 있도록 수정했음
-* Producer와 Consumer를 주입받아 서 메시지를 처리했는데
-* 이때, 메시지를 Json에서 String으로 바꿔서 넣어줘야 하기 때문에 Jackson 라이브러리의 ObjectMapper를 주입받아 사용했다.
-* 그럼 Producer를 통해 메시지큐에 요청에 대한 내용이 push되고 Consumer를 통해 작성해둔 메소드가 수행되는 식
-* 메소드가 수행될때 큐의 요청 내용이 JPA를 통해 DB에 반영되거나 조회할 수 있는것임
-
-</div>
-</details>
-
-
-<details>
 <summary><b>영속성 컨텍스트란</b></summary>
 <div markdown="1">
 
