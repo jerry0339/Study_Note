@@ -59,11 +59,38 @@ IoC, DI 등 스프링의 특징이 개발자가 전체적으로 신경써야할 
 
 
 <details>
-<summary><b>서블릿 ?, 디스패처 서블릿(Dispatcher Servlet) 이란?</b></summary>
+<summary><b>Apache Tomcat 이란</b></summary>
 <div markdown="1">
 
-* 서블릿(Servlet)은 웹 기반의 요청에 대해 동적으로 처리해주는 역할을 하며 Servlet Container에서 동작함
-* 디스패처 서블릿(Dispatcher Servlet)은 제일 앞에서 서버로 들어오는 모든 요청을 처리하는 Front Controller임(=Front Controller 패턴)
+* 아파치 소프트웨어 재단에서 개발한 서블릿 컨테이너(또는 웹 컨테이너)만 있는 웹 어플리케이션 서버(WAS)이다.
+* 웹 서버와 연동하여 실행할 수 있는 자바 환경을 제공한다.
+* 즉, JSP(Java Server Pages)와 Servlet이 실행할 수 있는 환경을 제공.
+
+* 요청을 늦게 응답할수록, 해당 요청이 톰캣의 쓰레드를 차지하고 있어서 쓰레드가 금방 고갈되는 이슈가 있음
+* 요청을 가능하면 빠르게 처리하고 응답을 주어야 함 -> 쓰레드가 다시 다른 요청을 처리할 수 있는 상태가 됨
+
+* ----미완----
+
+</div>
+</details>
+
+
+<details>
+<summary><b>서블릿, 디스패처 서블릿(Dispatcher Servlet), 서블릿 컨테이너, 스프링 컨테이너 ?</b></summary>
+<div markdown="1">
+
+#### [참고링크](https://taes-k.github.io/2020/02/16/servlet-container-spring-container/)
+* 스프링에서는 아래와 같은 구조를 통해 클라이언트와 통신함
+![](https://taes-k.github.io/images//posts/2020-02-16-servlet-container-spring-container/1.png)
+
+<br>
+
+### 서블릿(Servlet)과 디스패처 서블릿(Dispatcher Servlet)
+* 서블릿은 웹 기반의 요청에 대해 **동적으로** 처리해주는 역할을 함. (Servlet Container에서 동작함)
+* **Spring MVC** 에서는 디스패처 서블릿이라는 모든 요청을 담당하는 서블릿을 두고 컨트롤러에 위임을 하여 요청을 처리함
+* 즉, **디스패처 서블릿(Dispatcher Servlet)** 은 제일 앞에서 서버로 들어오는 모든 요청을 처리하는 Front Controller임(=Front Controller 패턴)
+* 디스패처 서블릿 역시 Servlet Container에서 동작함
+![](https://taes-k.github.io/images//posts/2020-02-16-servlet-container-spring-container/2.png)
 
 <br>
 
@@ -72,21 +99,59 @@ IoC, DI 등 스프링의 특징이 개발자가 전체적으로 신경써야할 
 * 즉, Controller로 향하는 모든 웹 요청의 진입점으로써 요청을 처리하고 결과를 클라이언트에게 응답해 주는 역할을 함
 * 디스패처 서블릿을 이용한다는 것은 Spring MVC를 이용하겠다는 뜻임
 
-![](https://taes-k.github.io/images//posts/2020-02-16-servlet-container-spring-container/6.png)
+<br>
+
+### 서블릿 컨테이너
+* 서블릿 컨테이너라는 말 그대로 서블릿을 관리하는 역할을 함
+    1. 서블릿의 라이프 사이클(생성, 실행, 파괴 등)을 직접적으로 관리해주는 역할을 함
+    2. 웹서버와의 통신을 통해 클라이언트의 request를 전달받아 동적 서비스를 response를 해야하는데, 
+        해당 과정에서 **웹서버와 소켓을 만들어 통신** 함
+    3. 클라이언트 요청이 들어올때 쓰레드를 생성하여 요청을 처리. 해당 쓰레드는 서블릿 컨테이너에서 쓰레드풀을 별도로 관리하여 실행
+
+<br>
+
+### 스프링 컨테이너
+* 아래의 그림을 보면 디스패처 서블릿안에 Servlet WebApplicationContext와 Root WebApplicationContext가 동작하는것 처럼 보이지만
+* 두 Context는 첫번째 그림에서 Spring Container안에서 동작하는 Context임
+![](https://taes-k.github.io/images//posts/2020-02-16-servlet-container-spring-container/4.png)
+* 서블릿 컨테이너는 서블릿의 생명주기를 관리했다면,
+    스프링컨테이너는 Java object인 빈(Bean)의 라이프 사이클 관리
+* Spring 프레임워크의 특징인 IOC(제어역전)와 DI(의존성주입)을 제공해주는 역할을 함
 
 </div>
 </details>
 
 
 <details>
-<summary><b>Spring에서의 API 요청흐름</b></summary>
+<summary><b>Spring에서의 요청 흐름</b></summary>
+<div markdown="1">
+
+* [참고링크](https://taes-k.github.io/2020/02/16/servlet-container-spring-container/)
+
+![](https://taes-k.github.io/images//posts/2020-02-16-servlet-container-spring-container/6.png)
+
+* Spring Boot에서의 클라이언트 요청 처리 과정
+    1. Client -> Web server 으로 request 보냄
+    2. 동적 Web server -> Servlet container로 전달
+    3. Servlet container 쓰레드 생성
+    4. DispatcherServlet init (서블릿 생성 안되어 있을경우)
+    5. 생성된 쓰레드에서 DispatcherServlet service() 메서드 호출
+    6. HandlerMapping을 통해 매핑 컨트롤러 조회
+    7. HandlerAdapter를 통해 매핑 컨트롤러에 request 전달
+    8. 개발자가 구현한 Controller가 동작
+
+</div>
+</details>
+
+
+<details>
+<summary><b>Filter, Dispatcher Servlet, AOP, Controller 호출 순서?</b></summary>
 <div markdown="1">
 
 * [출처](https://baek-kim-dev.site/61)
 * Interceptor와 Filter는 Servlet 단위에서 실행된다. 반면 AOP는 메소드 앞에 Proxy패턴의 형태로 실행된다.
 * 실행순서를 보면 Filter가 가장 밖에 있고 그안에 Interceptor, 그안에 AOP가 있는 형태
 * ![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F1bEhb%2FbtqH8cRq0sY%2FdQVkF7pbrdOTVnILW7bmzK%2Fimg.png)
-
 
 </div>
 </details>

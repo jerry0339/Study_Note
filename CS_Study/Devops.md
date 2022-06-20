@@ -133,6 +133,7 @@
 <br>
 
 * Kafka와 RabbitMQ 비교
+    * [참고링크](https://ellune.tistory.com/29)
     * kafka는 클러스터를 통해 병렬처리가 주요 차별점인 만큼 방대한 양의 데이터를 처리할 때 장점이 부각됨
     * RabbitMQ는 데이터 처리보단 Manage UI를 제공하는 만큼 관리적인 측면이나, 다양한 기능 구현을 위한 서비스를 구축할 때 장점이 부각됨
 
@@ -223,3 +224,30 @@
 </details>
 
 
+<details>
+<summary><b>클라우드(Cloud) VS 온프레미스(On-premise)</b></summary>
+<div markdown="1">
+
+* 클라우드
+    * 서버 구입비 없음, 사용한 만큼 과금
+    * 물리적 인프라를 관리할 필요가 없음
+    * 트래픽에 맞게 자동으로 Scale-out 가능
+    * 추가 서버 필요시 쉽게 추가 가능
+
+<br>
+
+* 온프레미스
+    * 초기 서버 구입비로 비용 많이 필요함
+    * 인프라를 관리하는데 인력이 필요함 (물리적인 관리 포함)
+    * Peak의 트래픽을 감당하기 위해 평소에 불필요한 서버를 준비해야 함
+    * 추가 서버 필요시 서버를 새로 설치해야 하므로 확장성이 낮다고 볼 수 있음
+
+</div>
+</details>
+
+
+### Todo
+* 스트레스 테스트 툴
+    * Artillery(Node.js)
+    * nGrinder(Java)
+    * Locust(Python)
