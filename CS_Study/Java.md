@@ -228,28 +228,40 @@ public static void main(String[] args) {
 * Java의 synchronized 키워드는 Thread 사이의 동기화 문제를 해결해주는 기법중 하나
 * synchronized 키워드는 각 일반 Instance안에 존재하는 Monitor를 이용하여 Thread 사이의 동기화를 수행
 * synchronized는 특정 Thead가 해당 블럭 전체를 lock하기 때문에 자원 낭비가 심함
-* NonBlocking하면서 동기화 문제를 해결하기 위한 방법으로 Atomic이 있음.
+    * lock을 거는데 오버헤드가 큼
+    * dead-lock을 일으킬 가능성이 있음
+    * 따라서 실무에서는 사용x
 
 <br>
 
+* 가시성 문제
+    ~~~
+    만약, 한 쓰레드가 변경된 값을 cache memory에서 메인메모리로 데이터를 저장하기 전에 
+    다른 쓰레드에서 메인메모리의 해당 값을 읽어 변경되기 이전의 값을 처리한다면 data 불일치 문제가 발생한다.
+    이러한 상황을 가시성 문제 라고 한다.
+    ~~~
 * 멀티쓰레드환경, 멀티코어 환경에서는 각 CPU는 메인 메모리에서 변수값을 참조하는게 아니라 각 CPU의 캐시 영역에서 메모리를 참조
 * volatile keyword는 Java 변수를 Main Memory에 저장하겠다라는 것을 명시하는 것
 * 매번 변수의 값을 Read, Write할 때마다 CPU cache가 아닌 Main Memory에서 읽거나 작성하는것
 * Multi Thread환경에서 Thread가 변수 값을 읽어올 때 각각의 CPU Cache에 저장된 값이 다르기 때문에 변수 값 불일치 문제가 발생하기 때문
     ![](https://nesoy.github.io/assets/posts/20180609/2.png)
 * volatile 키워드를 추가하게 되면 Main Memory에 저장하고 읽어오기 때문에 변수 값 불일치 문제를 해결할 수 있음
+* 즉, 가시성이 보장되어야하는 변수를 cache memory에서 읽는 것이 아니라, 메인메모리 에서만 읽도록 보장하는 것
     ~~~java
     public class SharedObject {
         public volatile int counter = 0;
     }
     ~~~
 * 언제(When) volatile이 적합?
-    * Multi Thread 환경에서 하나의 Thread만 read & write하고 나머지 Thread가 read하는 상황에서 가장 최신의 값을 보장함
+    * 한 스레드만 '쓰기'하고, 나머지 스레드는 '읽기'만 하는 상황에서만 volatile을 이용한 동시성 보장이 가능하므로
+    * Multi Thread 환경에서 하나의 Thread만 read & write하고 나머지 Thread가 read하는 상황에서 사용
 
 <br>
 
 * NonBlocking하면서 동기화 문제를 해결하기 위한 방법이 Atomic.
 * Atomic의 동작 핵심원리는 바로 CAS알고리즘
+* CAS는 변수의 값을 변경하기 전에 기존에 가지고 있던 값이 내가 예상하던 값과 같을 경우에만 새로운 값을 할당하는 방법
+* 즉, CAS는 값을 변경하기 전에 한 번 더 확인하는 것
 * Volatile 에서 설명했듯이, 메인메모리에 저장된 값과 CPU캐시에 저장된 값이 다른 경우가 있을 수 있음 (가시성문제)
 * 이럴때 사용하는 것이 **CAS알고리즘**임
     * 현재 쓰레드에 저장된 값과 메인메모리에 저장된 값을 비교
@@ -499,3 +511,4 @@ Garbage Collector가 참조되지 않는 메모리를 확인하고 제거하는 
 
 * Lambda Capturing?
 * 제네릭
+* Java Reflection -> Reflection 의존성 주입(DI), Entity 동적 생성, jackson 직렬화에 활용?

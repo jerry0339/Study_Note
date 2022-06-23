@@ -413,3 +413,4 @@ Member조회 N번, Delivery조회 N번으로 **1+N+N**번의 쿼리가 나가게
     * self invocation ?
     * jpa에서 Repository를 이용한 비관적락
     * [Access Token 저장위치](https://velog.io/@neity16/NodeJS-Token-%EC%A0%80%EC%9E%A5-%EC%9C%84%EC%B9%98%EC%9D%98-%EA%B3%A0%EC%B0%B0)
+    * [동기 & 비동기 & 동시성 & 병렬성 차이](https://mysoftworld.tistory.com/42), 해결방법
