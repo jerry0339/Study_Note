@@ -46,21 +46,79 @@
 
 
 <details>
+<summary><b>서버 이중화 HA(High Availability) 란?</b></summary>
+<div markdown="1">
+
+* [참고링크1](https://www.ibinfo.co.kr/computer-tip-2/%EC%84%9C%EB%B2%84-%EC%9D%B4%EC%A4%91%ED%99%94ha-%EC%86%94%EB%A3%A8%EC%85%98%EC%97%90-%EB%8C%80%ED%95%98%EC%97%AC)
+* [참고링크2](https://bae-juk.tistory.com/26)
+* 미완
+
+</div>
+</details>
+
+
+<details>
+<summary><b>DB의 Master & Slave Replication</b></summary>
+<div markdown="1">
+
+* [참고링크](https://jung-story.tistory.com/118)
+* Replication
+    * 말 그대로 DB 데이터를 물리적으로 복사해 다른곳에 넣어두는 기술을 의미
+* **Replica를 만들땐 목표를 분명히 해야 함** : [참고링크](https://blog.naver.com/PostView.nhn?blogId=sehyunfa&logNo=221851706103&categoryNo=93&parentCategoryNo=0&viewDate=&currentPage=1&postListTopCurrentPage=1&from=postView)
+    1. HA(가용성)을 위한 Replication
+    2. 확장성(Scaling, Scalibility)을 위한 Replication
+
+<br>
+
+* HA 구성을 위한 Replica 생성
+    * 가용성을 위한 구성으로 Master node가 문제가 생기면 Slave node가 그 역할을 이어 받는 것
+    * 따라서 Master-Slave 구성이라 하고, 일반적으로 Slave는 READ-ONLY 데이터베이스가 된다.
+    * 주기적으로 Master의 데이터가 Slave로 동기화(Syncronize)가 되면서 DB 간 정합성을 유지한다.
+    * Master가 정상 작동할 때엔 Slave는 직접 서비스를 처리할 일이 없다면 Warm StandBy 형태로 운영한다. (HA란? 참고)
+* Scaling을 위한 Replica 생성
+    * Master가 정상 작동하더라도 SELECT 구문과 같은 READ 작업에 대해서 부하를 분산한다면, Slave는 Hot Stand-By로 작동하는 이점
+    * 또한 일반적인 환경에서도 DB의 부하를 나누는 구조이기 때문에 Scaling에 도움이 됨
+
+<br>
+
+* 그림으로 보는 Master & Slave 구조
+    * DB에 따라 자세한 동작방식은 다르지만 기본적으로 아래와 같은 구조로 트래픽 분산이 이루어진다.
+    ![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FG2cIO%2FbtrapFNGsO3%2FZo0vtn0JUC1OvZzXi2tZz1%2Fimg.png)
+
+* 위 그림처럼 Master에게는 데이터 동시성이 아주 높게 요구되는 트랜잭션을 담당하고
+* Slave에게는 데이터 동시성이 꼭 보장될 필요는 없는 경우에 읽기 전용으로 데이터를 가져오게 됨
+* 일반적으로 Front Controller에서 요청을 처리할때, 읽기 전용과 아닌 경우에 대한 API를 나누어 디비에 대한 트래픽을 분산할 수 있음
+
+</div>
+</details>
+
+
+<details>
 <summary><b>Sharding 이란?</b></summary>
 <div markdown="1">
 
 * [참고링크](https://techblog.woowahan.com/2687/)
+* DB를 분산하여 저장하는 방법
 * 같은 타입(테이블)의 데이터를 다수의 데이터베이스에 쪼개서 저장하는 것
 * 하나의 DB에 데이터가 늘어나면 용량 이슈, CRUD 성능저하 이슈 -> 샤딩을 통해 DB트래픽 분산
 * DB를 분산(샤딩)하면 특정 DB의 장애가 전면장애로 이어지지 않는다는 장점이 있음
 * 데이터를 분산하고, 해당 데이터의 위치를 찾기 위해서는 라우팅이 잘 이루어져야 하는데 이때 유일한 키값(PK | 샤딩키)을 필요로 함
 * 라우팅방법은 모듈러(Modular) 샤딩, 레인지(Range) 샤딩 2가지가 있음
-* Modular sharding -> (PK % DB수)
-    * 장점 : 레인지 샤딩에 비해 데이터가 균일하게 분산됨 
-    * 단점 : DB를 추가 증설하면 모듈러값이 달라지게 되어 이미 적재된 데이터의 재정렬이 필요하다. 
-* Range sharding -> (1~4는 DB1, 5~9는 DB2,, 이런식)
-    * 장점 : 모듈러샤딩에 비해 기본적으로 증설에 재정렬 비용이 들지 않는다.
-    * 단점 : 일부 DB에 데이터가 몰릴 수 있다. -> 한쪽 데이터가 몰리거나 너무 트래픽이 없는 경우 자원낭비 -> 특정DB 확장or축소로 해결
+
+<br>
+
+* **Modular sharding** -> (PK % DB수)
+    * 장점 : 레인지 샤딩에 비해 데이터가 균일하게 분산됨
+    * 단점 : DB를 추가 증설하면 모듈러값이 달라지게 되어 이미 적재된 데이터의 **재정렬** 이 필요하다.
+    * **데이터가 균일하게 분산** 된다는 점은 트래픽을 안정적으로 소화하면서도 DB리소스를 최대한 활용할 수 있는 방법이다.
+    * **데이터량이 일정 수준에서 유지** 될 것으로 예상되는 데이터 성격을 가진 곳에 적용할 때 어울리는 방식(또는 적재속도가 빠르지 않는 경우)
+* **Range sharding** -> (1~4는 DB1, 5~9는 DB2, ..., 이런식)
+    * 장점 : 모듈러샤딩에 비해 기본적으로 증설에 재정렬 비용이 들지 않는다. -> **증설작업에 드는 비용이 크지 않다.**
+    * 단점 : 일부 DB에 데이터가 몰릴 수 있다.
+    * 데이터가 급격히 증가할 여지가 있다면 레인지방식은 좋은 선택
+    * 하지만 한쪽 데이터가 몰리거나 너무 트래픽이 없는 경우 자원낭비가 심함 **특정DB 확장or축소** 로 해결
+    * 위 경우 또다시 부하분산을 위해 해당 DB를 쪼개 재정렬하는 작업이 필요함
+        * 반대로 트래픽이 저조한 DB는 통합작업을 통해 유지비용을 아끼도록 관리해야 함
 
 </div>
 </details>
@@ -738,4 +796,6 @@ BCNF 정규형은 3.5 정규형이라고도 하며 아래와 같은 필요조건
 </details>
 
 * Todo
+    * [Master / Slave 구조](https://jung-story.tistory.com/118)
+    * [HA란](https://www.ibinfo.co.kr/computer-tip-2/%EC%84%9C%EB%B2%84-%EC%9D%B4%EC%A4%91%ED%99%94ha-%EC%86%94%EB%A3%A8%EC%85%98%EC%97%90-%EB%8C%80%ED%95%98%EC%97%AC)
     * Redis
