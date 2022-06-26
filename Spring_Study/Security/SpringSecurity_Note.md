@@ -1,13 +1,7 @@
 # Spring Security
 * Spring Security의 실제적인 구현은 서블릿 필터 (javax.servlet.Filter 인터페이스 구현체) 를 통해 이루어짐
 * 즉, Spring Security는 필터의 집합체
-
-* Reference List
-    * [Jacson security](https://iyboklee.notion.site/iyboklee/Spring-Boot-Spring-Security-54d0e411d5d74f8b8caa53a20983842a)
-    * [스프링 시큐리티 기본 API및 Filter 이해](https://catsbi.oopy.io/c0a4f395-24b2-44e5-8eeb-275d19e2a536)
-    * [Spring Security란?](https://mangkyu.tistory.com/76)
-    * [세션 정의](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=good_ray&logNo=221360993022)
-    * [상태 정보란? 쿠키와 세션](https://blog.naver.com/good_ray/221360883685)
+* Spring Security는 인증과 인가에 관련된 로직을 처리해주는 역할을 함
 
 
 <br> <br>
@@ -63,6 +57,7 @@
 <br>
 
 * 볼드체의 필터들은 아직 정리 안한 필터들임
+* 필터의 순서도 중요함 -> 순서에 따라 다른 필터의 동작에 영향을 미칠 수 있음
 
 1. ChannelProcessingFilter                  : 웹 요청이 어떤 프로토콜로 (http 또는 https) 전달되어야 하는지 처리 
 2. SecurityContextPersistenceFilter         : SecurityContextRepository를 통해 SecurityContext를 Load/Save 처리
@@ -87,12 +82,11 @@
 
 ******
 ### 4. filter : RequestCacheAwareFilter
-인증 요청에 의해 가로채어진 원래 요청으로 이동하기
- = 최초 요청했던 페이지로 리다이렉션 시켜줌
-
-현재 요청과 관련 있는 캐시된 요청이 있는지 찾아서 적용하는 필터
-* 캐시된 요청이 없다면, 현재 요청 처리
-* 캐시된 요청이 있다면, 캐시된 요청 처리
+* 로그인 인증 이후에, 접근 거부를 발생시킨 원래의 페이지로 다시 리다이렉션 시키기 위해서 존재하는 필터
+* 필터를 통해, 인증 요청에 의해 가로채어진 원래 요청으로 리다이렉션 시켜줌
+* 즉, 현재 요청과 관련 있는 캐시된 요청이 있는지 찾아서 적용하는 필터
+    * 캐시된 요청이 없다면, 현재 요청 처리
+    * 캐시된 요청이 있다면, 캐시된 요청 처리
 
 #### 예시
 1. 어떤 페이지를 요청했는데 인증이 필요함
