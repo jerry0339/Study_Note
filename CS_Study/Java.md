@@ -512,3 +512,4 @@ Garbage Collector가 참조되지 않는 메모리를 확인하고 제거하는 
 * Lambda Capturing?
 * 제네릭
 * Java Reflection -> Reflection 의존성 주입(DI), Entity 동적 생성, jackson 직렬화에 활용?
+* test
