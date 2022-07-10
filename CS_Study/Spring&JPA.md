@@ -59,17 +59,24 @@ IoC, DI 등 스프링의 특징이 개발자가 전체적으로 신경써야할 
 
 
 <details>
-<summary><b>Apache Tomcat 이란</b></summary>
+<summary><b>Apache Tomcat 이란?</b></summary>
 <div markdown="1">
 
-* 아파치 소프트웨어 재단에서 개발한 서블릿 컨테이너(또는 웹 컨테이너)만 있는 웹 어플리케이션 서버(WAS)이다.
 * 웹 서버와 연동하여 실행할 수 있는 자바 환경을 제공한다.
-* 즉, JSP(Java Server Pages)와 Servlet이 실행할 수 있는 환경을 제공.
+* JSP(Java Server Pages)와 Servlet이 실행할 수 있는 환경을 제공한다
+* 즉, 웹서버(Web Server)의 기능과 웹 애플리케이션 서버(WAS-Web Application Server) 모두를 포함한다.
+* WAS는 ThradPool을 생성함 (Tomcat 기본값 200)
+* HTTP 요청이 들어오면 Queue에 적재되고, ThreadPool 내의 특정 Thread가 Queue에서 요청을 가져와 처리하게됨
+* HTTP 요청은 처음부터 끝까지 동일한 Thread에서 처리됨
+* HTTP 요청 처리가 끝나면 Thread는 다시 ThreadPool에 반납됨
+* 즉, WAS의 최대 동시 처리 HTTP 요청의 갯수는 ThreadPool의 갯수와 같음
+* Thead 갯수를 늘리면 동시 처리 갯수가 늘어나지만, Thread Context 스위칭에 의한 오버헤드도 커지기 때문에 성능이 선형적으로 증가하지는 않음
 
-* 요청을 늦게 응답할수록, 해당 요청이 톰캣의 쓰레드를 차지하고 있어서 쓰레드가 금방 고갈되는 이슈가 있음
-* 요청을 가능하면 빠르게 처리하고 응답을 주어야 함 -> 쓰레드가 다시 다른 요청을 처리할 수 있는 상태가 됨
-
-* ----미완----
+* 아파치 톰캣 관련 이슈
+* 요청의 응답이 늦어질 수록, 해당 요청이 톰캣의 쓰레드풀을 차지하고 있어서 쓰레드풀이 금방 고갈됨.(Tomcat default 200개)
+* 따라서 요청을 가능하면 빠르게 처리하고 응답을 주어야 함 -> 쓰레드가 다시 다른 요청을 처리할 수 있는 상태가 됨
+* 높은 트래픽으로 요청이 많아지면 아파치의 큐의 사이즈보다 더 많은 요청이 오게 되고 이때부터 **요청이 실패** 되어 버려짐(default 큐길이 100)
+* 큐에 들어오고 나서 처리되는데 까지 30초(default값)의 시간이 지나면 요청은 타임아웃 처리됨 -> 요청 실패되어 버려짐
 
 </div>
 </details>
@@ -128,6 +135,7 @@ IoC, DI 등 스프링의 특징이 개발자가 전체적으로 신경써야할 
 
 * [참고링크](https://taes-k.github.io/2020/02/16/servlet-container-spring-container/)
 
+* Apache Tomcat + Spring 구조임
 ![](https://taes-k.github.io/images//posts/2020-02-16-servlet-container-spring-container/6.png)
 
 * Spring Boot에서의 클라이언트 요청 처리 과정
