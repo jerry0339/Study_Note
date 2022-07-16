@@ -12,7 +12,7 @@
     * Spring Web MVC는 Thread Per Request 모델을 기반으로 함 -> ThreadPool을 사용함
     * SecurityContext도 ThreadLocal을 기반으로 동작하기 때문에, Spring Web MVC에서 Controller, Service, Repository, 도메인모델 어느 부분에서든 SecurityContextHolder를 통해서 SecurityContext를 조회할 수 있음
 * SecurityContext는 Authentication을 보관하는 역할을 하며, SecurityContext를 통해 Authentication인터페이스의 구현체를 꺼내올 수 있음
-* Authentication은 현재 접근하는 주체의 정보와 권한을 담는 인터페이스
+* Authentication은 현재 접근하는 주체의 정보와 권한을 담는 인터페이스, 인증전과 인증후에 대한 정보를 표현
 * Authentication 인터페이스 구현체는 Principal, Credentials, Authorities, Authenticated와 같은 필드를 가지고 있음
     * Principal : 인증전이면 String값(로그인ID), 인증후라면 User객체
     * Authorities : 사용자의 권한 목록

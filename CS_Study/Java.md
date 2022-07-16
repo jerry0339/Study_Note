@@ -501,14 +501,40 @@ Garbage Collector가 참조되지 않는 메모리를 확인하고 제거하는 
 </div>
 </details>
 
+
+<details>
+<summary><b>리플렉션(Reflection)이란?</b></summary>
+<div markdown="1">
+
+* [참고](https://kdg-is.tistory.com/entry/JAVA-리플렉션-Reflection이란)
+* 리플렉션은 구체적인 **클래스 타입을 알지 못하더라도** 그 클래스의 메서드, 타입, 변수들에 접근할 수 있도록 해주는 자바 API이다.
+* 컴파일 시간이 아닌 **런타임 시점**에 동적으로 특정 클래스의 정보를 추출할 수 있는 프로그래밍 기법
+* 리플렉션은 언제사용 ?
+    * 동적으로 클래스를 사용해야할 때 사용함
+    * 즉, 작성 시점에는 어떠한 클래스를 사용해야 할지 모르지만, 런타임 시점에서 클래스를 가져와서 실행해야하는 경우 필요 사용함
+    * 대표적인 예시로, Spring 프레임워크의 어노테이션이 있음 (실행 도중 동적으로 클래스의 정보를 가져옴)
+* 리플렉션이 가져오는 정보들
+    * Class
+    * Constructor
+    * Method
+    * Field
+* 사용방법, 예시 -> [참고](https://kdg-is.tistory.com/entry/JAVA-리플렉션-Reflection이란)
+
+</div>
+</details>
+
+
+
+
+
+
+
+
 <br><br>
 
-### Stream
-* Stream 장단점, 특징
-* 중계 오퍼레이션, 종료 오퍼레이션
-
-<br><br>
-
+* Stream
+    * Stream 장단점, 특징
+    * 중계 오퍼레이션, 종료 오퍼레이션
 * Lambda Capturing?
 * 제네릭
 * Java Reflection -> Reflection 의존성 주입(DI), Entity 동적 생성, jackson 직렬화에 활용?
