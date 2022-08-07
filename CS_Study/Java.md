@@ -143,52 +143,6 @@
 
 
 <details>
-<summary><b>객체 지향 프로그래밍의 특징</b></summary>
-<div markdown="1">
-
-1. 추상화(abstraction)
-2. 캡슐화(encapsulation)
-3. 상속성(inheritance)
-4. 다형성(polymorphism) : 여러 형태를 받아들일 수 있는 성질
-
-</div>
-</details>
-
-
-<details>
-<summary><b>SOLID와 다형성</b></summary>
-<div markdown="1">
-
-1. SRP : 단일 책임 원칙
-2. OCP : 개방-폐쇄 원칙 
-    * 확장에는 open , 변경에는 closed
-3. LSP : 리스코프 치환 원칙
-    * 다형성에서 하위 클래스는 인터페이스 규약을 지켜야 한다
-    * ex) 자동차의 엑셀을 뒤로가도록 구현하면 안된다 -> LSP위반
-4. ISP : 인터페이스 분리 원칙
-    * 범용 인터페이스 하나보다 특정 클라이언트를 위한 인터페이스 여러개가 더 낫다.
-    * ex) 자동차인터페이스 -> 운전 인터페이스, 정비 인터페이스로 세분화
-5. DIP : 의존관계 역전 원칙
-    * 왜 역전일까?
-    * 추상화에 의존해야지, 구체화에 의존하면 안된다.
-    * 인터페이스와 그것을 구현한 구현클래스가 있다면, 다른 클래스에서는 구현클래스가 아니라 인터페이스에 의존해야 한다.
-        * 예시
-        ~~~java
-        @Component
-        @RequiredArgsConstructor
-        public class OrderServiceImpl implements OrderService {
-            
-            // DiscountPolicy를 상속받는 FixDiscountPolicy와 RateDiscountPolicy 가 있음
-            private final DiscountPolicy discountPolicy; 
-            private final MemberRepository memberRepository;
-        }
-        ~~~
-
-</div>
-</details>
-
-
-<details>
 <summary><b>객체와 인스턴스 차이</b></summary>
 <div markdown="1">
 

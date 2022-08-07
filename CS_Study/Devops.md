@@ -290,7 +290,7 @@
 * CentOS 지원종료
     * CentOS 8은 지원종료됨
     * CentOS 7은 2024/06/30 까지 지원
-    * CentOS는 향후 CentOS Stream으로 전환 ?
+    * CentOS는 8 사용자는 CentOS Stream으로 전환 권장
 
 </div>
 </details>
