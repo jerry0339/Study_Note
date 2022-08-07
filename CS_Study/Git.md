@@ -1,4 +1,24 @@
 # Git
+* [Git 인프런 무료강의: github, gitKraken, git flow](https://www.inflearn.com/course/%EA%B2%8C%EC%9E%84%EC%B2%98%EB%9F%BC-git%EB%8D%98%EC%A0%84#curriculum)
+
+<details>
+<summary><b>Git Flow란 ?</b></summary>
+<div markdown="1">
+
+* [출처](https://techblog.woowahan.com/2553/)
+* Git Flow는 Git으로 형상관리를 할때 브랜치를 효율적으로 관리하기 위해 사용하는 브랜치 관리 전략(Branch management strategy)이다.
+* Git Flow의 Branch 종류
+    * master : 제품으로 출시될 수 있는 브랜치
+    * develop : 다음 출시 버전을 개발하는 브랜치
+    * feature : 기능을 개발하는 브랜치
+    * release : 이번 출시 버전을 준비하는 브랜치
+    * hotfix : 출시 버전에서 발생한 버그를 수정 하는 브랜치
+* Git Flow를 그림으로 알아보자
+    ![](https://techblog.woowahan.com/wp-content/uploads/img/2017-10-30/git-flow_overall_graph.png)
+
+</div>
+</details>
+
 
 <details>
 <summary><b>git bash, git cmd 차이점</b></summary>
@@ -104,6 +124,20 @@
 
 
 <details>
+<summary><b>git squash 란?</b></summary>
+<div markdown="1">
+
+* 여러개의 커밋로그를 하나로 묶기
+* 정확히 이야기해서 git squash 라는 명령어는 없다.
+* interactive rebase를 하는데 필요한 명령어 중 하나임.
+* 가능하면 이미 push하지 않은 작업만 squash 하는것이 좋다. push와 pull 작업이 번거로워 지기 때문
+### 미완 수정중...
+
+</div>
+</details>
+
+
+<details>
 <summary><b>Cherry-pick 이란?, 언제 사용할까 ?</b></summary>
 <div markdown="1">
 
@@ -125,4 +159,5 @@
 
 </div>
 </details>
+
 
