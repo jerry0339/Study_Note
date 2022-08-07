@@ -30,7 +30,8 @@
     > 최단거리-> min-Heap, 그리디, DP 이용  
     > O(VlogV) + O(ElogV) = O((V+E)logV)    
 
-* Bellman-Ford - not yet
+* Bellman-Ford
+    > O(NE)
 
 * Topology Sort
     > 방향 비순환 그래프(directed acyclic graph-> `DAG`)    
@@ -74,11 +75,12 @@
 #### 3.String
 * manacher
     > Palindrome 문자열 찾기  
-    > O(N)  
-
+    > O(N)
 * Trie
-* KMP - not yet
-* Aho-Corasick - not yet
+* KMP
+    > O(N+M)
+* Aho-Corasick
+    > O(N+M1+M2+..+Mk)
 
 
 #### 4.Math
