@@ -3,54 +3,6 @@
 * [붕어빵좌](https://github.com/depromeet/3dollars-in-my-pocket-backend)
 * OOP에 대한 내용도 포함됨
 
-단축키
-Ctrl + Shift + V : 마크다운 미리보기
-Shift + Alt + V  : 이미지 붙여넣기
-
-### CLI로 docker 사용하기
-
-**docker image란?** : 컨테이너를 생성하는 틀(템플릿)
-ex) 리눅스에서 node.js가 설치된 docker image
-ex) 리눅스에서의 mysql:8 docker image
-
-**docker container란?**
-컨테이너란 호스트 OS상에 논리적인 구획(컨테이너)을 만들고, 어플리케이션을 작동시키기 위해 필요한 라이브러리나 어플리케이션 등을 하나로 모아, 마치 별도의 서버인 것처럼 사용할 수 있게 만든 것입니다. 호스트 OS의 리소스를 논리적으로 분리시키고, 여러 개의 컨테이너가 공유하여 사용합니다. 컨테이너는 오버헤드가 적기 때문에 가볍고 고속으로 작동하는 것이 특징입니다.
-
-* 저장된 이미지들 확인하기
-`docker images` : 모든 이미지 확인가능 -> 이미지 ID도 나옴
-
-* 컨테이너 확인하기
-`docker ps` : 현재 **실행중인** 컨테이너 -> 컨테이너 ID, 이미지, 이름 등 확인가능
-`docker ps -a` : 생성된 **모든** 컨테이너 -> 실행중이지 않은 컨테이너 포함
-
-* 컨테이너 아이디를 통해 해당 컨테이너 로그 확인하기
-`docker logs 컨테이너ID`
-
-* 이미지 삭제하기
-`docker rmi 이미지ID` : -f를 넣으면 강제 삭제가능 ex) docker rmi -f 이미지ID
-
-* 컨테이너 삭제하기
-`docker rm 컨테이너ID` : -f를 넣으면 강제 삭제가능 ex) docker rm -f 컨테이너ID
-
-* 도커 컨테이너 생성하기 예시 (mysql:8 컨테이너 생성)
-`docker run --name kdt-gc-coffee -e MYSQL_PORT_HOST=% -e MYSQL_ROOT_PASSWORD=root1234! -p3306:3306 -d mysql:8`
-[참고해볼 영상](https://www.youtube.com/watch?v=hWPv9LMlme8)
-
-<br><br>
-
-
-### MySql DB 생성하기
-
-1. 도커 이미지로 컨테이너 생성하기
-ex)
-`docker run --name kdt-gc-coffee -e MYSQL_PORT_HOST=% -e MYSQL_ROOT_PASSWORD=root1234! -p3306:3306 -d mysql:8`
-
-<br>
-
-2. Intellij -> Database -> +로 Data Source(MySql) 추가 -> 컨테이너 정보 작성 -> 하단의 Test Connection으로 연결확인 -> 생성
-
-
-<br><br>
 
 ************************
 ### 1. Spring 어노테이션의 스테레오타입 분류
