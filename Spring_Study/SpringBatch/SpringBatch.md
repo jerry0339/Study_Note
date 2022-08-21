@@ -1,6 +1,10 @@
 # Spring Batch
 * 강의내용 정리 - [스프링 배치 - Spring Boot 기반으로 개발하는 Spring Batch](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-%EB%B0%B0%EC%B9%98/)
 
+<br><br>
+
+### Batch 기본개념
+
 <details>
 <summary><b>Batch란?, Spring Batch 탄생 배경?</b></summary>
 <div markdown="1">
@@ -82,25 +86,8 @@
 </details>
 
 
-<details>
-<summary><b>Spring Batch 아키텍처</b></summary>
-<div markdown="1">
 
-1. Application
-    * 개발자가 만든 모든 배치 Job과 커스텀 코드를 포함
-    * 개발자는 업무 로직의 구현에만 집중, 공통적인 기반기술은 프레임웍이 담당
-2. Batch Core
-    * Job을 실행, 모니터링, 관리하는 API로 구성되어 있다.
-    * JobLauncher, Job, Step, Flow 등이 속한다.
-3. Batch Infrastructure
-    * Application, Batch Core 모두 공통 Infrastructure 위에서 빌드한다.
-    * Job 실행의 흐름과 처리를 위한 틀을 제공
-    * Reader, Processor, Writer, Skip, Retry 등이 속함
-
-</div>
-</details>
-
-<br>
+<br><br>
 
 ### Spring Batch Job
 * Job
@@ -109,7 +96,7 @@
 * JobExecution
 
 <details>
-<summary><b>Spring Batch Job</b></summary>
+<summary><b>Job 이란?</b></summary>
 <div markdown="1">
 
 * Job이란 ?
@@ -128,7 +115,7 @@
 
 
 <details>
-<summary><b>JobInstance</b></summary>
+<summary><b>JobInstance 이란?</b></summary>
 <div markdown="1">
 
 1. Job Launcher클래스는 Job & JobParameters에 대한 정보를 인자로 받아 Job을 실행시킴
@@ -143,7 +130,7 @@
 
 
 <details>
-<summary><b>JobParameter</b></summary>
+<summary><b>JobParameter 이란?</b></summary>
 <div markdown="1">
 
 * Job을 실행할 때 함께 포함되어 사용되는 파라미터를 가진 도메인 객체
@@ -160,7 +147,7 @@
 
 
 <details>
-<summary><b>JobExecution</b></summary>
+<summary><b>JobExecution 이란?</b></summary>
 <div markdown="1">
 
 * JobInstance가 생성이 되면 JobExecution도 생성이 됨
