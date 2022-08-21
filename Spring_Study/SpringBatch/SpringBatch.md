@@ -1,9 +1,9 @@
 # Spring Batch
 * 강의내용 정리 - [스프링 배치 - Spring Boot 기반으로 개발하는 Spring Batch](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-%EB%B0%B0%EC%B9%98/)
 
-<br><br>
+<br>
 
-### Batch 기본개념
+## Batch 기본개념
 
 <details>
 <summary><b>Batch란?, Spring Batch 탄생 배경?</b></summary>
@@ -89,12 +89,7 @@
 
 <br><br>
 
-### Spring Batch Job
-* Job
-* JobInstance
-* JobParameters
-* JobExecution
-
+## Spring Batch Job
 <details>
 <summary><b>Job 이란?</b></summary>
 <div markdown="1">
