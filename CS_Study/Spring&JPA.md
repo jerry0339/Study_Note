@@ -418,6 +418,8 @@ Member조회 N번, Delivery조회 N번으로 **1+N+N**번의 쿼리가 나가게
 </details>
 
 * Todo
+    * Jpa One to Many : 양방향 매핑할때 자료구조 성능상 List보다 set?
+    * feignclient vs resttemplate vs webclient
     * self invocation ?
     * jpa에서 Repository를 이용한 비관적락
     * [Access Token 저장위치](https://velog.io/@neity16/NodeJS-Token-%EC%A0%80%EC%9E%A5-%EC%9C%84%EC%B9%98%EC%9D%98-%EA%B3%A0%EC%B0%B0)
