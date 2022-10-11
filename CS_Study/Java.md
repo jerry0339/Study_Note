@@ -304,6 +304,8 @@ CPU가 이해할 수 있는 언어(저수준 언어 : 기계어)로 번역(변�
 <summary><b>JVM 메모리 구조 (Java7, Java8 비교) </b></summary>
 <div markdown="1">
 
+* [참고링크](https://jaemunbro.medium.com/java-metaspace%EC%97%90-%EB%8C%80%ED%95%B4-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90-ac363816d35e)
+   
 * 전체적인 JVM 메모리 구조와 동작방식에 대한 그림
     ![](https://velog.velcdn.com/images/hosunghan0821/post/aea3b9ab-e226-4744-833d-da1f41b2dbf2/image.png)
 
