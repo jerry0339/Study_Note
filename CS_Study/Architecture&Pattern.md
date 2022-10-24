@@ -321,6 +321,23 @@ TDD를 왜 해야할까
 </div>
 </details>
 
+<details>
+<summary><b>AOP란 ?</b></summary>
+<div markdown="1">
+
+* AOP : 관점 지향 프로그래밍
+* [참고링크](https://velog.io/@ann0905/AOP%EC%99%80-Transactional%EC%9D%98-%EB%8F%99%EC%9E%91-%EC%9B%90%EB%A6%AC)
+* 어떤 로직을 기준으로 핵심적인 관점, 부가적인 관점으로 나누어서 보고 그 관점을 기준으로 각각 모듈화하겠다는 것
+* 모듈화란 어떤 공통된 로직이나 기능을 하나의 단위로 묶는 것임
+* 반복되는 로직들을 흩어진 관심사 (Crosscutting Concerns) 라고 함
+* AOP없이 흩어진 관심사를 처리하려면 여러 곳에서 반복적인 코드를 작성해야 하고 수정시 여러곳 모두를 수정해야 함
+* 흩어진 관심사 문제를 별도의 클래스로 모듈화 하고 꺼내쓰기 위한 방식이 AOP인 것
+* 이후, 모듈화 시킨 Aspect를 클래스의 어느곳에서 사용하면 되는지 정의만 해주면 됨
+* 대표적인 예시 - JPA의 `@Transactional`, Spring의 `@ExceptionHandler` 등
+
+</div>
+</details>
+
 
 * Todo
     * 디자인 패턴(Front Controller, Singleton, ....)

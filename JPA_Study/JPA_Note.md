@@ -1207,8 +1207,26 @@ null이 아닌지 확인하는 쿼리를 실행해야 하기 때문이다.
 <br><br>
 
 *******************************************************************
-### 50.
-
+### 50. @DynamicInsert , @DynamicUpdate , 이외(@PrePersist)
+* [참고1](https://mangchhe.github.io/jpa/2021/09/06/EntityDynamicQuery/)
+* [참고2](https://dotoridev.tistory.com/6)
+* 초기화 하지 않은 값을 save하는 경우, 기본적으로 쿼리에 null로 들어감
+* 변경감지를 통한 update의 경우에도 마찬가지임
+* default값이 설정되어 있는 경우에도 쿼리에 null로 들어가기 때문에 default값 설정 적용이 안됨
+* @DynamicInsert와 @DynamicUpdate를 사용하면 위 문제들을 해결 가능
+    * null인 필드값이 insert나 update되는 경우 null인 필드를 제외하고 쿼리가 날라감
+* 따라서 @DynamicInsert, @DynamicUpdate 를 사용하게 되면 불필요한 DB 부하를 줄일 수 있고, default 값 대신에 null 값이 들어갈 일이 없어짐
+* 테이블에 컬럼 개수가 많다면 Default 값에 null 값이 들어갈 우려가 있다면 해당 어노테이션을 쓰는 것을 고려하는것이 좋음
+* 이외에 @PrePersist를 사용하는 방법이 있음
+~~~java
+/**
+* insert 되기전 (persist 되기전) 실행됨
+* */
+@PrePersist
+public void prePersist() {
+    this.likeCount = this.likeCount == null ? 0 : this.likeCount;
+}
+~~~
 
 
 
