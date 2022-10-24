@@ -796,5 +796,6 @@ BCNF 정규형은 3.5 정규형이라고도 하며 아래와 같은 필요조건
 </details>
 
 * Todo
+    * jedis, lettuce, redisson
     * [HA란](https://www.ibinfo.co.kr/computer-tip-2/%EC%84%9C%EB%B2%84-%EC%9D%B4%EC%A4%91%ED%99%94ha-%EC%86%94%EB%A3%A8%EC%85%98%EC%97%90-%EB%8C%80%ED%95%98%EC%97%AC)
     * Redis
