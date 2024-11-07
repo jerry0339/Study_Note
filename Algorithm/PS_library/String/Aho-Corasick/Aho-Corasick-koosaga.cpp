@@ -1,6 +1,7 @@
 // [구사과님 코드 참고](https://gist.github.com/koosaga/96e5de4ccb99616f9bc3a760ec964cbe)
 // [참고 블로그](https://m.blog.naver.com/kks227/220992598966)
-// [그림 참고](https://blog.myungwoo.kr/101)
+// 그림 참고 - 2024-08-27-17-47-16.png
+//   출처 - https://loosie.tistory.com/587
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -53,7 +54,7 @@ bool query(string &s){
     for(char &i : s){
         while(p && !trie[p][i-'a']) p = fail[p];
         p = trie[p][i-'a'];
-        // 등장하는 문자열의 개수를 구하고 싶으면 아래 조건문의 실행횟수 구해서 반환하면 됨
+        // 등장하는 문자열의 개수를 구하고 싶으면 아래 조건문의 실행횟수 구해서 반환하면 됨, 반환형도 bool에서 int로 변경하기
         if(term[p]) return 1;
     }
     return 0;
