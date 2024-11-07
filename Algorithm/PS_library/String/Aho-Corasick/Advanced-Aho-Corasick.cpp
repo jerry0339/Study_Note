@@ -61,7 +61,7 @@ void init(vector<string> &v){
 // fail[p] 탑다운;
 int solve(int p, int c) {
 	int& ret = fCache[p][c];
-	if (~ret) return ret;
+	if (ret != -1) return ret;
 	if (!p || trie[p][c]) ret = p;
 	else ret = solve(fail[p], c);
 	return ret;
